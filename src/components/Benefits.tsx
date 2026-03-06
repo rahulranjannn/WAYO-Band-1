@@ -33,7 +33,7 @@ export function Benefits() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold text-wayo-dark mb-6">
-              Peace of mind, <br/>
+              Peace of mind, <br />
               <span className="text-wayo-mint">simplified.</span>
             </h2>
             <p className="text-xl text-gray-600 mb-12">
@@ -62,11 +62,10 @@ export function Benefits() {
             className="relative"
           >
             <div className="bg-wayo-cream rounded-[3rem] p-8 relative z-10">
-              <img 
-                src="https://picsum.photos/seed/grandparent/600/800" 
-                alt="Grandparent using Wayo" 
-                className="rounded-[2rem] w-full shadow-2xl"
-                referrerPolicy="no-referrer"
+              <img
+                src="/img1.png"
+                alt="Wayo - Peace of mind, simplified"
+                className="rounded-[2rem] w-full shadow-2xl object-cover"
               />
             </div>
             <div className="absolute inset-0 bg-wayo-yellow/20 rounded-[3rem] transform rotate-3 scale-105 -z-0"></div>

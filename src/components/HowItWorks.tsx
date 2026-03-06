@@ -5,19 +5,19 @@ export function HowItWorks() {
     {
       title: "Wear It",
       description: "One band for you, one for them. Soft, comfortable, and fun to wear.",
-      image: "https://picsum.photos/seed/wristband/400/400",
+      image: "/one.png",
       color: "bg-wayo-yellow"
     },
     {
       title: "Roam Free",
       description: "The bands stay completely silent as long as your child is within a safe 10-meter radius.",
-      image: "https://picsum.photos/seed/runningkid/400/400",
+      image: "/three.png",
       color: "bg-wayo-mint"
     },
     {
       title: "Instant Alert",
       description: "If they wander too far, BOTH bands instantly vibrate—stopping them and alerting you.",
-      image: "https://picsum.photos/seed/alert/400/400",
+      image: "/her.png",
       color: "bg-wayo-coral"
     }
   ];
@@ -42,8 +42,8 @@ export function HowItWorks() {
             >
               <div className="bg-white rounded-[2rem] p-4 shadow-xl hover:shadow-2xl transition-shadow duration-300 h-full flex flex-col">
                 <div className={`aspect-square rounded-[1.5rem] overflow-hidden mb-6 relative ${step.color} bg-opacity-20`}>
-                  <img 
-                    src={step.image} 
+                  <img
+                    src={step.image}
                     alt={step.title}
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                     referrerPolicy="no-referrer"

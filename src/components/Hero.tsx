@@ -7,7 +7,7 @@ interface HeroProps {
 
 export function Hero({ onOpenWaitlist }: HeroProps) {
   return (
-    <section className="relative pt-40 lg:pt-48 pb-32 overflow-hidden">
+    <section className="relative pt-28 lg:pt-36 pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -16,12 +16,9 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
             transition={{ duration: 0.6 }}
             className="z-10"
           >
-            <div className="inline-block px-4 py-1.5 rounded-full bg-wayo-yellow/20 text-yellow-800 font-bold text-sm mb-6 tracking-wide uppercase">
-              Launching April 2026
-            </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] tracking-tight text-wayo-dark mb-6">
-              No matter where they go — <br />
-              <span className="text-wayo-coral">Wayo brings them back.</span>
+              No matter where they go —
+              <span className="block text-wayo-coral mt-4 lg:mt-5">WAYO brings them back.</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
               The brilliantly simple, screen-free wristband that keeps your child safely within reach.
