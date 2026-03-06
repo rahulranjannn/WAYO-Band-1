@@ -7,7 +7,7 @@ interface HeroProps {
 
 export function Hero({ onOpenWaitlist }: HeroProps) {
   return (
-    <section className="relative pt-20 pb-32 overflow-hidden">
+    <section className="relative pt-40 lg:pt-48 pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -52,32 +52,15 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative rounded-[3rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+            <div className="relative rounded-[3rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 bg-[#fbf9f6]">
               <img
-                src="https://picsum.photos/seed/kidpark/800/1000"
-                alt="Parent and child at a park"
+                src="/hero1.png"
+                alt="Wayo Band - No setup needed, just wear & go"
                 className="w-full h-[600px] object-cover"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-              
-              {/* Floating UI Element */}
-              <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1, duration: 0.5 }}
-                className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg flex items-center gap-4"
-              >
-                <div className="w-12 h-12 rounded-full bg-wayo-mint flex items-center justify-center text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <div>
-                  <p className="font-bold text-wayo-dark">Status: Safe</p>
-                  <p className="text-xs text-gray-500">Connected • 5m away</p>
-                </div>
-              </motion.div>
             </div>
-            
+
             {/* Decorative blobs */}
             <div className="absolute -top-12 -right-12 w-64 h-64 bg-wayo-yellow rounded-full mix-blend-multiply filter blur-3xl opacity-30 -z-10 animate-pulse"></div>
             <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-wayo-mint rounded-full mix-blend-multiply filter blur-3xl opacity-30 -z-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
