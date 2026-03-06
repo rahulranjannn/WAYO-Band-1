@@ -23,11 +23,11 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="py-24 bg-wayo-cream relative overflow-hidden">
+    <section className="pt-16 pb-12 md:py-24 bg-wayo-cream relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-wayo-dark mb-4">Brilliantly Simple</h2>
-          <p className="text-xl text-gray-600">No screens. No confusing maps. Just safety.</p>
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-wayo-dark mb-4">Brilliantly Simple</h2>
+          <p className="text-lg md:text-xl text-gray-600">No screens. No confusing maps. Just safety.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
