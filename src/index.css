@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-wayo-yellow: #FFD23F;
+  --color-wayo-coral: #FF6B6B;
+  --color-wayo-mint: #4ECDC4;
+  --color-wayo-cream: #F9F9F7;
+  --color-wayo-dark: #1A1A1A;
+}
+
+body {
+  background-color: var(--color-wayo-cream);
+  color: var(--color-wayo-dark);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
