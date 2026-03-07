@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Footer } from './components/Footer';
 import { WaitlistModal } from './components/WaitlistModal';
 import { Home } from './pages/Home';
@@ -143,6 +144,7 @@ function Layout() {
       </div>
 
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
+      <SpeedInsights />
     </div>
   );
 }
