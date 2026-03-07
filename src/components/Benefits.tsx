@@ -36,7 +36,7 @@ export function Benefits() {
               Peace of mind, <br />
               <span className="text-wayo-mint">simplified.</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-12">
+            <p className="text-xl text-[#4B5563] mb-12">
               We stripped away the complexity to build something that actually works when you need it most.
             </p>
 
@@ -48,7 +48,7 @@ export function Benefits() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-wayo-dark mb-2">{benefit.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                    <p className="text-[#4B5563] leading-relaxed">{benefit.description}</p>
                   </div>
                 </div>
               ))}
@@ -63,8 +63,11 @@ export function Benefits() {
           >
             <div className="bg-wayo-cream rounded-[3rem] p-8 relative z-10">
               <img
-                src="/childband.png"
+                src="/childband.webp"
                 alt="Wayo - Peace of mind, simplified"
+                width="800"
+                height="800"
+                loading="lazy"
                 className="rounded-[2rem] w-full shadow-2xl object-cover"
               />
             </div>

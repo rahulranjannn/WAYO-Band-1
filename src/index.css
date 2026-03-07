@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-wayo-yellow: #FFD23F;
   --color-wayo-coral: #FF6B6B;
   --color-wayo-mint: #4ECDC4;
@@ -18,7 +17,12 @@ body {
   font-family: var(--font-sans);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
 }
 
@@ -39,7 +43,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 16px;
 }
 
-.legal-content p, .legal-content table {
+.legal-content p,
+.legal-content table {
   font-family: "DM Sans", sans-serif;
   font-size: 16px;
   color: #3D4F5C;

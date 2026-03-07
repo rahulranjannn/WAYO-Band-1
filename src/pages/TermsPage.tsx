@@ -1,8 +1,14 @@
 import { LegalPageLayout } from '../components/LegalPageLayout';
+import { SEO } from '../components/SEO';
 
 export function TermsPage() {
     return (
         <LegalPageLayout title="Terms of Service" lastUpdated="March 2026">
+            <SEO
+                title="Terms of Service | Wayo Band"
+                description="Wayo Band Terms of Service. Read the terms governing the use of the Wayo Band website and pre-order registration."
+                path="/terms"
+            />
             <p>
                 <strong>Effective Date:</strong> March 2026<br />
                 <strong>Last Updated:</strong> March 2026

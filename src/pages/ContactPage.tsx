@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
@@ -32,6 +33,11 @@ export function ContactPage() {
 
     return (
         <main className="min-h-screen bg-[#FAFAF8] font-sans pb-0">
+            <SEO
+                title="Contact Wayo Band"
+                description="Get in touch with the Wayo team. We're real people and we reply to every message personally. Email us at hello@wayoband.com."
+                path="/contact"
+            />
             {/* SECTION 1 — PAGE HERO BANNER */}
             <section
                 className="text-center rounded-b-[32px] pt-[140px] pb-[60px] px-6"
@@ -75,7 +81,7 @@ export function ContactPage() {
                                         <input type="hidden" name="source" value="contact_page" />
 
                                         <div className="mb-5">
-                                            <label className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
+                                            <label htmlFor="contact-name" className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
                                                 YOUR NAME *
                                             </label>
                                             <div className="relative">
@@ -83,6 +89,8 @@ export function ContactPage() {
                                                 <input
                                                     type="text"
                                                     name="name"
+                                                    id="contact-name"
+                                                    aria-label="Full Name"
                                                     required
                                                     placeholder="Priya Sharma"
                                                     className="w-full pl-[44px] pr-4 py-[14px] border-[1.5px] border-[#E8E2D9] rounded-[14px] bg-[#FAFAF8] font-['DM_Sans'] text-[15px] text-[#1A2E44] transition-all duration-200 focus:border-[#5B7A99] focus:bg-white focus:shadow-[0_0_0_4px_rgba(91,122,153,0.12)] focus:outline-none [&:not(:placeholder-shown)]:border-[#52B788] [&:not(:placeholder-shown)]:bg-[#F0FBF4]"
@@ -91,7 +99,7 @@ export function ContactPage() {
                                         </div>
 
                                         <div className="mb-5">
-                                            <label className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
+                                            <label htmlFor="contact-email" className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
                                                 EMAIL ADDRESS *
                                             </label>
                                             <div className="relative">
@@ -99,6 +107,8 @@ export function ContactPage() {
                                                 <input
                                                     type="email"
                                                     name="email"
+                                                    id="contact-email"
+                                                    aria-label="Email Address"
                                                     required
                                                     placeholder="you@example.com"
                                                     className="w-full pl-[44px] pr-4 py-[14px] border-[1.5px] border-[#E8E2D9] rounded-[14px] bg-[#FAFAF8] font-['DM_Sans'] text-[15px] text-[#1A2E44] transition-all duration-200 focus:border-[#5B7A99] focus:bg-white focus:shadow-[0_0_0_4px_rgba(91,122,153,0.12)] focus:outline-none [&:not(:placeholder-shown)]:border-[#52B788] [&:not(:placeholder-shown)]:bg-[#F0FBF4]"
@@ -107,7 +117,7 @@ export function ContactPage() {
                                         </div>
 
                                         <div className="mb-5">
-                                            <label className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
+                                            <label htmlFor="contact-phone" className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
                                                 PHONE (OPTIONAL)
                                             </label>
                                             <div className="relative">
@@ -115,6 +125,8 @@ export function ContactPage() {
                                                 <input
                                                     type="tel"
                                                     name="phone"
+                                                    id="contact-phone"
+                                                    aria-label="Phone Number"
                                                     placeholder="+91 98765 43210"
                                                     className="w-full pl-[44px] pr-4 py-[14px] border-[1.5px] border-[#E8E2D9] rounded-[14px] bg-[#FAFAF8] font-['DM_Sans'] text-[15px] text-[#1A2E44] transition-all duration-200 focus:border-[#5B7A99] focus:bg-white focus:shadow-[0_0_0_4px_rgba(91,122,153,0.12)] focus:outline-none [&:not(:placeholder-shown)]:border-[#52B788] [&:not(:placeholder-shown)]:bg-[#F0FBF4]"
                                                 />
@@ -123,12 +135,14 @@ export function ContactPage() {
                                         </div>
 
                                         <div className="mb-5">
-                                            <label className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
+                                            <label htmlFor="contact-topic" className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
                                                 WHAT'S THIS ABOUT?
                                             </label>
                                             <select
                                                 name="topic"
+                                                id="contact-topic"
                                                 required
+                                                aria-label="Topic"
                                                 defaultValue=""
                                                 className="w-full px-4 py-[14px] border-[1.5px] border-[#E8E2D9] rounded-[14px] bg-[#FAFAF8] font-['DM_Sans'] text-[15px] text-[#1A2E44] transition-all duration-200 focus:border-[#5B7A99] focus:bg-white focus:shadow-[0_0_0_4px_rgba(91,122,153,0.12)] focus:outline-none"
                                             >
@@ -144,11 +158,13 @@ export function ContactPage() {
                                         </div>
 
                                         <div className="mb-6">
-                                            <label className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
+                                            <label htmlFor="contact-message" className="font-['DM_Sans'] text-[11px] font-semibold text-[#7A8FA0] tracking-[0.1em] uppercase block mb-1.5">
                                                 YOUR MESSAGE *
                                             </label>
                                             <textarea
                                                 name="message"
+                                                id="contact-message"
+                                                aria-label="Your Message"
                                                 required
                                                 rows={5}
                                                 placeholder="Tell us what's on your mind..."
@@ -242,7 +258,7 @@ export function ContactPage() {
 
                         {/* Section C - Social Links */}
                         <div className="mt-6 w-full">
-                            <div className="text-[11px] text-[#7A8FA0] uppercase tracking-[0.1em] mb-3 font-semibold font-['DM_Sans']">FOLLOW OUR JOURNEY</div>
+                            <div className="text-[11px] text-[#4B5563] uppercase tracking-[0.1em] mb-3 font-semibold font-['DM_Sans']">FOLLOW OUR JOURNEY</div>
                             <div className="flex gap-3">
                                 <a href="#" className="bg-[#FAFAF8] border border-[#EAE4DC] rounded-[100px] px-5 py-2.5 font-['DM_Sans'] text-[14px] font-medium text-[#1A2E44] flex items-center gap-2 hover:bg-[#EBF1F7] hover:border-[#5B7A99] transition-colors">
                                     <span>📸</span> @wayoband

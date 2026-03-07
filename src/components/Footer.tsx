@@ -11,7 +11,7 @@ export function Footer({ onOpenWaitlist }: FooterProps) {
         <h2 className="text-4xl md:text-5xl font-bold mb-8">
           Ready to let them roam?
         </h2>
-        <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+        <p className="text-xl text-[#4B5563] mb-12 max-w-2xl mx-auto">
           Wayo launches in April. Don't miss out on the first batch.
         </p>
 
@@ -22,8 +22,8 @@ export function Footer({ onOpenWaitlist }: FooterProps) {
           Notify Me <ArrowRight className="w-6 h-6" />
         </button>
 
-        <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-          <p className="text-center md:text-left text-gray-500">
+        <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[#4B5563] text-sm">
+          <p className="text-center md:text-left text-[#4B5563]">
             &copy; 2026 Wayo Band by PSU Pro Enterprises.<br className="hidden sm:block" /> All rights reserved.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">

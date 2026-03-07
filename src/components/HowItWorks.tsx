@@ -5,19 +5,19 @@ export function HowItWorks() {
     {
       title: "Wear It",
       description: "One band for you, one for them. Soft, comfortable, and fun to wear.",
-      image: "/one.png",
+      image: "/one.webp",
       color: "bg-wayo-yellow"
     },
     {
       title: "Roam Free",
       description: "The bands stay completely silent as long as your child is within a safe 10-meter radius.",
-      image: "/three.png",
+      image: "/three.webp",
       color: "bg-wayo-mint"
     },
     {
       title: "Instant Alert",
       description: "If they wander too far, BOTH bands instantly vibrate—stopping them and alerting you.",
-      image: "/her.png",
+      image: "/her.webp",
       color: "bg-wayo-coral"
     }
   ];
@@ -45,6 +45,9 @@ export function HowItWorks() {
                   <img
                     src={step.image}
                     alt={step.title}
+                    width="400"
+                    height="400"
+                    loading="lazy"
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { ArrowRight, Store, Umbrella, Tent, TreePine, ChevronRight } from 'lucide-react';
 
 interface HowItWorksPageProps {
@@ -12,19 +13,19 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
             num: 1,
             title: "Wear It",
             body: "Put one band on your wrist, one on theirs. Soft, adjustable, and light enough to forget it's there.",
-            image: "/childband.png"
+            image: "/childband.webp"
         },
         {
             num: 2,
             title: "Roam Free",
             body: "As long as they're within a safe range, both bands stay quiet. No buzzes, no alerts — just a normal, happy day.",
-            image: "/three.png"
+            image: "/three.webp"
         },
         {
             num: 3,
             title: "Instant Alert",
             body: "The moment they wander too far, BOTH bands vibrate at the same time — alerting you and stopping them instinctively.",
-            image: "/her.png"
+            image: "/her.webp"
         }
     ];
 
@@ -37,6 +38,11 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
 
     return (
         <main className="bg-white">
+            <SEO
+                title="How Wayo Band Works"
+                description="See how Wayo Band works in 3 simple steps. Wear it, roam free, get an instant alert. No phone, no app, no internet needed. Launching April 2026."
+                path="/how-it-works"
+            />
             {/* Hero */}
             <section className="pt-36 lg:pt-48 pb-12 text-center max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center">
                 <span className="text-wayo-coral text-sm font-bold tracking-widest uppercase mb-4 block">
@@ -45,7 +51,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                 <h1 className="text-4xl md:text-5xl font-extrabold text-[#1A1A2E] mb-6">
                     Simple enough for a toddler.<br className="hidden md:block" /> Safe enough for every parent.
                 </h1>
-                <p className="text-xl text-[#6B7280]">
+                <p className="text-xl text-[#4B5563]">
                     No charging apps. No reading manuals. Wayo just works.
                 </p>
             </section>
@@ -65,13 +71,13 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                                 className="bg-white rounded-[20px] shadow-sm overflow-hidden border border-gray-100 p-6 flex flex-col"
                             >
                                 <div className="rounded-2xl overflow-hidden mb-6 aspect-video bg-gray-100">
-                                    <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
+                                    <img src={step.image} alt={step.title} width="400" height="225" loading="lazy" className="w-full h-full object-cover" />
                                 </div>
                                 <div className="w-10 h-10 rounded-full bg-wayo-coral text-white flex items-center justify-center font-bold text-xl mb-4">
                                     {step.num}
                                 </div>
                                 <h3 className="text-2xl font-bold text-[#1A1A2E] mb-3">{step.title}</h3>
-                                <p className="text-[#6B7280] leading-relaxed flex-grow">{step.body}</p>
+                                <p className="text-[#4B5563] leading-relaxed flex-grow">{step.body}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -86,7 +92,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                             <h2 className="text-4xl font-bold text-[#1A1A2E] mb-6">
                                 The <span className="text-[#2D9C8F]">10–100 Metre</span> Promise
                             </h2>
-                            <p className="text-xl text-[#6B7280] leading-relaxed">
+                            <p className="text-xl text-[#4B5563] leading-relaxed">
                                 Wayo is calibrated to a 10–100 metre safe zone — far enough for kids to explore, close enough for you to reach them in seconds.
                             </p>
                         </div>
@@ -126,7 +132,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                             <div key={idx} className="bg-white p-6 rounded-[20px] shadow-sm text-center border border-gray-100 transform hover:-translate-y-1 transition-transform">
                                 <div className="flex justify-center">{place.icon}</div>
                                 <h3 className="font-bold text-[#1A1A2E] mb-1">{place.label}</h3>
-                                <p className="text-sm text-[#6B7280]">{place.desc}</p>
+                                <p className="text-sm text-[#4B5563]">{place.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -143,7 +149,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                                 <ChevronRight className="w-5 h-5 text-wayo-coral mr-2 rotate-90" />
                                 Does it need WiFi or a SIM card?
                             </h4>
-                            <p className="text-[#6B7280] pl-7">
+                            <p className="text-[#4B5563] pl-7">
                                 Nope. Wayo works completely offline — no internet, no SIM, no monthly fees. Ever.
                             </p>
                         </div>
@@ -152,7 +158,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                                 <ChevronRight className="w-5 h-5 text-wayo-coral mr-2 rotate-90" />
                                 What if the battery dies?
                             </h4>
-                            <p className="text-[#6B7280] pl-7">
+                            <p className="text-[#4B5563] pl-7">
                                 Wayo charges via USB-C and lasts for days on a single charge. A low battery will alert you well in advance.
                             </p>
                         </div>

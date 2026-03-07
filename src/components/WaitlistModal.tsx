@@ -42,16 +42,17 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             >
               <button
                 onClick={onClose}
+                aria-label="Close registration popup"
                 className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
-                <X className="w-6 h-6 text-gray-500" />
+                <X className="w-6 h-6 text-[#4B5563]" />
               </button>
 
               {!submitted ? (
                 <>
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold text-wayo-dark mb-2">You're early. That's exciting. </h3>
-                    <p className="text-gray-600">
+                    <p className="text-[#4B5563]">
                       Leave your details — we'll reach out the moment Wayo is ready to ship.
                     </p>
                   </div>
@@ -60,6 +61,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <div>
                       <input
                         type="text"
+                        aria-label="Full Name"
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -70,6 +72,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <div>
                       <input
                         type="tel"
+                        aria-label="Phone Number"
                         required
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
                         placeholder="+91 98765 43210"
@@ -78,6 +81,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <div>
                       <input
                         type="email"
+                        aria-label="Email Address"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -88,13 +92,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <div>
                       <input
                         type="text"
+                        aria-label="City"
                         required
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
                         placeholder="Mumbai"
                       />
                     </div>
                     <div>
-                      <select required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
+                      <select required aria-label="Wayo is for my" defaultValue="" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
                         <option value="" disabled>Wayo is for my…</option>
                         <option value="1 Child">1 Child — 1 pair (parent + child)</option>
                         <option value="2 Children">2 Children — 2 pairs (1 parent + 2 child)</option>
@@ -110,7 +115,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       Reserve My Spot →
                     </button>
 
-                    <p className="text-xs text-center text-gray-500 mt-4">
+                    <p className="text-xs text-center text-[#4B5563] mt-4">
                       No payment. No spam. Just an early heads-up.
                     </p>
                   </form>
@@ -121,7 +126,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <span className="text-3xl">🎉</span>
                   </div>
                   <h3 className="text-2xl font-bold text-wayo-dark mb-2">You're on the list!</h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-[#4B5563] mb-6">
                     Thanks, {name}. We'll be in touch soon with your early access invite.
                   </p>
                   <button

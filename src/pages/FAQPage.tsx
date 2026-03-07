@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { SEO } from '../components/SEO';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -47,6 +48,11 @@ export function FAQPage({ onOpenWaitlist }: FAQPageProps) {
 
     return (
         <main className="bg-wayo-cream min-h-screen">
+            <SEO
+                title="Wayo Band FAQ"
+                description="Answers to your questions about Wayo Band — range, battery life, water alerts, early access, and how it works. No jargon, just honest answers."
+                path="/faq"
+            />
             {/* Hero */}
             <section className="pt-36 lg:pt-48 pb-12 text-center max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center">
                 <span className="text-wayo-coral text-sm font-bold tracking-widest uppercase mb-4 block">
@@ -55,7 +61,7 @@ export function FAQPage({ onOpenWaitlist }: FAQPageProps) {
                 <h1 className="text-4xl md:text-5xl font-extrabold text-[#1A1A2E] mb-6">
                     Every question, answered honestly.
                 </h1>
-                <p className="text-xl text-[#6B7280]">
+                <p className="text-xl text-[#4B5563]">
                     No jargon. No fine print. Just real answers.
                 </p>
             </section>
@@ -86,7 +92,7 @@ export function FAQPage({ onOpenWaitlist }: FAQPageProps) {
                                                         exit={{ height: 0, opacity: 0 }}
                                                         transition={{ duration: 0.3 }}
                                                     >
-                                                        <div className="px-6 pb-5 text-[#6B7280] leading-relaxed">
+                                                        <div className="px-6 pb-5 text-[#4B5563] leading-relaxed">
                                                             {faq.a}
                                                         </div>
                                                     </motion.div>

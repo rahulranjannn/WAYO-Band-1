@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Target, ShieldCheck, MapPin, ArrowRight } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 interface AboutPageProps {
     onOpenWaitlist: () => void;
@@ -19,6 +20,11 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
 
     return (
         <main className="bg-white">
+            <SEO
+                title="Wayo Band - Our Story"
+                description="The story behind Wayo — built by parents, for parents. Born from one terrifying moment at a crowded mela. Launching April 2026 across India."
+                path="/about"
+            />
             {/* Hero */}
             <section className="pt-36 lg:pt-48 pb-12 text-center max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center">
                 <span className="text-wayo-coral text-sm font-bold tracking-widest uppercase mb-4 block">
@@ -27,7 +33,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                 <h1 className="text-4xl md:text-5xl font-extrabold text-[#1A1A2E] mb-6">
                     Built by parents.<br className="hidden md:block" /> For every parent.
                 </h1>
-                <p className="text-xl text-[#6B7280] max-w-2xl mx-auto leading-relaxed">
+                <p className="text-xl text-[#4B5563] max-w-2xl mx-auto leading-relaxed">
                     Wayo started with one terrifying moment at a crowded mela — and a question: why doesn't something simple like this already exist?
                 </p>
             </section>
@@ -38,7 +44,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div>
                             <h2 className="text-3xl font-bold text-[#1A1A2E] mb-6">It happened to us too.</h2>
-                            <div className="prose prose-lg text-[#6B7280]">
+                            <div className="prose prose-lg text-[#4B5563]">
                                 <p className="mb-4">
                                     We were at a local festival. One second our daughter was right there, the next — gone. That split-second panic changed everything.
                                 </p>
@@ -51,7 +57,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                             </div>
                         </div>
                         <div className="rounded-[20px] overflow-hidden shadow-lg aspect-square md:aspect-auto md:h-[500px] bg-gray-100 relative">
-                            <img src="/childband.png" alt="Family at market" className="w-full h-full object-cover" />
+                            <img src="/childband.webp" alt="Family at market" width="500" height="500" loading="lazy" className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-[#2D9C8F]/10 mix-blend-multiply"></div>
                         </div>
                     </div>
@@ -67,7 +73,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                             <div key={i} className="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100 flex flex-col items-start">
                                 {v.icon}
                                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-3">{v.title}</h3>
-                                <p className="text-[#6B7280] leading-relaxed">{v.desc}</p>
+                                <p className="text-[#4B5563] leading-relaxed">{v.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -87,7 +93,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                                 <div>
                                     <h3 className="text-xl font-bold text-[#1A1A2E]">{t.name}</h3>
                                     <p className="text-wayo-coral font-medium text-sm mb-2 uppercase tracking-wide">{t.role}</p>
-                                    <p className="text-[#6B7280] text-sm leading-relaxed">"{t.bio}"</p>
+                                    <p className="text-[#4B5563] text-sm leading-relaxed">"{t.bio}"</p>
                                 </div>
                             </div>
                         ))}

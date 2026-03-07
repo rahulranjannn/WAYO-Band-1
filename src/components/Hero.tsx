@@ -38,7 +38,7 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                      <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="User" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      <img src={`https://picsum.photos/seed/user${i}/100/100.webp`} alt="User avatar" width="32" height="32" loading="lazy" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
@@ -56,8 +56,14 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
           >
             <div className="relative rounded-[3rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 bg-[#fbf9f6]">
               <img
-                src="/hero1.png"
+                src="/hero1.webp"
+                srcSet="/hero1-480.webp 480w, /hero1-1080.webp 1080w, /hero1.webp 1600w"
+                sizes="(max-width: 600px) 480px, (max-width: 1200px) 1080px, 1600px"
                 alt="Wayo Band - No setup needed, just wear & go"
+                width="1600"
+                height="1200"
+                loading="eager"
+                fetchPriority="high"
                 className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -87,7 +93,7 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                    <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="User" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <img src={`https://picsum.photos/seed/user${i}/100/100.webp`} alt="User avatar" width="32" height="32" loading="lazy" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   </div>
                 ))}
               </div>

@@ -50,13 +50,14 @@ function Layout() {
           <div className="flex justify-start items-center">
             <button
               className="md:hidden p-2 -ml-2 text-wayo-dark"
+              aria-label="Open navigation menu"
               onClick={() => setIsMobileMenuOpen(true)}
             >
               <Menu className="w-7 h-7" />
             </button>
             <div className="hidden md:flex h-20 lg:h-24 items-center shrink-0">
               <Link to="/" className="h-full block">
-                <img src="/logo2.png" alt="Wayo" className="h-full w-auto object-contain" />
+                <img src="/logo2.webp" alt="Wayo" width="160" height="48" className="h-full w-auto object-contain" />
               </Link>
             </div>
           </div>
@@ -64,7 +65,7 @@ function Layout() {
           <div className="flex justify-center flex-grow whitespace-nowrap">
             <div className="md:hidden h-16 sm:h-20 flex items-center shrink-0">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="h-full block">
-                <img src="/logo2.png" alt="Wayo" className="h-full w-auto object-contain" />
+                <img src="/logo2.webp" alt="Wayo" width="160" height="48" className="h-full w-auto object-contain" />
               </Link>
             </div>
             <div className="hidden md:flex justify-center gap-6 lg:gap-8 text-wayo-dark font-medium text-sm lg:text-base">
@@ -74,7 +75,7 @@ function Layout() {
                   to={link.path}
                   className={`transition-colors ${isActive(link.path)
                     ? 'font-bold text-wayo-dark'
-                    : 'text-gray-600 hover:text-wayo-dark'
+                    : 'text-[#4B5563] hover:text-wayo-dark'
                     }`}
                 >
                   {link.name}
@@ -98,11 +99,11 @@ function Layout() {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[60] bg-wayo-cream flex flex-col md:hidden animate-in fade-in zoom-in-95 duration-200">
           <div className="px-4 py-4 flex justify-between items-center border-b border-gray-200">
-            <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 -ml-2 text-wayo-dark">
+            <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close navigation menu" className="p-2 -ml-2 text-wayo-dark">
               <X className="w-7 h-7" />
             </button>
             <div className="h-10 flex items-center">
-              <img src="/logo2.png" alt="Wayo" className="h-full w-auto object-contain" />
+              <img src="/logo2.webp" alt="Wayo" width="160" height="48" className="h-full w-auto object-contain" />
             </div>
             <div className="w-11" />
           </div>

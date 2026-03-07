@@ -1,8 +1,14 @@
 import { LegalPageLayout } from '../components/LegalPageLayout';
+import { SEO } from '../components/SEO';
 
 export function PrivacyPage() {
     return (
         <LegalPageLayout title="Privacy Policy" lastUpdated="March 2026">
+            <SEO
+                title="Privacy Policy | Wayo Band"
+                description="Wayo's privacy policy — plain English, no legal walls. We only collect what we need, we never sell your data, and you can delete it anytime."
+                path="/privacy"
+            />
             <p>
                 <strong>Effective Date:</strong> March 2026<br />
                 <strong>Last Updated:</strong> March 2026

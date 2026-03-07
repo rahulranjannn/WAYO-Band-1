@@ -42,7 +42,7 @@ export function FeatureStrip() {
                                 {feature.icon}
                             </div>
                             <h3 className="text-xl font-bold text-[#1A1A2E] mb-3">{feature.title}</h3>
-                            <p className="text-[#6B7280] leading-relaxed flex-grow">{feature.body}</p>
+                            <p className="text-[#4B5563] leading-relaxed flex-grow">{feature.body}</p>
                         </motion.div>
                     ))}
                 </div>

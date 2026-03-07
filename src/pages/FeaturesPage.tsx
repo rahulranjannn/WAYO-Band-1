@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { ArrowRight, Wifi, Droplet, Battery, Maximize, Activity, ShieldAlert, BadgeCheck } from 'lucide-react';
 
 interface FeaturesPageProps {
@@ -9,6 +10,11 @@ interface FeaturesPageProps {
 export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
     return (
         <main className="bg-white">
+            <SEO
+                title="Wayo Band Features"
+                description="Wayo Band has two built-in shields — distance alert (30–100m) and water submersion alert. Two protections, one wristband, zero monthly fees."
+                path="/features"
+            />
             {/* Hero */}
             <section className="pt-36 lg:pt-48 pb-12 text-center max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center">
                 <span className="bg-wayo-coral text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
@@ -18,7 +24,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                     Everything protecting your child.<br />
                     Nothing getting in the way.
                 </h1>
-                <p className="text-xl text-[#6B7280] max-w-[560px] mx-auto leading-relaxed">
+                <p className="text-xl text-[#4B5563] max-w-[560px] mx-auto leading-relaxed">
                     Wayo does two jobs silently and simultaneously — so you can stop worrying and start living.
                 </p>
             </section>
@@ -43,7 +49,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
 
                             <h2 className="text-3xl font-extrabold text-[#1A1A2E] mb-2">Wanders Too Far?</h2>
                             <h3 className="text-2xl font-bold text-wayo-coral mb-6">You'll feel it instantly.</h3>
-                            <p className="text-[#6B7280] leading-relaxed mb-10 text-lg">
+                            <p className="text-[#4B5563] leading-relaxed mb-10 text-lg">
                                 The moment your child moves beyond a safe range whether across a crowded market or down a busy beach both your bands vibrate at the same time. No phone needed. No fumbling. Just an instant signal that says: go find them now.
                             </p>
 
@@ -72,7 +78,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
 
                             <h2 className="text-3xl font-extrabold text-[#1A1A2E] mb-2">Falls into Water?</h2>
                             <h3 className="text-2xl font-bold text-[#2D9C8F] mb-6">You'll know within seconds.</h3>
-                            <p className="text-[#6B7280] leading-relaxed mb-10 text-lg">
+                            <p className="text-[#4B5563] leading-relaxed mb-10 text-lg">
                                 If the child's band gets submerged in water a pool, a lake, a river your parent band triggers an immediate alert. Not for splashes. Not for rain. Only when it matters: full submersion. Because a second is all it takes.
                             </p>
 
@@ -100,7 +106,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                             <h2 className="text-4xl font-extrabold text-[#1A1A2E] mb-6">
                                 It <span className="text-[#2D9C8F]">knows</span> a splash from a fall.
                             </h2>
-                            <p className="text-xl text-[#6B7280] leading-relaxed mb-8">
+                            <p className="text-xl text-[#4B5563] leading-relaxed mb-8">
                                 Not every drop of water is danger. Wayo's water sensor is calibrated to trigger only on full submersion — ignoring handwashing, rain, and the inevitable splash fight. So you only get alerted when something is actually wrong.
                             </p>
 
@@ -109,14 +115,14 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                                     <div className="mt-1 text-2xl">✅</div>
                                     <div>
                                         <strong className="text-[#1A1A2E] block">Triggers on:</strong>
-                                        <span className="text-[#6B7280]">Full submersion in pool, lake, river, or sea</span>
+                                        <span className="text-[#4B5563]">Full submersion in pool, lake, river, or sea</span>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
                                     <div className="mt-1 text-2xl">❌</div>
                                     <div>
                                         <strong className="text-[#1A1A2E] block">Won't trigger on:</strong>
-                                        <span className="text-[#6B7280]">Rain, splashing, washing hands, sweat</span>
+                                        <span className="text-[#4B5563]">Rain, splashing, washing hands, sweat</span>
                                     </div>
                                 </div>
                             </div>
@@ -215,42 +221,42 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
             <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-extrabold text-center text-[#1A1A2E] mb-2">Built for real Indian family life.</h2>
-                    <p className="text-center text-[#6B7280] mb-12">Not a lab. Real places. Real moments.</p>
+                    <p className="text-center text-[#4B5563] mb-12">Not a lab. Real places. Real moments.</p>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {/* Scenario 1 */}
                         <div className="bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-sm flex flex-col hover:-translate-y-1 transition-transform">
                             <div className="aspect-video bg-gray-200">
-                                <img src="/festival1.png" alt="Festival" className="w-full h-full object-cover" />
+                                <img src="/festival1.webp" alt="Festival" width="400" height="225" loading="lazy" className="w-full h-full object-cover" />
                             </div>
                             <div className="p-6 flex-grow flex flex-col items-start">
                                 <span className="bg-wayo-coral/10 text-wayo-coral text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">DISTANCE ALERT</span>
                                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-3 flex items-center gap-2">🎡 The Festival</h3>
-                                <p className="text-[#6B7280]">Your child runs toward the lights. The crowd swallows them. Before you even panic — your wrist vibrates.</p>
+                                <p className="text-[#4B5563]">Your child runs toward the lights. The crowd swallows them. Before you even panic — your wrist vibrates.</p>
                             </div>
                         </div>
 
                         {/* Scenario 2 */}
                         <div className="bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-sm flex flex-col hover:-translate-y-1 transition-transform">
                             <div className="aspect-video bg-gray-200">
-                                <img src="/beach1.png" alt="Beach" className="w-full h-full object-cover" />
+                                <img src="/beach1.webp" alt="Beach" width="400" height="225" loading="lazy" className="w-full h-full object-cover" />
                             </div>
                             <div className="p-6 flex-grow flex flex-col items-start">
                                 <span className="bg-[#2D9C8F]/10 text-[#2D9C8F] text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">WATER ALERT</span>
                                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-3 flex items-center gap-2">🏖️ The Beach</h3>
-                                <p className="text-[#6B7280]">You turn to grab the sunscreen. They take one step too many. Wayo alerts you before they're even knee-deep.</p>
+                                <p className="text-[#4B5563]">You turn to grab the sunscreen. They take one step too many. Wayo alerts you before they're even knee-deep.</p>
                             </div>
                         </div>
 
                         {/* Scenario 3 */}
                         <div className="bg-white rounded-[24px] overflow-hidden border border-gray-100 shadow-sm flex flex-col hover:-translate-y-1 transition-transform">
                             <div className="aspect-video bg-gray-200">
-                                <img src="/pool1.png" alt="Pool" className="w-full h-full object-cover" />
+                                <img src="/pool1.webp" alt="Pool" width="400" height="225" loading="lazy" className="w-full h-full object-cover" />
                             </div>
                             <div className="p-6 flex-grow flex flex-col items-start">
                                 <span className="bg-[#2D9C8F]/10 text-[#2D9C8F] text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">WATER ALERT</span>
                                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-3 flex items-center gap-2">🏊 The Building Pool</h3>
-                                <p className="text-[#6B7280]">Society pools. Cousin's birthday. One adult supervising five kids. Wayo is the set of eyes you can't always have.</p>
+                                <p className="text-[#4B5563]">Society pools. Cousin's birthday. One adult supervising five kids. Wayo is the set of eyes you can't always have.</p>
                             </div>
                         </div>
                     </div>
@@ -266,22 +272,22 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                         <div className="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 flex flex-col items-center justify-center">
                             <Wifi className="w-8 h-8 text-[#1A1A2E] mb-4" />
                             <h4 className="font-bold text-[#1A1A2E]">Alert Range</h4>
-                            <p className="text-sm text-[#6B7280] mt-2">30–100m outdoors <br /> 20–30m indoors</p>
+                            <p className="text-sm text-[#4B5563] mt-2">30–100m outdoors <br /> 20–30m indoors</p>
                         </div>
                         <div className="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 flex flex-col items-center justify-center">
                             <Droplet className="w-8 h-8 text-[#1A1A2E] mb-4" />
                             <h4 className="font-bold text-[#1A1A2E]">Water Alert</h4>
-                            <p className="text-sm text-[#6B7280] mt-2">Triggers on full submersion only</p>
+                            <p className="text-sm text-[#4B5563] mt-2">Triggers on full submersion only</p>
                         </div>
                         <div className="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 flex flex-col items-center justify-center">
                             <Battery className="w-8 h-8 text-[#1A1A2E] mb-4" />
                             <h4 className="font-bold text-[#1A1A2E]">Battery Life</h4>
-                            <p className="text-sm text-[#6B7280] mt-2">Several days per charge (USB-C)</p>
+                            <p className="text-sm text-[#4B5563] mt-2">Several days per charge (USB-C)</p>
                         </div>
                         <div className="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 flex flex-col items-center justify-center">
                             <Maximize className="w-8 h-8 text-[#1A1A2E] mb-4" />
                             <h4 className="font-bold text-[#1A1A2E]">Weight</h4>
-                            <p className="text-sm text-[#6B7280] mt-2">Light enough to forget you're wearing it</p>
+                            <p className="text-sm text-[#4B5563] mt-2">Light enough to forget you're wearing it</p>
                         </div>
                     </div>
 
@@ -297,25 +303,25 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                     <div className="space-y-4 mb-8">
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: Does it need WiFi or a SIM card?</h4>
-                            <p className="text-[#6B7280]">
+                            <p className="text-[#4B5563]">
                                 A: Nope. Wayo works completely offline — no internet, no SIM, no monthly fees. Ever.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: How far is "too far"?</h4>
-                            <p className="text-[#6B7280]">
+                            <p className="text-[#4B5563]">
                                 A: It depends on where you are. In open spaces like parks or beaches, Wayo alerts at up to 100 metres. In crowded places like malls or festivals, it triggers sooner — around 10–30 metres — because that's actually when you need it most.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: Will it alert if my child is just playing in rain or washing hands?</h4>
-                            <p className="text-[#6B7280]">
+                            <p className="text-[#4B5563]">
                                 A: No. Wayo's water sensor is calibrated for full submersion only — not surface contact. Splashes, rain, and handwashing won't trigger it.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: Does the water alert work in the sea as well as pools?</h4>
-                            <p className="text-[#6B7280]">
+                            <p className="text-[#4B5563]">
                                 A: Yes — it works in fresh water, salt water, pools, lakes, and rivers.
                             </p>
                         </div>
