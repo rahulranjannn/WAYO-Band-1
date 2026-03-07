@@ -19,7 +19,7 @@ export function ContactPage() {
             name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
-            subject: formData.get('topic'),
+            topic: formData.get('topic'),
             message: formData.get('message')
         };
 

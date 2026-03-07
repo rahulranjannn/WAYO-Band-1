@@ -29,16 +29,16 @@ const sendAdminNotification = async (data, type) => {
       <p><strong>Email:</strong> ${data.email}</p>
       <p><strong>Phone:</strong> ${data.phone}</p>
       <p><strong>City:</strong> ${data.city}</p>
-      <p><strong>Wayo is for my:</strong> ${data.wayoIsFor}</p>
+      <p><strong>Wayo is for my:</strong> ${data.target_user}</p>
     `;
     } else if (type === 'contact') {
-        subject = `✉️ New Contact Query: ${data.subject}`;
+        subject = `✉️ New Contact Query: ${data.topic}`;
         htmlContent = `
       <h2>New Contact Form Submission!</h2>
       <p><strong>Name:</strong> ${data.name}</p>
       <p><strong>Email:</strong> ${data.email}</p>
       <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
-      <p><strong>Subject:</strong> ${data.subject}</p>
+      <p><strong>Topic:</strong> ${data.topic}</p>
       <p><strong>Message:</strong><br/>${data.message}</p>
     `;
     }

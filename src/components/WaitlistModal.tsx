@@ -24,7 +24,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       const response = await fetch('http://localhost:5000/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, email, city, wayoIsFor })
+        body: JSON.stringify({ name, phone, email, city, target_user: wayoIsFor })
       });
 
       if (!response.ok) {

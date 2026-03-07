@@ -33,9 +33,9 @@ app.get('/', (req, res) => {
 
 // Example: Waitlist Registration
 app.post('/api/waitlist', async (req, res) => {
-    const { name, phone, email, city, wayoIsFor } = req.body;
+    const { name, phone, email, city, target_user } = req.body;
 
-    if (!name || !phone || !email || !city || !wayoIsFor) {
+    if (!name || !phone || !email || !city || !target_user) {
         return res.status(400).json({ error: 'Missing required waitlist fields.' });
     }
 
@@ -46,7 +46,7 @@ app.post('/api/waitlist', async (req, res) => {
             phone,
             email,
             city,
-            wayo_is_for_my: wayoIsFor
+            wayo_is_for_my: target_user
         }]);
 
     if (error) {
@@ -55,7 +55,7 @@ app.post('/api/waitlist', async (req, res) => {
     }
 
     // Async send notifications
-    sendAdminNotification({ name, phone, email, city, wayoIsFor }, 'waitlist');
+    sendAdminNotification({ name, phone, email, city, target_user }, 'waitlist');
     sendUserConfirmation(email, name, 'waitlist');
 
     res.status(201).json({ message: 'Waitlist reservation successful', data });
@@ -63,9 +63,9 @@ app.post('/api/waitlist', async (req, res) => {
 
 // Example: Contact Query
 app.post('/api/contact', async (req, res) => {
-    const { name, email, phone, subject, message } = req.body;
+    const { name, email, phone, topic, message } = req.body;
 
-    if (!name || !email || !subject || !message) {
+    if (!name || !email || !topic || !message) {
         return res.status(400).json({ error: 'Missing required contact fields.' });
     }
 
@@ -75,7 +75,7 @@ app.post('/api/contact', async (req, res) => {
             name,
             email,
             phone: phone || null,  // Phone is optional
-            subject,
+            subject: topic,
             message
         }]);
 
@@ -85,7 +85,7 @@ app.post('/api/contact', async (req, res) => {
     }
 
     // Async send notifications
-    sendAdminNotification({ name, email, phone, subject, message }, 'contact');
+    sendAdminNotification({ name, email, phone, topic, message }, 'contact');
     sendUserConfirmation(email, name, 'contact');
 
     res.status(201).json({ message: 'Contact query submitted successfully', data });
