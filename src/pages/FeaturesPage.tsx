@@ -44,12 +44,12 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                             <h2 className="text-3xl font-extrabold text-[#1A1A2E] mb-2">Wanders Too Far?</h2>
                             <h3 className="text-2xl font-bold text-wayo-coral mb-6">You'll feel it instantly.</h3>
                             <p className="text-[#6B7280] leading-relaxed mb-10 text-lg">
-                                The moment your child moves beyond a safe range — whether across a crowded market or down a busy beach — both your bands vibrate at the same time. No phone needed. No fumbling. Just an instant signal that says: go find them now.
+                                The moment your child moves beyond a safe range whether across a crowded market or down a busy beach both your bands vibrate at the same time. No phone needed. No fumbling. Just an instant signal that says: go find them now.
                             </p>
 
                             <div className="flex flex-wrap gap-3 mt-auto">
                                 <span className="bg-white px-4 py-2 rounded-full text-sm font-bold text-[#1A1A2E] shadow-sm border border-gray-100 flex items-center gap-2">
-                                    <Wifi className="w-4 h-4 text-wayo-coral" /> 30–100m range
+                                    <Wifi className="w-4 h-4 text-wayo-coral" /> 10–100m range
                                 </span>
                                 <span className="bg-white px-4 py-2 rounded-full text-sm font-bold text-[#1A1A2E] shadow-sm border border-gray-100 flex items-center gap-2">
                                     <ShieldAlert className="w-4 h-4 text-wayo-coral" /> Silent until needed
@@ -73,7 +73,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                             <h2 className="text-3xl font-extrabold text-[#1A1A2E] mb-2">Falls into Water?</h2>
                             <h3 className="text-2xl font-bold text-[#2D9C8F] mb-6">You'll know within seconds.</h3>
                             <p className="text-[#6B7280] leading-relaxed mb-10 text-lg">
-                                If the child's band gets submerged in water — a pool, a lake, a river — your parent band triggers an immediate alert. Not for splashes. Not for rain. Only when it matters: full submersion. Because a second is all it takes.
+                                If the child's band gets submerged in water a pool, a lake, a river your parent band triggers an immediate alert. Not for splashes. Not for rain. Only when it matters: full submersion. Because a second is all it takes.
                             </p>
 
                             <div className="flex flex-wrap gap-3 mt-auto">
@@ -304,7 +304,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: How far is "too far"?</h4>
                             <p className="text-[#6B7280]">
-                                A: It depends on where you are. In open spaces like parks or beaches, Wayo alerts at up to 100 metres. In crowded places like malls or festivals, it triggers sooner — around 20–30 metres — because that's actually when you need it most.
+                                A: It depends on where you are. In open spaces like parks or beaches, Wayo alerts at up to 100 metres. In crowded places like malls or festivals, it triggers sooner — around 10–30 metres — because that's actually when you need it most.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
