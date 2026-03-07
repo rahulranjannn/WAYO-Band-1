@@ -1,9 +1,13 @@
 const nodemailer = require('nodemailer');
 
+const smtpPort = parseInt(process.env.SMTP_PORT || '465', 10);
+
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.hostinger.com',
-    port: process.env.SMTP_PORT || 465,
-    secure: true, // true for 465, false for other ports
+    port: smtpPort,
+    secure: smtpPort === 465, // true for 465, false for other ports
+    requireTLS: smtpPort !== 465, // specifically useful for port 587
+    family: 4, // Forces IPv4 explicitly to combat Render ETIMEDOUT routing issues
     auth: {
         user: process.env.SMTP_USER || 'hello@wayoband.com',
         pass: process.env.SMTP_PASS, // Make sure to provide this in .env
