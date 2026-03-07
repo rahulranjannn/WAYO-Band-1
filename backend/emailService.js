@@ -1,18 +1,57 @@
 const nodemailer = require('nodemailer');
+const dns = require('dns');
 
 const smtpPort = parseInt(process.env.SMTP_PORT || '465', 10);
+const smtpHostName = process.env.SMTP_HOST || 'smtp.hostinger.com';
 
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.hostinger.com',
-    port: smtpPort,
-    secure: smtpPort === 465, // true for 465, false for other ports
-    requireTLS: smtpPort !== 465, // specifically useful for port 587
-    family: 4, // Forces IPv4 explicitly to combat Render ETIMEDOUT routing issues
-    auth: {
-        user: process.env.SMTP_USER || 'hello@wayoband.com',
-        pass: process.env.SMTP_PASS, // Make sure to provide this in .env
-    },
-});
+let transporterInstance = null;
+
+const getTransporter = () => {
+    return new Promise((resolve, reject) => {
+        if (transporterInstance) {
+            return resolve(transporterInstance);
+        }
+
+        // Physically force IPv4 resolution
+        dns.resolve4(smtpHostName, (err, addresses) => {
+            if (err || !addresses || addresses.length === 0) {
+                console.error(`DNS resolve4 failed for ${smtpHostName}, falling back to hostname:`, err);
+
+                transporterInstance = nodemailer.createTransport({
+                    host: smtpHostName,
+                    port: smtpPort,
+                    secure: smtpPort === 465, // true for 465, false for other ports
+                    requireTLS: smtpPort !== 465,
+                    family: 4,
+                    auth: {
+                        user: process.env.SMTP_USER || 'hello@wayoband.com',
+                        pass: process.env.SMTP_PASS,
+                    },
+                });
+                return resolve(transporterInstance);
+            }
+
+            const rawIPv4 = addresses[0];
+            console.log(`Resolved ${smtpHostName} to IPv4: ${rawIPv4}`);
+
+            transporterInstance = nodemailer.createTransport({
+                host: rawIPv4, // Bypass Render routing using direct IP
+                port: smtpPort,
+                secure: smtpPort === 465,
+                requireTLS: smtpPort !== 465,
+                tls: {
+                    servername: smtpHostName // Stop SSL certificates from rejecting raw IP
+                },
+                auth: {
+                    user: process.env.SMTP_USER || 'hello@wayoband.com',
+                    pass: process.env.SMTP_PASS,
+                },
+            });
+
+            resolve(transporterInstance);
+        });
+    });
+};
 
 /**
  * Sends an email to the admin with the submitted details.
@@ -56,6 +95,7 @@ const sendAdminNotification = async (data, type) => {
     };
 
     try {
+        const transporter = await getTransporter();
         await transporter.sendMail(mailOptions);
         console.log(`Admin notification email sent for ${type}`);
     } catch (error) {
@@ -107,6 +147,7 @@ const sendUserConfirmation = async (userEmail, userName, type) => {
     };
 
     try {
+        const transporter = await getTransporter();
         await transporter.sendMail(mailOptions);
         console.log(`User confirmation email sent to ${userEmail} for ${type}`);
     } catch (error) {
