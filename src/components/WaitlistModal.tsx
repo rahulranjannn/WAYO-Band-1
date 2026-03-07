@@ -50,47 +50,69 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               {!submitted ? (
                 <>
                   <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-wayo-dark mb-2">Join the Waitlist</h3>
+                    <h3 className="text-2xl font-bold text-wayo-dark mb-2">You're early. That's exciting. 🎉</h3>
                     <p className="text-gray-600">
-                      Be the first to know when Wayo launches this April. Early access members get a special founder's discount.
+                      Leave your details — we'll reach out the moment Wayo is ready to ship.
                     </p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                        First Name
-                      </label>
                       <input
                         type="text"
-                        id="name"
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
-                        placeholder="Jane"
+                        placeholder="Rahul Sharma"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        Email Address
-                      </label>
+                      <input
+                        type="tel"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
+                        placeholder="+91 98765 43210"
+                      />
+                    </div>
+                    <div>
                       <input
                         type="email"
-                        id="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
-                        placeholder="jane@example.com"
+                        placeholder="you@example.com"
                       />
                     </div>
+                    <div>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
+                        placeholder="Mumbai"
+                      />
+                    </div>
+                    <div>
+                      <select required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
+                        <option value="" disabled>Wayo is for my…</option>
+                        <option value="Young Child">Young Child</option>
+                        <option value="Elderly Parent">Elderly Parent</option>
+                        <option value="Both">Both</option>
+                        <option value="Myself">Myself</option>
+                      </select>
+                    </div>
+
                     <button
                       type="submit"
-                      className="w-full bg-wayo-coral hover:bg-red-500 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-wayo-coral/30"
+                      className="w-full bg-wayo-coral hover:bg-red-700 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-wayo-coral/30"
                     >
-                      Get Early Access
+                      Reserve My Spot →
                     </button>
+
+                    <p className="text-xs text-center text-gray-500 mt-4">
+                      No payment. No spam. Just an early heads-up.
+                    </p>
                   </form>
                 </>
               ) : (

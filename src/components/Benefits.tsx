@@ -63,7 +63,7 @@ export function Benefits() {
           >
             <div className="bg-wayo-cream rounded-[3rem] p-8 relative z-10">
               <img
-                src="/img1.png"
+                src="/childband.png"
                 alt="Wayo - Peace of mind, simplified"
                 className="rounded-[2rem] w-full shadow-2xl object-cover"
               />

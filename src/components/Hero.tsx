@@ -7,7 +7,7 @@ interface HeroProps {
 
 export function Hero({ onOpenWaitlist }: HeroProps) {
   return (
-    <section className="relative pt-28 lg:pt-36 pb-12 md:pb-24 lg:pb-32 overflow-hidden">
+    <section className="relative pt-36 lg:pt-48 pb-12 md:pb-24 lg:pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center">
           <motion.div
@@ -21,7 +21,7 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
               <span className="block text-wayo-coral mt-4 lg:mt-5">WAYO brings them back.</span>
             </h1>
             <p className="text-xl text-gray-600 mb-2 lg:mb-8 max-w-lg leading-relaxed">
-              The brilliantly simple, screen-free wristband that keeps your child safely within reach.
+              The brilliantly simple, screen free wristband that keeps your child safely within reach.
             </p>
 
             {/* Desktop Actions (Hidden on Mobile) */}
