@@ -5,29 +5,46 @@ import { SEO } from '../components/SEO';
 export function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(false);
+        setIsLoading(true);
 
         const form = e.currentTarget;
-        const data = new FormData(form);
+        const formData = new FormData(form);
+
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            subject: formData.get('topic'),
+            message: formData.get('message')
+        };
 
         try {
-            const response = await fetch("https://formspree.io/f/YOUR_ENDPOINT_ID", {
+            const response = await fetch("http://localhost:5000/api/contact", {
                 method: "POST",
-                body: data,
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                }
+                },
+                body: JSON.stringify(data)
             });
-            if (response.ok) {
-                setSubmitted(true);
-            } else {
-                setError(true);
+
+            if (!response.ok) {
+                throw new Error('Failed to send message');
             }
+
+            setSubmitted(true);
+            form.reset(); // Clear the form fields successfully
         } catch (err) {
+            console.error(err);
             setError(true);
+            alert('We were unable to send your message. Please try again later.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -174,10 +191,11 @@ export function ContactPage() {
 
                                         <button
                                             type="submit"
-                                            className="w-full py-4 rounded-[50px] font-['DM_Sans'] text-[16px] font-semibold text-white border-none cursor-pointer transition-all duration-200 shadow-[0_8px_24px_rgba(232,102,61,0.35)] hover:-translate-y-[2px] hover:shadow-[0_12px_28px_rgba(232,102,61,0.45)]"
-                                            style={{ background: 'linear-gradient(135deg, #E8663D, #D4532A)' }}
+                                            disabled={isLoading}
+                                            className={`w-full py-4 rounded-[50px] font-['DM_Sans'] text-[16px] font-semibold text-white border-none transition-all duration-200 shadow-[0_8px_24px_rgba(232,102,61,0.35)] ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'cursor-pointer hover:-translate-y-[2px] hover:shadow-[0_12px_28px_rgba(232,102,61,0.45)]'}`}
+                                            style={isLoading ? {} : { background: 'linear-gradient(135deg, #E8663D, #D4532A)' }}
                                         >
-                                            Send Message →
+                                            {isLoading ? 'Sending...' : 'Send Message →'}
                                         </button>
                                         {error && (
                                             <p className="text-red-500 text-sm mt-3 text-center">

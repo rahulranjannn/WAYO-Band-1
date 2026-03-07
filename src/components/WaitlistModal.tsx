@@ -10,14 +10,34 @@ interface WaitlistModalProps {
 export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [city, setCity] = useState('');
+  const [wayoIsFor, setWayoIsFor] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Simulate API call
-    setTimeout(() => {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email, city, wayoIsFor })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to reserve spot');
+      }
+
       setSubmitted(true);
-    }, 1000);
+    } catch (error) {
+      console.error(error);
+      alert('There was an issue reserving your spot. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -74,6 +94,8 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         type="tel"
                         aria-label="Phone Number"
                         required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
                         placeholder="+91 98765 43210"
                       />
@@ -94,12 +116,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         type="text"
                         aria-label="City"
                         required
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all"
                         placeholder="Mumbai"
                       />
                     </div>
                     <div>
-                      <select required aria-label="Wayo is for my" defaultValue="" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
+                      <select required aria-label="Wayo is for my" value={wayoIsFor} onChange={(e) => setWayoIsFor(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
                         <option value="" disabled>Wayo is for my…</option>
                         <option value="1 Child">1 Child — 1 pair (parent + child)</option>
                         <option value="2 Children">2 Children — 2 pairs (1 parent + 2 child)</option>
@@ -110,9 +134,10 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
                     <button
                       type="submit"
-                      className="w-full bg-wayo-coral hover:bg-red-700 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-wayo-coral/30"
+                      disabled={isLoading}
+                      className={`w-full ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-wayo-coral hover:bg-red-700 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-wayo-coral/30'} text-white font-bold py-4 rounded-xl transition-all transform`}
                     >
-                      Reserve My Spot →
+                      {isLoading ? 'Reserving...' : 'Reserve My Spot →'}
                     </button>
 
                     <p className="text-xs text-center text-[#4B5563] mt-4">
