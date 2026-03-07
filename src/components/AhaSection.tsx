@@ -15,8 +15,7 @@ export function AhaSection() {
             <span className="text-gray-400">You turn around, and they're gone.</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 md:mb-12">
-            The panic is real. Crowded parks, busy malls, or packed festivals can turn a fun day into a nightmare in moments.
-            Smartphones are too complex for toddlers, and GPS trackers are too bulky and require monthly fees.
+            Life is unpredictable. Whether it's a child darting into a crowd at a market or taking one step too close to the pool — Wayo gives your whole family a silent safety net. Two alerts, one band, zero monthly fees.
           </p>
 
           <div className="bg-wayo-cream p-8 rounded-3xl border border-gray-100 inline-block">

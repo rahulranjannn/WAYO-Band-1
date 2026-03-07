@@ -9,6 +9,7 @@ import { AboutPage } from './pages/AboutPage';
 import { FAQPage } from './pages/FAQPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { ContactPage } from './pages/ContactPage';
+import { FeaturesPage } from './pages/FeaturesPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ function Layout() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'How it Works', path: '/how-it-works' },
+    { name: 'Features', path: '/features' },
     { name: 'FAQ', path: '/faq' },
   ];
 
@@ -121,6 +123,7 @@ function Layout() {
       <Routes>
         <Route path="/" element={<Home onOpenWaitlist={openModal} />} />
         <Route path="/how-it-works" element={<HowItWorksPage onOpenWaitlist={openModal} />} />
+        <Route path="/features" element={<FeaturesPage onOpenWaitlist={openModal} />} />
         <Route path="/about" element={<AboutPage onOpenWaitlist={openModal} />} />
         <Route path="/faq" element={<FAQPage onOpenWaitlist={openModal} />} />
         <Route path="/privacy" element={<PrivacyPage />} />

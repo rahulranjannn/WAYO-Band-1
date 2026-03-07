@@ -12,19 +12,19 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
             num: 1,
             title: "Wear It",
             body: "Put one band on your wrist, one on theirs. Soft, adjustable, and light enough to forget it's there.",
-            image: "/childband.png" // using placeholder since specific not provided
+            image: "/childband.png"
         },
         {
             num: 2,
             title: "Roam Free",
             body: "As long as they're within a safe range, both bands stay quiet. No buzzes, no alerts — just a normal, happy day.",
-            image: "/img1.png" // placeholder
+            image: "/three.png"
         },
         {
             num: 3,
             title: "Instant Alert",
             body: "The moment they wander too far, BOTH bands vibrate at the same time — alerting you and stopping them instinctively.",
-            image: "/childband.png" // placeholder
+            image: "/her.png"
         }
     ];
 
@@ -78,16 +78,16 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                 </div>
             </section>
 
-            {/* The 10-Metre Promise */}
+            {/* The 10–100 Metre Promise */}
             <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div>
                             <h2 className="text-4xl font-bold text-[#1A1A2E] mb-6">
-                                The <span className="text-[#2D9C8F]">10-Metre</span> Promise
+                                The <span className="text-[#2D9C8F]">10–100 Metre</span> Promise
                             </h2>
                             <p className="text-xl text-[#6B7280] leading-relaxed">
-                                Wayo is calibrated to a 10-metre safe zone — far enough for kids to explore, close enough for you to reach them in seconds.
+                                Wayo is calibrated to a 10–100 metre safe zone — far enough for kids to explore, close enough for you to reach them in seconds.
                             </p>
                         </div>
                         {/* Visual Explainer Animation */}
@@ -109,7 +109,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
 
                                 {/* Distance text */}
                                 <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-bold text-[#2D9C8F] bg-white px-3 py-1 rounded-full shadow-sm z-10">
-                                    10 metres
+                                    100 metres
                                 </div>
                             </div>
                         </div>

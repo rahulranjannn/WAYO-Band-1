@@ -14,12 +14,14 @@ export function FAQPage({ onOpenWaitlist }: FAQPageProps) {
             items: [
                 { q: "What exactly is Wayo Band?", a: "It's a pair of wristbands — one for you, one for your child (or loved one). When they move too far from you, both bands vibrate at the same time, instantly alerting both of you." },
                 { q: "Does it need a phone, WiFi, or internet?", a: "Not at all. Wayo works completely on its own — no app, no internet connection, no SIM card. Just put it on and go." },
-                { q: "How far is \"too far\"?", a: "Wayo is calibrated to alert at roughly 10 metres — about the length of a small room. Close enough to reach them quickly, far enough to give them room to play." },
+                { q: "How far is \"too far\"?", a: "It depends on where you are. In open spaces like parks or beaches, Wayo alerts at up to 100 metres." },
+                { q: "Does Wayo alert me if my child falls into water?", a: "Yes. The child's band has a water submersion sensor. If it detects full submersion — in a pool, lake, river, or sea — your parent band instantly vibrates to alert you. It won't go off for rain, splashes, or handwashing." },
+                { q: "Will it work in saltwater (sea/ocean)?", a: "Yes — Wayo's water sensor works in both fresh water and salt water." },
                 { q: "How long does the battery last?", a: "Several days on a full charge. Wayo charges via USB-C (same as most phones today), and will gently alert you before the battery gets too low." },
                 { q: "Is it waterproof?", a: "Wayo is splash-resistant and built for everyday outdoor use. We don't recommend submerging it." },
                 { q: "Will it work in crowded places like malls or metro stations?", a: "Yes. Wayo doesn't rely on mobile networks or WiFi signals, so crowded spaces or underground locations don't affect it at all." },
                 { q: "What age is it suitable for?", a: "Wayo is designed for children aged 2 and up, and works equally well for elderly family members who need gentle monitoring." },
-                { q: "Can I pair more than two bands?", a: "The first version is a paired set (two bands). We're working on multi-band pairing for larger families — stay tuned." },
+                { q: "Can I pair more than two bands?", a: "The first version comes as a pair — one for you, one for your child. V2 supports one parent band connected to multiple child bands — perfect for families with two or more kids. Register early and you'll be first to own it when that's available." },
             ]
         },
         {
