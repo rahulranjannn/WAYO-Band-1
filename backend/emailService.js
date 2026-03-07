@@ -1,57 +1,6 @@
-const nodemailer = require('nodemailer');
-const dns = require('dns');
+const { Resend } = require('resend');
 
-const smtpPort = parseInt(process.env.SMTP_PORT || '465', 10);
-const smtpHostName = process.env.SMTP_HOST || 'smtp.hostinger.com';
-
-let transporterInstance = null;
-
-const getTransporter = () => {
-    return new Promise((resolve, reject) => {
-        if (transporterInstance) {
-            return resolve(transporterInstance);
-        }
-
-        // Physically force IPv4 resolution
-        dns.resolve4(smtpHostName, (err, addresses) => {
-            if (err || !addresses || addresses.length === 0) {
-                console.error(`DNS resolve4 failed for ${smtpHostName}, falling back to hostname:`, err);
-
-                transporterInstance = nodemailer.createTransport({
-                    host: smtpHostName,
-                    port: smtpPort,
-                    secure: smtpPort === 465, // true for 465, false for other ports
-                    requireTLS: smtpPort !== 465,
-                    family: 4,
-                    auth: {
-                        user: process.env.SMTP_USER || 'hello@wayoband.com',
-                        pass: process.env.SMTP_PASS,
-                    },
-                });
-                return resolve(transporterInstance);
-            }
-
-            const rawIPv4 = addresses[0];
-            console.log(`Resolved ${smtpHostName} to IPv4: ${rawIPv4}`);
-
-            transporterInstance = nodemailer.createTransport({
-                host: rawIPv4, // Bypass Render routing using direct IP
-                port: smtpPort,
-                secure: smtpPort === 465,
-                requireTLS: smtpPort !== 465,
-                tls: {
-                    servername: smtpHostName // Stop SSL certificates from rejecting raw IP
-                },
-                auth: {
-                    user: process.env.SMTP_USER || 'hello@wayoband.com',
-                    pass: process.env.SMTP_PASS,
-                },
-            });
-
-            resolve(transporterInstance);
-        });
-    });
-};
+const resend = new Resend(process.env.RESEND_API_KEY || 're_9Q4F8S4z_2cKG5nwaEA9Sb9PJ5mGXuEQb');
 
 /**
  * Sends an email to the admin with the submitted details.
@@ -86,20 +35,17 @@ const sendAdminNotification = async (data, type) => {
     `;
     }
 
-    const mailOptions = {
-        from: adminEmail,
-        to: adminEmail, // Emailing the admin account itself
-        replyTo: data.email,
-        subject: subject,
-        html: htmlContent,
-    };
-
     try {
-        const transporter = await getTransporter();
-        await transporter.sendMail(mailOptions);
-        console.log(`Admin notification email sent for ${type}`);
+        await resend.emails.send({
+            from: 'Wayo Band <hello@wayoband.com>',
+            to: adminEmail,
+            replyTo: data.email,
+            subject: subject,
+            html: htmlContent,
+        });
+        console.log(`Admin notification email sent via Resend for ${type}`);
     } catch (error) {
-        console.error('Error sending admin notification:', error);
+        console.error('Error sending admin notification via Resend:', error);
     }
 };
 
@@ -110,8 +56,6 @@ const sendAdminNotification = async (data, type) => {
  * @param {String} type The type of submission ('waitlist' or 'contact').
  */
 const sendUserConfirmation = async (userEmail, userName, type) => {
-    const fromEmail = process.env.SMTP_USER || 'hello@wayoband.com';
-
     let subject = '';
     let htmlContent = '';
 
@@ -139,19 +83,16 @@ const sendUserConfirmation = async (userEmail, userName, type) => {
     `;
     }
 
-    const mailOptions = {
-        from: `"Wayo Band" <${fromEmail}>`,
-        to: userEmail,
-        subject: subject,
-        html: htmlContent,
-    };
-
     try {
-        const transporter = await getTransporter();
-        await transporter.sendMail(mailOptions);
-        console.log(`User confirmation email sent to ${userEmail} for ${type}`);
+        await resend.emails.send({
+            from: 'Wayo Band <hello@wayoband.com>',
+            to: userEmail,
+            subject: subject,
+            html: htmlContent,
+        });
+        console.log(`User confirmation email sent via Resend to ${userEmail} for ${type}`);
     } catch (error) {
-        console.error('Error sending user confirmation:', error);
+        console.error('Error sending user confirmation via Resend:', error);
     }
 };
 
