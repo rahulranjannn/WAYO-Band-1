@@ -23,10 +23,12 @@ export function Footer({ onOpenWaitlist }: FooterProps) {
         </button>
 
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-          <p>&copy; 2026 Wayo Inc. All rights reserved.</p>
+          <p className="text-center md:text-left text-gray-500">
+            &copy; 2026 Wayo Band by PSU Pro Enterprises.<br className="hidden sm:block" /> All rights reserved.
+          </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link to="/privacy" className="hover:text-white transition-colors">Terms</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
             <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
           </div>
         </div>

@@ -21,3 +21,55 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
+
+.legal-content h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 26px;
+  color: #1A2E44;
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.legal-content h3 {
+  font-family: "DM Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1A2E44;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.legal-content p, .legal-content table {
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  color: #3D4F5C;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.legal-content ul {
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  color: #3D4F5C;
+  line-height: 1.8;
+  padding-left: 24px;
+  margin-bottom: 16px;
+  list-style-type: disc;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+}
+
+.legal-content strong {
+  color: #1A2E44;
+  font-weight: 600;
+}
+
+.legal-content hr {
+  border-top: 1px solid #E8E2D9;
+  margin: 48px 0 0;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}

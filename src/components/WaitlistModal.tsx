@@ -50,7 +50,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               {!submitted ? (
                 <>
                   <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-wayo-dark mb-2">You're early. That's exciting. 🎉</h3>
+                    <h3 className="text-2xl font-bold text-wayo-dark mb-2">You're early. That's exciting. </h3>
                     <p className="text-gray-600">
                       Leave your details — we'll reach out the moment Wayo is ready to ship.
                     </p>
@@ -96,10 +96,10 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <div>
                       <select required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
                         <option value="" disabled>Wayo is for my…</option>
-                        <option value="Young Child">Young Child</option>
-                        <option value="Elderly Parent">Elderly Parent</option>
-                        <option value="Both">Both</option>
-                        <option value="Myself">Myself</option>
+                        <option value="1 Child">1 Child — 1 pair (parent + child)</option>
+                        <option value="2 Children">2 Children — 2 pairs (1 parent + 2 child)</option>
+                        <option value="3+ Children">3+ Children — 3 or more pairs</option>
+                        <option value="Elderly Parent / Grandparent">Elderly Parent / Grandparent</option>
                       </select>
                     </div>
 

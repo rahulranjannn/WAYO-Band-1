@@ -8,6 +8,7 @@ import { HowItWorksPage } from './pages/HowItWorksPage';
 import { AboutPage } from './pages/AboutPage';
 import { FAQPage } from './pages/FAQPage';
 import { PrivacyPage } from './pages/PrivacyPage';
+import { TermsPage } from './pages/TermsPage';
 import { ContactPage } from './pages/ContactPage';
 import { FeaturesPage } from './pages/FeaturesPage';
 
@@ -127,6 +128,7 @@ function Layout() {
         <Route path="/about" element={<AboutPage onOpenWaitlist={openModal} />} />
         <Route path="/faq" element={<FAQPage onOpenWaitlist={openModal} />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
 
