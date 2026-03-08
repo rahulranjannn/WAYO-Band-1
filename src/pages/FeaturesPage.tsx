@@ -11,8 +11,8 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
     return (
         <main className="bg-white">
             <SEO
-                title="Wayo Band Features"
-                description="Wayo Band has two built-in shields — distance alert (30–100m) and water submersion alert. Two protections, one wristband, zero monthly fees."
+                title="WAYO Band Features"
+                description="WAYO Band has two built-in shields — distance alert (30–100m) and water submersion alert. Two protections, one wristband, zero monthly fees."
                 path="/features"
             />
             {/* Hero */}
@@ -25,7 +25,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                     Nothing getting in the way.
                 </h1>
                 <p className="text-xl text-[#4B5563] max-w-[560px] mx-auto leading-relaxed">
-                    Wayo does two jobs silently and simultaneously — so you can stop worrying and start living.
+                    WAYO does two jobs silently and simultaneously — so you can stop worrying and start living.
                 </p>
             </section>
 
@@ -107,7 +107,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                                 It <span className="text-[#2D9C8F]">knows</span> a splash from a fall.
                             </h2>
                             <p className="text-xl text-[#4B5563] leading-relaxed mb-8">
-                                Not every drop of water is danger. Wayo's water sensor is calibrated to trigger only on full submersion — ignoring handwashing, rain, and the inevitable splash fight. So you only get alerted when something is actually wrong.
+                                Not every drop of water is danger. WAYO's water sensor is calibrated to trigger only on full submersion — ignoring handwashing, rain, and the inevitable splash fight. So you only get alerted when something is actually wrong.
                             </p>
 
                             <div className="space-y-4">
@@ -168,7 +168,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                                 <tr>
                                     <th className="p-6 border-b border-gray-100 bg-gray-50/50 w-1/3"></th>
                                     <th className="p-6 border-b border-gray-100 bg-wayo-coral text-white font-bold text-lg text-center rounded-t-xl mx-2 shadow-sm">
-                                        🟠 Wayo Band
+                                        🟠 WAYO Band
                                     </th>
                                     <th className="p-6 border-b border-gray-100 text-center font-bold text-[#1A1A2E]">GPS Tracker</th>
                                     <th className="p-6 border-b border-gray-100 text-center font-bold text-[#1A1A2E]">Smartwatch</th>
@@ -244,7 +244,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                             <div className="p-6 flex-grow flex flex-col items-start">
                                 <span className="bg-[#2D9C8F]/10 text-[#2D9C8F] text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">WATER ALERT</span>
                                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-3 flex items-center gap-2">🏖️ The Beach</h3>
-                                <p className="text-[#4B5563]">You turn to grab the sunscreen. They take one step too many. Wayo alerts you before they're even knee-deep.</p>
+                                <p className="text-[#4B5563]">You turn to grab the sunscreen. They take one step too many. WAYO alerts you before they're even knee-deep.</p>
                             </div>
                         </div>
 
@@ -256,7 +256,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                             <div className="p-6 flex-grow flex flex-col items-start">
                                 <span className="bg-[#2D9C8F]/10 text-[#2D9C8F] text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">WATER ALERT</span>
                                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-3 flex items-center gap-2">🏊 The Building Pool</h3>
-                                <p className="text-[#4B5563]">Society pools. Cousin's birthday. One adult supervising five kids. Wayo is the set of eyes you can't always have.</p>
+                                <p className="text-[#4B5563]">Society pools. Cousin's birthday. One adult supervising five kids. WAYO is the set of eyes you can't always have.</p>
                             </div>
                         </div>
                     </div>
@@ -292,7 +292,7 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                     </div>
 
                     <p className="text-sm text-gray-500 max-w-2xl mx-auto">
-                        Wayo is a safety alert device — not a substitute for adult supervision. Always watch children near water.
+                        WAYO is a safety alert device — not a substitute for adult supervision. Always watch children near water.
                     </p>
                 </div>
             </section>
@@ -304,19 +304,19 @@ export function FeaturesPage({ onOpenWaitlist }: FeaturesPageProps) {
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: Does it need WiFi or a SIM card?</h4>
                             <p className="text-[#4B5563]">
-                                A: Nope. Wayo works completely offline — no internet, no SIM, no monthly fees. Ever.
+                                A: Nope. WAYO works completely offline — no internet, no SIM, no monthly fees. Ever.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: How far is "too far"?</h4>
                             <p className="text-[#4B5563]">
-                                A: It depends on where you are. In open spaces like parks or beaches, Wayo alerts at up to 100 metres. In crowded places like malls or festivals, it triggers sooner — around 10–30 metres — because that's actually when you need it most.
+                                A: It depends on where you are. In open spaces like parks or beaches, WAYO alerts at up to 100 metres. In crowded places like malls or festivals, it triggers sooner — around 10–30 metres — because that's actually when you need it most.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
                             <h4 className="font-bold text-[#1A1A2E] mb-2">Q: Will it alert if my child is just playing in rain or washing hands?</h4>
                             <p className="text-[#4B5563]">
-                                A: No. Wayo's water sensor is calibrated for full submersion only — not surface contact. Splashes, rain, and handwashing won't trigger it.
+                                A: No. WAYO's water sensor is calibrated for full submersion only — not surface contact. Splashes, rain, and handwashing won't trigger it.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">

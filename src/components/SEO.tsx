@@ -15,11 +15,11 @@ export function SEO({ title, description, path, heroImage, isHome = false }: SEO
     const schema = {
         "@context": "https://schema.org",
         "@type": "Product",
-        "name": "Wayo Band",
+        "name": "WAYO Band",
         "description": "A screen-free wristband pair that alerts parents when their child wanders too far or falls in water. No app, no internet, no monthly fees.",
         "brand": {
             "@type": "Brand",
-            "name": "Wayo"
+            "name": "WAYO"
         },
         "url": baseUrl,
         "image": ogImageUrl,
@@ -43,13 +43,13 @@ export function SEO({ title, description, path, heroImage, isHome = false }: SEO
 
             {isHome && (
                 <>
-                    <meta property="og:title" content="Wayo Band — No matter where they go, Wayo brings them back." />
+                    <meta property="og:title" content="WAYO Band — No matter where they go, WAYO brings them back." />
                     <meta property="og:description" content="The screen-free wristband that keeps your child safely within reach. Distance alert + water submersion alert. Launching April 2026." />
                     <meta property="og:image" content={ogImageUrl} />
                     <meta property="og:url" content={baseUrl} />
                     <meta property="og:type" content="website" />
                     <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content="Wayo Band — Launching April 2026" />
+                    <meta name="twitter:title" content="WAYO Band — Launching April 2026" />
                     <meta name="twitter:description" content="The screen-free wristband that keeps your child safely within reach." />
                     <meta name="twitter:image" content={ogImageUrl} />
                     <script type="application/ld+json">

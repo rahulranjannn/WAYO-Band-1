@@ -14,8 +14,8 @@ export function Home({ onOpenWaitlist }: HomeProps) {
     return (
         <main>
             <SEO
-                title="Wayo Band — No matter where they go, Wayo brings them back."
-                description="Wayo Band — the screen-free wristband that alerts you the moment your child wanders too far or falls in water. No app, no fees. Launching April 2026."
+                title="WAYO Band — No matter where they go, WAYO brings them back."
+                description="WAYO Band — the screen-free wristband that alerts you the moment your child wanders too far or falls in water. No app, no fees. Launching April 2026."
                 path="/"
                 heroImage="/hero1.webp"
                 isHome={true}

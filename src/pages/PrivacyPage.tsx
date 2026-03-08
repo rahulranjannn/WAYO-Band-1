@@ -5,8 +5,8 @@ export function PrivacyPage() {
     return (
         <LegalPageLayout title="Privacy Policy" lastUpdated="March 2026">
             <SEO
-                title="Privacy Policy | Wayo Band"
-                description="Wayo's privacy policy — plain English, no legal walls. We only collect what we need, we never sell your data, and you can delete it anytime."
+                title="Privacy Policy | WAYO Band"
+                description="WAYO's privacy policy — plain English, no legal walls. We only collect what we need, we never sell your data, and you can delete it anytime."
                 path="/privacy"
             />
             <p>
@@ -15,7 +15,7 @@ export function PrivacyPage() {
             </p>
 
             <p>
-                This Privacy Policy explains how <strong>PSU Pro Enterprises</strong> ("we", "us", "our"), operating under the brand <strong>Wayo Band</strong>, collects, uses, and protects your personal information when you visit wayoband.com or register on our waitlist.
+                This Privacy Policy explains how <strong>PSU Pro Enterprises</strong> ("we", "us", "our"), operating under the brand <strong>WAYO Band</strong>, collects, uses, and protects your personal information when you visit wayoband.com or register on our waitlist.
             </p>
             <p>
                 We are committed to protecting your privacy and handling your data with care and transparency.
@@ -45,7 +45,7 @@ export function PrivacyPage() {
             <h2>2. How We Use Your Information</h2>
             <p>We use your information to:</p>
             <ul>
-                <li>Send you WhatsApp and email updates about Wayo Band's launch</li>
+                <li>Send you WhatsApp and email updates about WAYO Band's launch</li>
                 <li>Notify you when the product is available to order</li>
                 <li>Understand demand by city and family type</li>
                 <li>Improve our product and marketing</li>
@@ -55,14 +55,14 @@ export function PrivacyPage() {
             <ul>
                 <li>Sell your data to third parties</li>
                 <li>Share your information with advertisers</li>
-                <li>Use your data for any purpose other than Wayo Band communications</li>
+                <li>Use your data for any purpose other than WAYO Band communications</li>
             </ul>
 
             <hr />
 
             <h2>3. WhatsApp Communications</h2>
             <p>
-                By providing your phone number, you consent to receive WhatsApp messages from <strong>Wayo Band / PSU Pro Enterprises</strong> including:
+                By providing your phone number, you consent to receive WhatsApp messages from <strong>WAYO Band / PSU Pro Enterprises</strong> including:
             </p>
             <ul>
                 <li>Launch announcements</li>
@@ -137,7 +137,7 @@ export function PrivacyPage() {
 
             <h2>7. Children's Privacy</h2>
             <p>
-                Wayo Band's website is intended for parents and adults. We do not knowingly collect personal information from children under the age of 13. If you believe a child has provided us with personal data, please contact us immediately.
+                WAYO Band's website is intended for parents and adults. We do not knowingly collect personal information from children under the age of 13. If you believe a child has provided us with personal data, please contact us immediately.
             </p>
 
             <hr />
@@ -160,7 +160,7 @@ export function PrivacyPage() {
             <p>For any privacy-related questions or requests:</p>
             <p>
                 <strong>PSU Pro Enterprises</strong><br />
-                Brand: Wayo Band<br />
+                Brand: WAYO Band<br />
                 Website: wayoband.com<br />
                 Email: hello@wayoband.com<br />
                 Location: Ranchi, Jharkhand, India

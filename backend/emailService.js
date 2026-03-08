@@ -21,7 +21,7 @@ const sendAdminNotification = async (data, type) => {
       <p><strong>Email:</strong> ${data.email}</p>
       <p><strong>Phone:</strong> ${data.phone}</p>
       <p><strong>City:</strong> ${data.city}</p>
-      <p><strong>Wayo is for my:</strong> ${data.target_user}</p>
+      <p><strong>WAYO is for my:</strong> ${data.target_user}</p>
     `;
     } else if (type === 'contact') {
         subject = `✉️ New Contact Query: ${data.topic}`;
@@ -37,7 +37,7 @@ const sendAdminNotification = async (data, type) => {
 
     try {
         await resend.emails.send({
-            from: 'Wayo Band <hello@wayoband.com>',
+            from: 'WAYO Band <hello@wayoband.com>',
             to: adminEmail,
             replyTo: data.email,
             subject: subject,
@@ -60,32 +60,32 @@ const sendUserConfirmation = async (userEmail, userName, type) => {
     let htmlContent = '';
 
     if (type === 'waitlist') {
-        subject = 'Welcome to the Wayo Band Waitlist! 🎉';
+        subject = 'Welcome to the WAYO Band Waitlist! 🎉';
         htmlContent = `
       <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h2 style="color: #4A90E2;">Hi ${userName},</h2>
-        <p>Thank you for reserving your spot early for <strong>Wayo Band</strong>!</p>
+        <p>Thank you for reserving your spot early for <strong>WAYO Band</strong>!</p>
         <p>We are thrilled to have you on board. You'll be among the first to know when we launch and will receive exclusive updates safely delivered to your inbox.</p>
         <p>Stay tuned!</p>
-        <p>Best regards,<br/><strong>The Wayo Band Team</strong></p>
+        <p>Best regards,<br/><strong>The WAYO Band Team</strong></p>
       </div>
     `;
     } else if (type === 'contact') {
-        subject = 'We received your message – Wayo Band';
+        subject = 'We received your message – WAYO Band';
         htmlContent = `
       <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h2 style="color: #4A90E2;">Hi ${userName},</h2>
         <p>Thank you for reaching out to us!</p>
         <p>We have successfully received your message and our team will get back to you within <strong>24 hours on working days</strong>.</p>
         <p>We appreciate your patience and look forward to speaking with you soon.</p>
-        <p>Best regards,<br/><strong>The Wayo Band Team</strong></p>
+        <p>Best regards,<br/><strong>The WAYO Band Team</strong></p>
       </div>
     `;
     }
 
     try {
         await resend.emails.send({
-            from: 'Wayo Band <hello@wayoband.com>',
+            from: 'WAYO Band <hello@wayoband.com>',
             to: userEmail,
             subject: subject,
             html: htmlContent,

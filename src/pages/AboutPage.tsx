@@ -9,20 +9,20 @@ interface AboutPageProps {
 export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
     const values = [
         { icon: <Target className="w-8 h-8 text-wayo-coral mb-4" />, title: "Simplicity First", desc: "If your grandmother can't use it in 10 seconds, it's too complicated. We design for real people, not tech enthusiasts." },
-        { icon: <ShieldCheck className="w-8 h-8 text-wayo-coral mb-4" />, title: "Safety Without Surveillance", desc: "Wayo isn't about tracking or monitoring. It's about a gentle signal that says \"we're still connected.\"" },
-        { icon: <MapPin className="w-8 h-8 text-wayo-coral mb-4" />, title: "Made for India", desc: "Built with Indian families in mind — crowded markets, joint families, local festivals. Wayo understands the way you live." }
+        { icon: <ShieldCheck className="w-8 h-8 text-wayo-coral mb-4" />, title: "Safety Without Surveillance", desc: "WAYO isn't about tracking or monitoring. It's about a gentle signal that says \"we're still connected.\"" },
+        { icon: <MapPin className="w-8 h-8 text-wayo-coral mb-4" />, title: "Made for India", desc: "Built with Indian families in mind — crowded markets, joint families, local festivals. WAYO understands the way you live." }
     ];
 
     const team = [
-        { initial: "R", name: "Rahul S.", role: "Founder & Builder", bio: "Spent 5 years in hardware, 1 terrifying moment at a mela, and built Wayo." },
+        { initial: "R", name: "Rahul S.", role: "Founder & Builder", bio: "Spent 5 years in hardware, 1 terrifying moment at a mela, and built WAYO." },
         { initial: "A", name: "Anjali K.", role: "Product Design", bio: "Former UX lead, now obsessed with making safety completely invisible." }
     ];
 
     return (
         <main className="bg-white">
             <SEO
-                title="Wayo Band - Our Story"
-                description="The story behind Wayo — built by parents, for parents. Born from one terrifying moment at a crowded mela. Launching April 2026 across India."
+                title="WAYO Band - Our Story"
+                description="The story behind WAYO — built by parents, for parents. Born from one terrifying moment at a crowded mela. Launching April 2026 across India."
                 path="/about"
             />
             {/* Hero */}
@@ -34,7 +34,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                     Built by parents.<br className="hidden md:block" /> For every parent.
                 </h1>
                 <p className="text-xl text-[#4B5563] max-w-2xl mx-auto leading-relaxed">
-                    Wayo started with one terrifying moment at a crowded mela — and a question: why doesn't something simple like this already exist?
+                    WAYO started with one terrifying moment at a crowded mela — and a question: why doesn't something simple like this already exist?
                 </p>
             </section>
 
@@ -52,7 +52,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                                     We looked at every solution on the market: GPS trackers with monthly fees, smartwatches too complex for toddlers, phone-based apps that assumed everyone had a smartphone ready. Nothing fit.
                                 </p>
                                 <p>
-                                    So we built Wayo — because every family deserves peace of mind, not a complicated gadget.
+                                    So we built WAYO — because every family deserves peace of mind, not a complicated gadget.
                                 </p>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
             {/* Team */}
             <section className="py-24 bg-white">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-3xl font-bold text-[#1A1A2E] mb-12 text-center">The people behind Wayo.</h2>
+                    <h2 className="text-3xl font-bold text-[#1A1A2E] mb-12 text-center">The people behind WAYO.</h2>
                     <div className="grid md:grid-cols-2 gap-8">
                         {team.map((t, i) => (
                             <div key={i} className="bg-gray-50 p-6 rounded-[20px] flex items-center gap-6 border border-gray-100">
@@ -107,7 +107,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                     <blockquote className="text-3xl md:text-5xl font-extrabold leading-tight mb-8 text-[#2D9C8F]">
                         "We're not building a tracker. We're building a thread — invisible, unbreakable, and always there."
                     </blockquote>
-                    <p className="text-gray-400 font-bold tracking-widest uppercase">— The Wayo Team</p>
+                    <p className="text-gray-400 font-bold tracking-widest uppercase">— The WAYO Team</p>
                 </div>
             </section>
 

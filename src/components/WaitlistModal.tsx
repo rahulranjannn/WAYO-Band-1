@@ -12,7 +12,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
-  const [wayoIsFor, setWayoIsFor] = useState('');
+  const [wayoIsFor, setWAYOIsFor] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,7 +74,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold text-wayo-dark mb-2">You're early. That's exciting. </h3>
                     <p className="text-[#4B5563]">
-                      Leave your details — we'll reach out the moment Wayo is ready to ship.
+                      Leave your details — we'll reach out the moment WAYO is ready to ship.
                     </p>
                   </div>
 
@@ -124,8 +124,8 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       />
                     </div>
                     <div>
-                      <select required aria-label="Wayo is for my" value={wayoIsFor} onChange={(e) => setWayoIsFor(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
-                        <option value="" disabled>Wayo is for my…</option>
+                      <select required aria-label="WAYO is for my" value={wayoIsFor} onChange={(e) => setWAYOIsFor(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-2 focus:ring-wayo-coral/20 outline-none transition-all bg-white text-gray-700">
+                        <option value="" disabled>WAYO is for my…</option>
                         <option value="1 Child">1 Child — 1 pair (parent + child)</option>
                         <option value="2 Children">2 Children — 2 pairs (1 parent + 2 child)</option>
                         <option value="3+ Children">3+ Children — 3 or more pairs</option>

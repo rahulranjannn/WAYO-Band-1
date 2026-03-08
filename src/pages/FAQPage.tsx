@@ -13,23 +13,23 @@ export function FAQPage({ onOpenWaitlist }: FAQPageProps) {
         {
             category: "Product Questions",
             items: [
-                { q: "What exactly is Wayo Band?", a: "It's a pair of wristbands — one for you, one for your child (or loved one). When they move too far from you, both bands vibrate at the same time, instantly alerting both of you." },
-                { q: "Does it need a phone, WiFi, or internet?", a: "Not at all. Wayo works completely on its own — no app, no internet connection, no SIM card. Just put it on and go." },
-                { q: "How far is \"too far\"?", a: "It depends on where you are. In open spaces like parks or beaches, Wayo alerts at up to 100 metres." },
-                { q: "Does Wayo alert me if my child falls into water?", a: "Yes. The child's band has a water submersion sensor. If it detects full submersion — in a pool, lake, river, or sea — your parent band instantly vibrates to alert you. It won't go off for rain, splashes, or handwashing." },
-                { q: "Will it work in saltwater (sea/ocean)?", a: "Yes — Wayo's water sensor works in both fresh water and salt water." },
-                { q: "How long does the battery last?", a: "Several days on a full charge. Wayo charges via USB-C (same as most phones today), and will gently alert you before the battery gets too low." },
-                { q: "Is it waterproof?", a: "Wayo is splash-resistant and built for everyday outdoor use. We don't recommend submerging it." },
-                { q: "Will it work in crowded places like malls or metro stations?", a: "Yes. Wayo doesn't rely on mobile networks or WiFi signals, so crowded spaces or underground locations don't affect it at all." },
-                { q: "What age is it suitable for?", a: "Wayo is designed for children aged 2 and up, and works equally well for elderly family members who need gentle monitoring." },
+                { q: "What exactly is WAYO Band?", a: "It's a pair of wristbands — one for you, one for your child (or loved one). When they move too far from you, both bands vibrate at the same time, instantly alerting both of you." },
+                { q: "Does it need a phone, WiFi, or internet?", a: "Not at all. WAYO works completely on its own — no app, no internet connection, no SIM card. Just put it on and go." },
+                { q: "How far is \"too far\"?", a: "It depends on where you are. In open spaces like parks or beaches, WAYO alerts at up to 100 metres." },
+                { q: "Does WAYO alert me if my child falls into water?", a: "Yes. The child's band has a water submersion sensor. If it detects full submersion — in a pool, lake, river, or sea — your parent band instantly vibrates to alert you. It won't go off for rain, splashes, or handwashing." },
+                { q: "Will it work in saltwater (sea/ocean)?", a: "Yes — WAYO's water sensor works in both fresh water and salt water." },
+                { q: "How long does the battery last?", a: "Several days on a full charge. WAYO charges via USB-C (same as most phones today), and will gently alert you before the battery gets too low." },
+                { q: "Is it waterproof?", a: "WAYO is splash-resistant and built for everyday outdoor use. We don't recommend submerging it." },
+                { q: "Will it work in crowded places like malls or metro stations?", a: "Yes. WAYO doesn't rely on mobile networks or WiFi signals, so crowded spaces or underground locations don't affect it at all." },
+                { q: "What age is it suitable for?", a: "WAYO is designed for children aged 2 and up, and works equally well for elderly family members who need gentle monitoring." },
                 { q: "Can I pair more than two bands?", a: "The first version comes as a pair — one for you, one for your child. V2 supports one parent band connected to multiple child bands — perfect for families with two or more kids. Register early and you'll be first to own it when that's available." },
             ]
         },
         {
             category: "Early Access Questions",
             items: [
-                { q: "When does Wayo launch?", a: "We're targeting April 2026 for our first batch." },
-                { q: "What happens when I register?", a: "You'll be among the first to know when Wayo is available. No payment is collected now." },
+                { q: "When does WAYO launch?", a: "We're targeting April 2026 for our first batch." },
+                { q: "What happens when I register?", a: "You'll be among the first to know when WAYO is available. No payment is collected now." },
                 { q: "Will early access members get anything special?", a: "Yes — early registrants will have first access to the first batch before it opens to the public." },
                 { q: "How do I contact you?", a: "Reach us at hello@wayoband.com or through our Contact page." },
             ]
@@ -49,8 +49,8 @@ export function FAQPage({ onOpenWaitlist }: FAQPageProps) {
     return (
         <main className="bg-wayo-cream min-h-screen">
             <SEO
-                title="Wayo Band FAQ"
-                description="Answers to your questions about Wayo Band — range, battery life, water alerts, early access, and how it works. No jargon, just honest answers."
+                title="WAYO Band FAQ"
+                description="Answers to your questions about WAYO Band — range, battery life, water alerts, early access, and how it works. No jargon, just honest answers."
                 path="/faq"
             />
             {/* Hero */}

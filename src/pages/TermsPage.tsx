@@ -5,8 +5,8 @@ export function TermsPage() {
     return (
         <LegalPageLayout title="Terms of Service" lastUpdated="March 2026">
             <SEO
-                title="Terms of Service | Wayo Band"
-                description="Wayo Band Terms of Service. Read the terms governing the use of the Wayo Band website and pre-order registration."
+                title="Terms of Service | WAYO Band"
+                description="WAYO Band Terms of Service. Read the terms governing the use of the WAYO Band website and pre-order registration."
                 path="/terms"
             />
             <p>
@@ -15,7 +15,7 @@ export function TermsPage() {
             </p>
 
             <p>
-                These Terms of Service ("Terms") govern your use of the Wayo Band website located at wayoband.com ("Site") and any related services provided by PSU Pro Enterprises ("we", "us", or "our"), operating under the brand name Wayo Band.
+                These Terms of Service ("Terms") govern your use of the WAYO Band website located at wayoband.com ("Site") and any related services provided by PSU Pro Enterprises ("we", "us", or "our"), operating under the brand name WAYO Band.
             </p>
             <p>
                 By accessing or using our Site, you agree to be bound by these Terms. If you disagree with any part of these Terms, please do not use our Site.
@@ -23,9 +23,9 @@ export function TermsPage() {
 
             <hr />
 
-            <h2>1. About Wayo Band</h2>
+            <h2>1. About WAYO Band</h2>
             <p>
-                Wayo Band is a product developed and owned by <strong>PSU Pro Enterprises</strong>, a company registered in India. The Wayo Band is a child safety proximity wristband system currently in pre-launch phase, expected to ship in April 2026.
+                WAYO Band is a product developed and owned by <strong>PSU Pro Enterprises</strong>, a company registered in India. The WAYO Band is a child safety proximity wristband system currently in pre-launch phase, expected to ship in April 2026.
             </p>
 
             <hr />
@@ -34,7 +34,7 @@ export function TermsPage() {
             <h3>2.1 Permitted Use</h3>
             <p>You may use this Site to:</p>
             <ul>
-                <li>Learn about the Wayo Band product</li>
+                <li>Learn about the WAYO Band product</li>
                 <li>Register your interest in the waitlist</li>
                 <li>Contact us with questions</li>
             </ul>
@@ -54,7 +54,7 @@ export function TermsPage() {
             <p>By registering on our waitlist, you:</p>
             <ul>
                 <li>Provide accurate personal information (name, phone, email, city)</li>
-                <li>Consent to receive WhatsApp and email communications from <strong>PSU Pro Enterprises</strong> regarding Wayo Band's launch</li>
+                <li>Consent to receive WhatsApp and email communications from <strong>PSU Pro Enterprises</strong> regarding WAYO Band's launch</li>
                 <li>Understand that registration does not constitute a purchase or guarantee of product availability</li>
                 <li>Can withdraw your registration at any time by contacting us</li>
             </ul>
@@ -64,7 +64,7 @@ export function TermsPage() {
 
             <h2>4. Intellectual Property</h2>
             <p>
-                All content on this Site — including the Wayo Band name, logo, product concept, copy, images, and design — is the intellectual property of <strong>PSU Pro Enterprises</strong> and is protected under applicable Indian intellectual property laws.
+                All content on this Site — including the WAYO Band name, logo, product concept, copy, images, and design — is the intellectual property of <strong>PSU Pro Enterprises</strong> and is protected under applicable Indian intellectual property laws.
             </p>
             <p>
                 You may not reproduce, distribute, or create derivative works from any content on this Site without our prior written consent.
@@ -87,7 +87,7 @@ export function TermsPage() {
 
             <h2>6. Limitation of Liability</h2>
             <p>
-                To the fullest extent permitted by law, <strong>PSU Pro Enterprises</strong> shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of or inability to use this Site or the Wayo Band product.
+                To the fullest extent permitted by law, <strong>PSU Pro Enterprises</strong> shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of or inability to use this Site or the WAYO Band product.
             </p>
 
             <hr />
@@ -110,7 +110,7 @@ export function TermsPage() {
             <p>For any questions regarding these Terms:</p>
             <p>
                 <strong>PSU Pro Enterprises</strong><br />
-                Brand: Wayo Band<br />
+                Brand: WAYO Band<br />
                 Website: wayoband.com<br />
                 Email: hello@wayoband.com
             </p>

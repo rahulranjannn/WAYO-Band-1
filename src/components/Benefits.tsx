@@ -64,7 +64,7 @@ export function Benefits() {
             <div className="bg-wayo-cream rounded-[3rem] p-8 relative z-10">
               <img
                 src="/childband.webp"
-                alt="Wayo - Peace of mind, simplified"
+                alt="WAYO - Peace of mind, simplified"
                 width="800"
                 height="800"
                 loading="lazy"

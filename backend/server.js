@@ -23,7 +23,7 @@ const supabase = createClient(supabaseUrl || 'https://placeholder.supabase.co', 
 
 // Health Check route
 app.get('/', (req, res) => {
-    res.status(200).json({ status: 'OK', message: 'Wayo Band backend API is running' });
+    res.status(200).json({ status: 'OK', message: 'WAYO Band backend API is running' });
 });
 
 /*

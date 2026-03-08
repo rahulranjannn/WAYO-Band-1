@@ -16,7 +16,7 @@ export function FeatureStrip() {
         {
             icon: <WifiOff className="w-8 h-8 text-wayo-coral" />,
             title: "No Phone Needed",
-            body: "No app, no internet, no SIM. Wayo works completely on its own, right out of the box."
+            body: "No app, no internet, no SIM. WAYO works completely on its own, right out of the box."
         },
         {
             icon: <UserCheck className="w-8 h-8 text-[#2D9C8F]" />,

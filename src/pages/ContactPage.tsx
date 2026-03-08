@@ -52,8 +52,8 @@ export function ContactPage() {
     return (
         <main className="min-h-screen bg-[#FAFAF8] font-sans pb-0">
             <SEO
-                title="Contact Wayo Band"
-                description="Get in touch with the Wayo team. We're real people and we reply to every message personally. Email us at hello@wayoband.com."
+                title="Contact WAYO Band"
+                description="Get in touch with the WAYO team. We're real people and we reply to every message personally. Email us at hello@wayoband.com."
                 path="/contact"
             />
             {/* SECTION 1 — PAGE HERO BANNER */}
@@ -70,7 +70,7 @@ export function ContactPage() {
                 </h1>
 
                 <p className="font-['DM_Sans'] text-[17px] text-white/70 leading-[1.6] max-w-[480px] mx-auto">
-                    Questions about Wayo Band? Partnership ideas?<br />
+                    Questions about WAYO Band? Partnership ideas?<br />
                     Just want to say hi?— <br />
                     we read every message.
                 </p>
@@ -95,7 +95,7 @@ export function ContactPage() {
                                     <p className="font-['DM_Sans'] text-[14px] text-[#7A8FA0] mb-[28px]">We reply within 24 hours on working days.</p>
 
                                     <form onSubmit={handleSubmit}>
-                                        <input type="hidden" name="_subject" value="Contact Form — Wayo Band" />
+                                        <input type="hidden" name="_subject" value="Contact Form — WAYO Band" />
                                         <input type="hidden" name="source" value="contact_page" />
 
                                         <div className="mb-5">
@@ -267,7 +267,7 @@ export function ContactPage() {
                         <div className="rounded-[20px] p-7 mt-6 w-full" style={{ background: 'linear-gradient(135deg, #1A2E44, #2D4A6B)' }}>
                             <div className="text-[11px] text-white/50 uppercase tracking-[0.05em] mb-2 font-semibold font-['DM_Sans']">WHO WE ARE</div>
                             <p className="font-['DM_Sans'] text-[15px] text-white/85 leading-[1.7]">
-                                Wayo Band is built by PSU Pro Enterprises, a small team based in Ranchi, Jharkhand. We're engineers who believe child safety.
+                                WAYO Band is built by PSU Pro Enterprises, a small team based in Ranchi, Jharkhand. We're engineers who believe child safety.
                             </p>
                             <div className="flex gap-1.5 mt-5">
                                 <div className="w-[40px] h-[8px] bg-[#A8C8E8] rounded-[4px]"></div>
@@ -301,7 +301,7 @@ export function ContactPage() {
 
                 <div className="flex flex-wrap justify-center gap-3 mb-6 max-w-3xl mx-auto">
                     <Link to="/faq" className="bg-white border border-[#EAE4DC] rounded-[100px] px-[24px] py-[12px] font-['DM_Sans'] text-[14px] text-[#1A2E44] hover:border-[#5B7A99] hover:bg-[#EBF1F7] transition-colors cursor-pointer block">
-                        📦 When does Wayo ship?
+                        📦 When does WAYO ship?
                     </Link>
                     <Link to="/faq" className="bg-white border border-[#EAE4DC] rounded-[100px] px-[24px] py-[12px] font-['DM_Sans'] text-[14px] text-[#1A2E44] hover:border-[#5B7A99] hover:bg-[#EBF1F7] transition-colors cursor-pointer block">
                         💰 How much will it cost?

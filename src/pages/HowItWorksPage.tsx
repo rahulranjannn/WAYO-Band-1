@@ -39,8 +39,8 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
     return (
         <main className="bg-white">
             <SEO
-                title="How Wayo Band Works"
-                description="See how Wayo Band works in 3 simple steps. Wear it, roam free, get an instant alert. No phone, no app, no internet needed. Launching April 2026."
+                title="How WAYO Band Works"
+                description="See how WAYO Band works in 3 simple steps. Wear it, roam free, get an instant alert. No phone, no app, no internet needed. Launching April 2026."
                 path="/how-it-works"
             />
             {/* Hero */}
@@ -52,7 +52,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                     Simple enough for a toddler.<br className="hidden md:block" /> Safe enough for every parent.
                 </h1>
                 <p className="text-xl text-[#4B5563]">
-                    No charging apps. No reading manuals. Wayo just works.
+                    No charging apps. No reading manuals. WAYO just works.
                 </p>
             </section>
 
@@ -93,7 +93,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                                 The <span className="text-[#2D9C8F]">10–100 Metre</span> Promise
                             </h2>
                             <p className="text-xl text-[#4B5563] leading-relaxed">
-                                Wayo is calibrated to a 10–100 metre safe zone — far enough for kids to explore, close enough for you to reach them in seconds.
+                                WAYO is calibrated to a 10–100 metre safe zone — far enough for kids to explore, close enough for you to reach them in seconds.
                             </p>
                         </div>
                         {/* Visual Explainer Animation */}
@@ -150,7 +150,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                                 Does it need WiFi or a SIM card?
                             </h4>
                             <p className="text-[#4B5563] pl-7">
-                                Nope. Wayo works completely offline — no internet, no SIM, no monthly fees. Ever.
+                                Nope. WAYO works completely offline — no internet, no SIM, no monthly fees. Ever.
                             </p>
                         </div>
                         <div className="border border-gray-200 rounded-[20px] p-6 bg-gray-50">
@@ -159,7 +159,7 @@ export function HowItWorksPage({ onOpenWaitlist }: HowItWorksPageProps) {
                                 What if the battery dies?
                             </h4>
                             <p className="text-[#4B5563] pl-7">
-                                Wayo charges via USB-C and lasts for days on a single charge. A low battery will alert you well in advance.
+                                WAYO charges via USB-C and lasts for days on a single charge. A low battery will alert you well in advance.
                             </p>
                         </div>
                     </div>
