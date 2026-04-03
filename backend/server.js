@@ -91,6 +91,30 @@ app.post('/api/contact', async (req, res) => {
     res.status(201).json({ message: 'Contact query submitted successfully', data });
 });
 
+// Product Review
+app.post('/api/reviews', async (req, res) => {
+    const { reviewer_name, rating, review_text } = req.body;
+
+    if (!reviewer_name || !rating || !review_text) {
+        return res.status(400).json({ error: 'Missing required review fields.' });
+    }
+
+    const { data, error } = await supabase
+        .from('product_reviews')
+        .insert([{
+            reviewer_name,
+            rating,
+            review_text
+        }]);
+
+    if (error) {
+        console.error('Product review insertion error:', error);
+        return res.status(500).json({ error: 'Failed to save product review.' });
+    }
+
+    res.status(201).json({ message: 'Review submitted successfully', data });
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
