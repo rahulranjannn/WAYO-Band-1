@@ -1,9 +1,11 @@
 import React from 'react';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 export function CartDrawer() {
   const { isCartOpen, toggleCart, cartItems, cartTotal, updateQuantity, removeFromCart } = useCart();
+  const navigate = useNavigate();
 
   if (!isCartOpen) return null;
 
@@ -98,7 +100,10 @@ export function CartDrawer() {
               <span className="text-2xl font-extrabold text-wayo-dark">₹{cartTotal}</span>
             </div>
             <p className="text-sm text-gray-500 font-medium mb-6 text-center">Taxes and shipping calculated at checkout</p>
-            <button className="w-full bg-wayo-dark text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-gray-800 transition-all hover:-translate-y-0.5 relative overflow-hidden group">
+            <button 
+              onClick={() => { toggleCart(); navigate('/checkout'); }}
+              className="w-full bg-wayo-dark text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-gray-800 transition-all hover:-translate-y-0.5 relative overflow-hidden group"
+            >
               <span className="relative z-10">Proceed to Checkout</span>
               <div className="absolute inset-0 bg-black/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </button>

@@ -119,16 +119,19 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
               </div>
               
               <button 
-                onClick={() => addToCart({
-                  id: `wayo-clip-${selectedColor}`,
-                  name: 'Wayo Clip',
-                  model: 'Clip',
-                  color: selectedColor,
-                  price: 799,
-                  quantity: quantity,
-                  image: mainImage,
-                  hasExtraBand: false
-                })}
+                onClick={() => {
+                  addToCart({
+                    id: `wayo-clip-${selectedColor}`,
+                    name: 'Wayo Clip',
+                    model: 'Clip',
+                    color: selectedColor,
+                    price: 799,
+                    quantity: quantity,
+                    image: mainImage,
+                    hasExtraBand: false
+                  });
+                  setQuantity(1);
+                }}
                 className="w-full bg-wayo-yellow text-wayo-dark rounded-xl font-bold text-xl hover:bg-yellow-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg h-[64px] px-8"
               >
                 Add to Cart

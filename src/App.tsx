@@ -20,6 +20,7 @@ import { ProductPage } from './pages/ProductPage';
 import { ShopPage } from './pages/ShopPage';
 import { ClipProductPage } from './pages/ClipProductPage';
 import { AccountDashboard } from './pages/AccountDashboard';
+import { CheckoutPage } from './pages/CheckoutPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -138,10 +139,10 @@ function Layout() {
             {user ? (
               <div className="relative group hidden md:block">
                 <button
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 border border-gray-200 text-wayo-dark hover:bg-gray-200 transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-wayo-cream border-2 border-transparent hover:border-gray-200 text-wayo-dark transition-colors"
                   title="Account"
                 >
-                  <UserIcon className="w-5 h-5" />
+                  <UserIcon className="w-5 h-5" strokeWidth={2} />
                 </button>
                 <div className="absolute top-full right-0 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all w-64 z-50">
                   <div className="bg-white rounded-[1.25rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-gray-100 py-2 flex flex-col font-sans">
@@ -167,10 +168,10 @@ function Layout() {
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="hidden md:flex items-center gap-2 text-gray-500 hover:text-wayo-dark font-bold text-sm transition-colors"
+                className="relative hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-wayo-cream border-2 border-transparent hover:border-gray-200 text-wayo-dark transition-colors"
                 title="Sign In"
               >
-                <UserIcon className="w-5 h-5" />
+                <UserIcon className="w-5 h-5" strokeWidth={2} />
               </button>
             )}
             
@@ -179,7 +180,7 @@ function Layout() {
               className="relative hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-wayo-cream border-2 border-transparent hover:border-gray-200 text-wayo-dark transition-colors"
               title="Cart"
             >
-              <ShoppingBag className="w-5 h-5" />
+              <ShoppingBag className="w-5 h-5" strokeWidth={2} />
               {cartItemCount > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 bg-wayo-coral text-white text-[10px] font-extrabold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm transition-transform animate-in zoom-in">
                   {cartItemCount}
@@ -275,6 +276,7 @@ function Layout() {
       <Routes>
         <Route path="/" element={<Home onOpenWaitlist={openModal} />} />
         <Route path="/account" element={<AccountDashboard />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product/clip" element={<ClipProductPage onOpenWaitlist={openModal} />} />

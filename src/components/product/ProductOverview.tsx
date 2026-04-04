@@ -182,16 +182,21 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                 ><Plus className="w-5 h-5" /></button>
               </div>
               <button 
-                onClick={() => addToCart({
-                  id: `wayo-band-${selectedModel}-${selectedColor}`,
-                  name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
-                  model: selectedModel,
-                  color: selectedColor,
-                  price: finalPrice,
-                  quantity: quantity,
-                  image: images[activeImage],
-                  hasExtraBand: hasExtraBand
-                })}
+                onClick={() => {
+                  addToCart({
+                    id: `wayo-band-${selectedModel}-${selectedColor}`,
+                    name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
+                    model: selectedModel,
+                    color: selectedColor,
+                    price: (selectedModel === 'plus' ? 1499 : 999) + (hasExtraBand ? 500 : 0),
+                    quantity: quantity,
+                    image: images[activeImage],
+                    hasExtraBand: hasExtraBand
+                  });
+                  setQuantity(1);
+                  setHasExtraBand(false);
+                  setSelectedModel('standard');
+                }}
                 className="w-full bg-wayo-coral text-white rounded-full font-bold text-xl hover:bg-red-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-wayo-coral/20 h-[60px] px-8"
               >
                 Add to Cart
