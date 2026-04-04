@@ -23,6 +23,7 @@ import { ClipProductPage } from './pages/ClipProductPage';
 import { AccountDashboard } from './pages/AccountDashboard';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { div } from 'motion/react-client';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -122,7 +123,7 @@ function Layout() {
                   </div>
                 </div>
               </div>
-              
+
               {navLinks.slice(1).map((link) => (
                 <Link
                   key={link.path}
@@ -159,11 +160,11 @@ function Layout() {
                       </div>
                     </div>
                     <div className="py-2">
-                      <Link to="/account" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><UserIcon className="w-4 h-4 text-gray-400"/> Profile</Link>
-                      <Link to="/account" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><Package className="w-4 h-4 text-gray-400"/> Orders</Link>
+                      <Link to="/account" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><UserIcon className="w-4 h-4 text-gray-400" /> Profile</Link>
+                      <Link to="/account" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><Package className="w-4 h-4 text-gray-400" /> Orders</Link>
                     </div>
                     <div className="border-t border-gray-50 py-2">
-                      <button onClick={handleLogout} className="w-full px-5 py-2 hover:bg-red-50 text-left text-[14px] font-bold text-red-600 transition-colors flex items-center gap-3"><LogOut className="w-4 h-4"/> Sign out</button>
+                      <button onClick={handleLogout} className="w-full px-5 py-2 hover:bg-red-50 text-left text-[14px] font-bold text-red-600 transition-colors flex items-center gap-3"><LogOut className="w-4 h-4" /> Sign out</button>
                     </div>
                   </div>
                 </div>
@@ -177,7 +178,7 @@ function Layout() {
                 <UserIcon className="w-5 h-5" strokeWidth={2} />
               </button>
             )}
-            
+
             <button
               onClick={toggleCart}
               className="relative hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-wayo-cream border-2 border-transparent hover:border-gray-200 text-wayo-dark transition-colors"
@@ -214,7 +215,7 @@ function Layout() {
             <div className="w-11" />
           </div>
           <div className="flex flex-col flex-grow text-wayo-dark pb-20 overflow-y-auto">
-            
+
             {user && (
               <div className="bg-white border-b border-gray-100 p-6 flex flex-col gap-1 items-center justify-center text-center">
                 <div className="w-16 h-16 rounded-full bg-wayo-dark text-white flex items-center justify-center font-bold text-2xl mb-2">
@@ -222,7 +223,7 @@ function Layout() {
                 </div>
                 <span className="text-gray-400 text-xs font-bold uppercase tracking-widest">Logged In</span>
                 <span className="font-bold text-wayo-dark">{user.email}</span>
-                
+
                 <div className="flex gap-4 mt-6">
                   <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="bg-wayo-cream text-wayo-dark px-6 py-2 rounded-full font-bold text-sm">Account</Link>
                   <button onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }} className="bg-gray-100 text-gray-600 px-6 py-2 rounded-full font-bold text-sm">Sign out</button>
@@ -232,7 +233,7 @@ function Layout() {
 
             <div className="flex flex-col items-center justify-center gap-8 text-2xl font-bold flex-grow pt-8">
               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className={isActive('/') ? 'text-wayo-coral' : ''}>Home</Link>
-              
+
               <div className="flex flex-col items-center gap-4 bg-wayo-dark/5 w-full py-6">
                 <span className="text-[#4B5563] text-sm opacity-60 mb-2 uppercase tracking-widest font-semibold">Shop</span>
                 <Link to="/product" onClick={() => setIsMobileMenuOpen(false)} className={`text-xl ${isActive('/product') ? 'text-wayo-coral' : ''}`}>WAYO Band</Link>
@@ -252,26 +253,26 @@ function Layout() {
               ))}
 
               {!user && (
-              <>
-                <div className="w-16 h-px bg-gray-200 my-2"></div>
-                <button onClick={() => { setIsMobileMenuOpen(false); setIsAuthModalOpen(true); }} className="flex items-center gap-2 text-xl text-wayo-dark">
-                  <UserIcon className="w-6 h-6" /> Sign In
-                </button>
-              </>
-            )}
-            <div className="w-16 h-px bg-gray-200 my-2"></div>
-            <button onClick={() => { setIsMobileMenuOpen(false); toggleCart(); }} className="flex items-center gap-2 text-xl text-wayo-dark">
-              <div className="relative">
-                <ShoppingBag className="w-6 h-6" />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-wayo-coral text-white text-[10px] font-extrabold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
-                    {cartItemCount}
-                  </span>
-                )}
-              </div>
-              Your Cart
-            </button>
-          </div>
+                <>
+                  <div className="w-16 h-px bg-gray-200 my-2"></div>
+                  <button onClick={() => { setIsMobileMenuOpen(false); setIsAuthModalOpen(true); }} className="flex items-center gap-2 text-xl text-wayo-dark">
+                    <UserIcon className="w-6 h-6" /> Sign In
+                  </button>
+                </>
+              )}
+              <div className="w-16 h-px bg-gray-200 my-2"></div>
+              <button onClick={() => { setIsMobileMenuOpen(false); toggleCart(); }} className="flex items-center gap-2 text-xl text-wayo-dark">
+                <div className="relative">
+                  <ShoppingBag className="w-6 h-6" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 bg-wayo-coral text-white text-[10px] font-extrabold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </div>
+                Your Cart
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -306,12 +307,9 @@ function Layout() {
       </div>
 
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
-<<<<<<< HEAD
       <SpeedInsights />
-=======
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
       <CartDrawer />
->>>>>>> feature/wayo-product-page
     </div>
   );
 }
