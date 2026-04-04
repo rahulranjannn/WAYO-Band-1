@@ -59,6 +59,20 @@ export function AccountDashboard() {
     signOut(auth);
   };
 
+  const getParsedItems = (items: any) => {
+    if (!items) return [];
+    if (typeof items === 'string') {
+      try {
+        const parsed = JSON.parse(items);
+        return Array.isArray(parsed) ? parsed : [parsed];
+      } catch (e) {
+        return [{ name: 'WAYO Product', quantity: 1, color: 'Standard' }];
+      }
+    }
+    if (Array.isArray(items)) return items;
+    return [{ name: 'WAYO Product', quantity: 1, color: 'Standard' }];
+  };
+
   return (
     <main className="min-h-screen bg-white pt-28 pb-20">
       <SEO title="My Account" description="Manage your WAYO account and view orders." path="/account" />
@@ -142,32 +156,38 @@ export function AccountDashboard() {
                <div className="bg-white rounded-2xl p-8 sm:p-12 border border-gray-100 flex justify-center py-24 shadow-[0_2px_10px_rgba(0,0,0,0.02)]"><div className="w-8 h-8 border-4 border-wayo-coral border-t-transparent rounded-full animate-spin"></div></div>
             ) : orders.length > 0 ? (
                <div className="space-y-4">
-                 {orders.map(order => (
+                 {orders.map(order => {
+                   const parsedItems = getParsedItems(order.items_ordered);
+                   return (
                    <div key={order.id} className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
                      <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
                         <div>
-                          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 mt-1">Order #{order.id?.substring(0, 8) || 'PREORDER'}</p>
-                          <p className="font-extrabold text-wayo-dark text-xl">Total: ₹{order.total_amount}</p>
+                          <div className="flex items-center gap-2 mb-1 mt-1">
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{order.created_at ? new Date(order.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Recent'}</p>
+                            <span className="text-gray-300">•</span>
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">#{order.id?.substring(0, 8) || 'PREORDER'}</p>
+                          </div>
+                          <p className="font-extrabold text-wayo-dark text-xl">Total: ₹{order.total_amount || 0}</p>
                         </div>
                         <div className="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-bold border border-green-100 uppercase">
                           {order.payment_status || 'Paid'}
                         </div>
                      </div>
                      <div className="flex flex-col gap-4">
-                       {(order.items_ordered || []).map((item: any, i: number) => (
+                       {parsedItems.map((item: any, i: number) => (
                          <div key={i} className="flex gap-4 items-center bg-gray-50/50 p-3 rounded-xl border border-gray-100">
                            <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center overflow-hidden border border-gray-100">
-                             <img src={item.image || '/logo2.webp'} alt={item.name} className="w-full h-full object-cover" />
+                             <img src={item.image || '/logo2.webp'} alt={item.name || 'Product'} className="w-full h-full object-cover" />
                            </div>
                            <div className="flex flex-col">
-                              <p className="font-bold text-wayo-dark text-[15px]">{item.name}</p>
-                              <p className="text-sm text-gray-500 font-medium">{item.color} • Qty {item.quantity}</p>
+                              <p className="font-bold text-wayo-dark text-[15px]">{item.name || 'WAYO Product'}</p>
+                              <p className="text-sm text-gray-500 font-medium">{item.color || 'Standard'} • Qty {item.quantity || 1}</p>
                            </div>
                          </div>
                        ))}
                      </div>
                    </div>
-                 ))}
+                 )})}
                </div>
             ) : (
               <div className="bg-white rounded-2xl p-8 sm:p-12 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col items-center justify-center min-h-[50vh] text-center">
