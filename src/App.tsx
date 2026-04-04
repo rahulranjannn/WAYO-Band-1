@@ -21,6 +21,7 @@ import { ShopPage } from './pages/ShopPage';
 import { ClipProductPage } from './pages/ClipProductPage';
 import { AccountDashboard } from './pages/AccountDashboard';
 import { CheckoutPage } from './pages/CheckoutPage';
+import { AdminDashboard } from './pages/AdminDashboard';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -60,6 +61,7 @@ function Layout() {
     { name: 'How it Works', path: '/how-it-works' },
     { name: 'Features', path: '/features' },
     { name: 'FAQ', path: '/faq' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -276,6 +278,7 @@ function Layout() {
       <Routes>
         <Route path="/" element={<Home onOpenWaitlist={openModal} />} />
         <Route path="/account" element={<AccountDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/product" element={<ProductPage />} />

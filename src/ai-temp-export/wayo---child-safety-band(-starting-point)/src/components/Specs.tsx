@@ -1,6 +1,6 @@
 export function Specs() {
   const details = [
-    { label: "Range", value: "Up to 30 metres in open areas." },
+    { label: "Range", value: "Up to 100 metres in open areas." },
     { label: "Phone/Internet needed?", value: "No. Never." },
     { label: "Monthly fee?", value: "No. Use forever." },
     { label: "Battery", value: "2-3 days on a full charge." },
@@ -17,11 +17,10 @@ export function Specs() {
         <div className="bg-[#FFFAF5] border-2 border-[#FFF0E5] rounded-[2rem] p-6 sm:p-10 shadow-sm">
           <div className="flex flex-col">
             {details.map((detail, index) => (
-              <div 
-                key={index} 
-                className={`flex flex-col sm:flex-row sm:items-center justify-between py-6 gap-2 sm:gap-4 ${
-                  index !== details.length - 1 ? 'border-b border-[#FCE8D8]' : ''
-                }`}
+              <div
+                key={index}
+                className={`flex flex-col sm:flex-row sm:items-center justify-between py-6 gap-2 sm:gap-4 ${index !== details.length - 1 ? 'border-b border-[#FCE8D8]' : ''
+                  }`}
               >
                 <div className="font-bold text-wayo-dark text-lg sm:text-xl">
                   {detail.label}

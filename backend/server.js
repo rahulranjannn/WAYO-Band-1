@@ -5,6 +5,7 @@ const { createClient } = require('@supabase/supabase-js');
 const { sendAdminNotification, sendUserConfirmation } = require('./emailService');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
+const rateLimit = require('express-rate-limit');
 
 let razorpay = null;
 if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
@@ -19,19 +20,38 @@ if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Basic middleware
-app.use(cors());
+// Strict CORS Configuration
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:5173', 'https://your-production-url.wayo.co'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
+// Basic middlewares
+// We must parse raw body for Razorpay Webhooks. We create a middleware hook for it.
+app.use('/api/webhook/razorpay', express.raw({ type: 'application/json' }));
 app.use(express.json());
 
 // Initialize Supabase Client using environment variables
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
     console.warn('WARNING: Missing SUPABASE_URL or SUPABASE_ANON_KEY environment variables.');
 }
 
+if (!supabaseServiceKey) {
+    console.warn('WARNING: Missing SUPABASE_SERVICE_ROLE_KEY. Secured backend queries will fail.');
+}
+
 const supabase = createClient(supabaseUrl || 'https://placeholder.supabase.co', supabaseKey || 'placeholder_key');
+const supabaseAdmin = createClient(supabaseUrl || 'https://placeholder.supabase.co', supabaseServiceKey || 'placeholder_key');
 
 // Health Check route
 app.get('/', (req, res) => {
@@ -43,8 +63,15 @@ app.get('/', (req, res) => {
  * E.g., handling form submissions and sending to Supabase or mailing with Nodemailer.
  */
 
+// Rate Limiting Config
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 requests per block
+  message: { error: 'Too many requests, please try again later.' }
+});
+
 // Example: Waitlist Registration
-app.post('/api/waitlist', async (req, res) => {
+app.post('/api/waitlist', apiLimiter, async (req, res) => {
     const { name, phone, email, city, target_user } = req.body;
 
     if (!name || !phone || !email || !city || !target_user) {
@@ -74,7 +101,7 @@ app.post('/api/waitlist', async (req, res) => {
 });
 
 // Example: Contact Query
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', apiLimiter, async (req, res) => {
     const { name, email, phone, topic, message } = req.body;
 
     if (!name || !email || !topic || !message) {
@@ -127,6 +154,42 @@ app.post('/api/reviews', async (req, res) => {
     res.status(201).json({ message: 'Review submitted successfully', data });
 });
 
+// Admin Data Extractor Dashboard hook
+app.get('/api/admin/data', async (req, res) => {
+    try {
+        const [ordersRes, promosRes, waitlistRes, contactsRes, reviewsRes] = await Promise.all([
+            supabaseAdmin.from('orders').select('*').order('created_at', { ascending: false }),
+            supabaseAdmin.from('promo_codes').select('*'),
+            supabaseAdmin.from('waitlist_reservations').select('*'), // Crash removed, no tracking on column 
+            supabaseAdmin.from('contact_queries').select('*').order('created_at', { ascending: false }),
+            supabaseAdmin.from('product_reviews').select('*') // Fallback pure fetch mapping 
+        ]);
+
+        res.json({
+            orders: ordersRes.data || [],
+            promos: promosRes.data || [],
+            waitlist: waitlistRes.data || [],
+            contacts: contactsRes.data || [],
+            reviews: reviewsRes.data || []
+        });
+    } catch (error) {
+        console.error('Admin Fetch Error:', error);
+        res.status(500).json({ error: 'Failed to fetch admin data' });
+    }
+});
+
+app.post('/api/admin/update-order', async (req, res) => {
+    try {
+        const { orderId, newStatus } = req.body;
+        const { error } = await supabaseAdmin.from('orders').update({ shipping_status: newStatus }).eq('id', orderId);
+        if (error) throw error;
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Update status sync err:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // Razorpay Order Creation Route
 app.post('/api/create-razorpay-order', async (req, res) => {
   try {
@@ -140,10 +203,27 @@ app.post('/api/create-razorpay-order', async (req, res) => {
         calculatedTotal += (itemPrice * item.quantity);
     });
 
-    if (promoCode === 'LAUNCH10') {
-        calculatedTotal = Math.round(calculatedTotal * 0.9);
+    let calculatedDiscount = 0;
+    if (promoCode) {
+        // Query database natively using Admin hook bypassing RLS securely
+        const { data: promo, error: promoError } = await supabaseAdmin
+            .from('promo_codes')
+            .select('*')
+            .eq('code', promoCode)
+            .single();
+
+        if (promo && promo.is_active) {
+            if (promo.discount_type === 'percent') {
+                calculatedDiscount = (calculatedTotal * promo.discount_value) / 100;
+            } else if (promo.discount_type === 'flat') {
+                calculatedDiscount = promo.discount_value;
+            }
+        } else if (promoError && promoError.code !== 'PGRST116') {
+             console.error('Promo lookup error:', promoError);
+        }
     }
 
+    calculatedTotal = Math.max(0, calculatedTotal - calculatedDiscount);
     const amountInPaise = Math.round(calculatedTotal * 100);
 
     // Razorpay REQUIRES amount, currency, and receipt
@@ -182,6 +262,32 @@ app.post('/api/verify-payment', (req, res) => {
     } catch (error) {
         console.error('Payment verification error:', error);
         res.status(500).json({ success: false, error: 'Payment verification failed' });
+    }
+});
+
+// Razorpay Webhook Fulfillment 
+app.post('/api/webhook/razorpay', (req, res) => {
+    const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    if (!secret) return res.status(500).send("Webhook secret missing on server.");
+
+    const signature = req.headers['x-razorpay-signature'];
+    
+    // Secure Crypto verification hashing against the raw buffer!
+    const shasum = crypto.createHmac('sha256', secret);
+    shasum.update(req.body);
+    const digest = shasum.digest('hex');
+
+    if (digest === signature) {
+        // Since we bypassed JSON parsing above, parse safely to use body logic
+        const parsedBody = JSON.parse(req.body.toString());
+        console.log("Valid Webhook Received:", parsedBody);
+        
+        // TODO: Database fulfillment routing 
+
+        res.status(200).send('OK');
+    } else {
+        console.error("Invalid Razorpay Webhook Signature.");
+        res.status(400).send('Invalid signature');
     }
 });
 

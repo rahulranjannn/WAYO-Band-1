@@ -18,7 +18,7 @@ export function FinalCTA({ selectedModel }: FinalCTAProps) {
         <p className="text-xl sm:text-2xl mb-10 font-medium text-white/90">
           Wayo Band. One pair. A lifetime of peace of mind.
         </p>
-        
+
         <div className="mb-10">
           <div className="flex items-baseline justify-center gap-3 mb-2">
             <span className="text-4xl font-extrabold">₹{price}</span>
@@ -28,7 +28,7 @@ export function FinalCTA({ selectedModel }: FinalCTAProps) {
           <p className="text-white/80 font-medium">· Free delivery across India</p>
         </div>
 
-        <button 
+        <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="w-full sm:w-auto bg-white text-wayo-coral px-16 py-6 rounded-full font-bold text-2xl hover:bg-gray-50 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-2xl min-h-[72px] mb-10"
         >
@@ -36,7 +36,7 @@ export function FinalCTA({ selectedModel }: FinalCTAProps) {
         </button>
 
         <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-sm font-medium text-white/90">
-          <div className="flex items-center gap-2"><RefreshCcw className="w-4 h-4" /> 7-day returns</div>
+          <div className="flex items-center gap-2"><RefreshCcw className="w-4 h-4" /> 7-day replacemnt</div>
           <div className="flex items-center gap-2"><Truck className="w-4 h-4" /> Free delivery</div>
           <div className="flex items-center gap-2"><Lock className="w-4 h-4" /> Secure payment</div>
           <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4" /> WhatsApp support</div>

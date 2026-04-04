@@ -5,12 +5,12 @@ export function ClipFeatures() {
     {
       emoji: "🔔",
       title: "It moves. You know.",
-      description: "The moment your bag is lifted, dragged, or carried away — even a short distance — your wrist buzzes and sounds an alarm. You're awake before they're gone."
+      description: "The moment your bag is lifted, dragged, or carried away even a short distance your wrist buzzes and sounds an alarm. You're awake before they're gone."
     },
     {
       emoji: "📡",
       title: "Works across the compartment.",
-      description: "Whether your bag is on the floor below your berth, in the overhead rack, or at the other end of the platform — the Clip and Band stay connected across a wide range. No blind spots."
+      description: "Whether your bag is on the floor below your berth, in the overhead rack, or at the other end of the platform the Clip and Band stay connected across a wide range. No blind spots."
     },
     {
       emoji: "🔋",

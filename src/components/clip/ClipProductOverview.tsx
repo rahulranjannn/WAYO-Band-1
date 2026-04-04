@@ -32,7 +32,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
     <section className="pt-24 pb-16 lg:pt-32 lg:pb-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          
+
           {/* Left Column - Gallery */}
           <div className="lg:col-span-7 flex flex-col gap-4">
             <div className="bg-wayo-cream rounded-[2rem] overflow-hidden aspect-square relative">
@@ -40,8 +40,8 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
             </div>
             <div className="grid grid-cols-4 gap-4">
               {thumbnails.map((thumb, idx) => (
-                <button 
-                  key={idx} 
+                <button
+                  key={idx}
                   onClick={() => setMainImage(thumb)}
                   className={`rounded-xl overflow-hidden aspect-square border-2 transition-all ${mainImage === thumb ? 'border-wayo-dark' : 'border-transparent hover:border-gray-200'}`}
                 >
@@ -56,7 +56,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
             <div className="inline-block bg-wayo-mint/20 text-teal-800 font-bold px-3 py-1 rounded-full text-sm w-fit mb-4">
               Your bag stays. You sleep.
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl font-extrabold text-wayo-dark mb-4 font-display tracking-tight">
               Wayo Clip
             </h1>
@@ -107,18 +107,18 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
 
             <div className="flex flex-col gap-4 mb-6">
               <div className="flex items-center justify-between border-2 border-gray-200 rounded-full px-4 py-2 w-36 h-[60px]">
-                <button 
+                <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="text-gray-500 hover:text-wayo-dark text-2xl font-medium px-2"
                 ><Minus className="w-5 h-5" /></button>
                 <span className="font-bold text-wayo-dark text-xl">{quantity}</span>
-                <button 
+                <button
                   onClick={() => setQuantity(quantity + 1)}
                   className="text-gray-500 hover:text-wayo-dark text-2xl font-medium px-2"
                 ><Plus className="w-5 h-5" /></button>
               </div>
-              
-              <button 
+
+              <button
                 onClick={() => {
                   addToCart({
                     id: `wayo-clip-${selectedColor}`,
@@ -136,8 +136,8 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
               >
                 Add to Cart
               </button>
-              
-              <button 
+
+              <button
                 onClick={onOpenWaitlist}
                 className="w-full bg-white border-2 border-gray-200 text-wayo-dark rounded-xl font-bold text-lg hover:border-gray-300 hover:bg-gray-50 transition-all h-[64px] px-8"
               >
@@ -161,11 +161,11 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
                 },
                 {
                   q: "How does the Clip attach to my bag?",
-                  a: "The Wayo Clip has a strong spring-loaded clip on the back — it snaps onto any zipper pull, bag strap, or belt loop in seconds. It won't fall off on its own."
+                  a: "The Wayo Clip has a strong spring-loaded clip on the back it snaps onto any zipper pull, bag strap, or belt loop in seconds. It won't fall off on its own."
                 },
                 {
                   q: "What if I'm not wearing the band and my bag moves?",
-                  a: "The band will still buzz and sound an alarm — even from inside your pocket or placed nearby. As long as it's within about 30 metres of the Clip, it will alert."
+                  a: "The band will still buzz and sound an alarm even from inside your pocket or placed nearby. As long as it's within about 30 metres of the Clip, it will alert."
                 },
                 {
                   q: "Does it need a SIM card or internet?",
@@ -173,7 +173,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
                 }
               ].map((faq, index) => (
                 <div key={index} className="py-4">
-                  <button 
+                  <button
                     onClick={(e) => {
                       const nextEl = (e.currentTarget.nextElementSibling as HTMLElement);
                       if (nextEl) {

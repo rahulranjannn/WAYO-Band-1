@@ -6,19 +6,19 @@ export function HowItWorks() {
     {
       icon: <Heart className="w-10 h-10 text-wayo-coral" />,
       title: "Wear it",
-      description: "One band for you. One for your child. Slip them on and forget about them. They connect to each other automatically — no buttons, no tapping, no waiting.",
+      description: "One band for you. One for your child. Slip them on and forget about them. They connect automatically.",
       color: "bg-red-50"
     },
     {
       icon: <Activity className="w-10 h-10 text-wayo-mint" />,
       title: "Let them roam",
-      description: "As long as your child is within a safe distance, the bands are completely silent. No beeping, no buzzing. Just freedom — for them and for you.",
+      description: "As long as they are within a safe distance, the bands are completely silent. Just freedom.",
       color: "bg-teal-50"
     },
     {
       icon: <BellRing className="w-10 h-10 text-wayo-yellow" />,
       title: "Get the instant alert",
-      description: "The moment they wander too far, both bands vibrate and beep at the same time. You feel it. They feel it. You find each other in seconds.",
+      description: "The moment they wander too far, both bands vibrate and beep. You feel it. They feel it. You find each other in seconds.",
       color: "bg-yellow-50"
     }
   ];
@@ -56,7 +56,7 @@ export function HowItWorks() {
             </motion.div>
           ))}
         </div>
-        
+
         <p className="text-center text-sm sm:text-base text-gray-500 font-medium max-w-2xl mx-auto">
           Works in crowded malls, busy markets, beaches, parks, railway stations, weddings — anywhere you take your child.
         </p>

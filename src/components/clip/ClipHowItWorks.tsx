@@ -13,7 +13,7 @@ export function ClipHowItWorks() {
     {
       number: "3",
       title: "Wayo Watches",
-      description: "The moment anyone lifts or moves your bag by even a metre — your wrist band vibrates and sounds an alert. Instantly. You don't need to be asleep to miss it."
+      description: "The moment anyone lifts or moves your bag by even a metre your wrist band vibrates and sounds an alert. Instantly. You don't need to be asleep to miss it."
     }
   ];
 
@@ -32,7 +32,7 @@ export function ClipHowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
           {/* Connecting line for desktop */}
           <div className="hidden md:block absolute top-10 left-[16%] right-[16%] h-0.5 bg-wayo-dark/10" />
-          
+
           {steps.map((step, index) => (
             <div key={index} className="relative flex flex-col items-center text-center">
               <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-3xl font-extrabold text-wayo-dark shadow-sm border-4 border-white z-10 mb-6">

@@ -6,8 +6,8 @@ export function Features() {
       tag: "SAFETY",
       tagColor: "bg-wayo-coral/10 text-wayo-coral",
       title: "The moment they wander — you know.",
-      description: "Most parents don't notice their child has drifted until they're already out of sight. Wayo Band doesn't wait. The instant your child moves beyond a safe distance, your band vibrates and beeps — and so does theirs. It stops them in their tracks and tells you exactly what's happening. No guessing. No searching. No panic.",
-      note: "Alert range works up to approximately 30 metres in open spaces. Range may be shorter in buildings with thick walls.",
+      description: "Wayo Band doesn't wait. The instant your child moves beyond a safe distance, your band vibrates and beeps and so does theirs. No guessing. No panic.",
+      note: "Alert range works up to approximately 100 metres in open spaces. Range may be shorter in buildings with thick walls.",
       image: "https://picsum.photos/seed/marketkid/800/600",
       imageAlt: "Child walking away in a market",
       reverse: false
@@ -16,7 +16,7 @@ export function Features() {
       tag: "PROTECTION",
       tagColor: "bg-wayo-mint/10 text-teal-700",
       title: "Falls in water? You'll know in an instant.",
-      description: "Whether it's a swimming pool, a water tank, a flooded street, or even a bucket — the moment the child's band touches water, both bands alarm immediately. Not after a delay. Not when you check your phone. Right now. Because some moments cannot wait.",
+      description: "Whether it's a swimming pool, a water tank, a flooded street, or even a bucket the moment the child's band touches water, both bands alarm immediately. Not after a delay. Not when you check your phone. Right now. Because some moments cannot wait.",
       note: "Water detection is on the child's band. Both bands are fully waterproof and safe to wear while swimming.",
       image: "https://picsum.photos/seed/waterkid/800/600",
       imageAlt: "Child's wristband near water",
@@ -36,7 +36,7 @@ export function Features() {
       tag: "SIMPLICITY",
       tagColor: "bg-gray-100 text-gray-700",
       title: "Works even when your phone is dead.",
-      description: "Wayo Band doesn't need your phone to be on. It doesn't need WiFi. It doesn't need mobile data. It doesn't have a monthly subscription. The two bands talk directly to each other — always. Charge them, wear them, and they just work. That's it.",
+      description: "Wayo doesn't need your phone to be on. No WiFi. No mobile data. No monthly subscription. The two bands talk directly to each other. Charge them, wear them, and they work.",
       note: null,
       image: "https://picsum.photos/seed/nophone/800/600",
       imageAlt: "No phone needed illustration",
@@ -62,8 +62,8 @@ export function Features() {
                 className="w-full lg:w-1/2"
               >
                 <div className="rounded-[2rem] overflow-hidden shadow-xl bg-white aspect-[4/3]">
-                  <img 
-                    src={feature.image} 
+                  <img
+                    src={feature.image}
                     alt={feature.imageAlt}
                     className="w-full h-full object-cover"
                     loading="lazy"
