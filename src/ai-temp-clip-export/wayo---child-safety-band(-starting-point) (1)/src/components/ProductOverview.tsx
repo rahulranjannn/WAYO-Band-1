@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Star, ShieldCheck, Truck, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { PriceDisplay } from '../PriceDisplay';
-import type { WayoModel } from '../../pages/ProductPage';
+import type { WayoModel } from '../App';
 
 interface ProductOverviewProps {
   selectedModel: WayoModel;
@@ -14,7 +13,6 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>('description');
-  const [hasExtraBand, setHasExtraBand] = useState(false);
 
   const colors = [
     { name: 'Coral', class: 'bg-wayo-coral' },
@@ -23,10 +21,10 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   ];
 
   const images = [
-    '/hero1-1080.webp',
-    '/childband-1080.webp',
-    '/one-1080.webp',
-    '/three-1080.webp',
+    '/hero-image.png',
+    'https://picsum.photos/seed/wayo1/800/800',
+    'https://picsum.photos/seed/wayo2/800/800',
+    'https://picsum.photos/seed/wayo3/800/800',
   ];
 
   const scrollToHowItWorks = () => {
@@ -37,11 +35,9 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
     setOpenAccordion(openAccordion === section ? null : section);
   };
 
-  const basePrice = selectedModel === 'plus' ? 1499 : 999;
-  const baseMrp = selectedModel === 'plus' ? 2499 : 1799;
-
-  const finalPrice = basePrice + (hasExtraBand ? 500 : 0);
-  const finalMrp = baseMrp + (hasExtraBand ? 500 : 0);
+  const price = selectedModel === 'plus' ? '1,499' : '999';
+  const mrp = selectedModel === 'plus' ? '2,499' : '1,799';
+  const save = selectedModel === 'plus' ? '1,000' : '800';
 
   return (
     <section className="pt-24 pb-16 lg:pt-32 lg:pb-24 bg-white">
@@ -85,8 +81,10 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
               <p className="text-lg text-gray-600 font-medium mb-6">
                 The invisible safety thread. Instant alerts the moment your child wanders too far — no phone, no app, no internet.
               </p>
-              <div className="mb-4">
-                <PriceDisplay discountedPrice={finalPrice} originalPrice={finalMrp} />
+              <div className="flex items-end gap-3 mb-2">
+                <span className="text-3xl font-extrabold text-wayo-dark">₹{price}</span>
+                <span className="text-xl text-gray-400 line-through font-medium mb-1">₹{mrp}</span>
+                <span className="text-sm font-bold text-wayo-mint bg-wayo-mint/10 px-2 py-1 rounded-md mb-1">Save ₹{save}</span>
               </div>
               <p className="text-sm text-gray-500 font-medium">Taxes included. Free delivery across India.</p>
             </div>
@@ -136,33 +134,6 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                     aria-label={color.name}
                   />
                 ))}
-              </div>
-            </div>
-
-            {/* Extra Band Add-on */}
-            <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#4B5563] mb-3 font-display tracking-tight">Need an extra band for a sibling?</h3>
-              <div className="flex items-center justify-between py-3 px-4 bg-wayo-cream/40 rounded-[1.25rem] border border-gray-100/80 shadow-sm transition-all hover:bg-wayo-cream/60">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-white rounded-xl overflow-hidden border border-gray-100 flex-shrink-0 shadow-sm">
-                    <img src="/childband-1080.webp" alt="Extra Band" className="w-full h-full object-cover object-center" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-wayo-dark text-[15px]">Extra Wayo Child Band</span>
-                    <span className="text-sm font-bold text-wayo-coral mt-0.5">+₹500</span>
-                  </div>
-                </div>
-                
-                <button
-                  onClick={() => setHasExtraBand(!hasExtraBand)}
-                  className={`px-5 py-2 font-bold rounded-xl transition-all text-sm w-28 flex justify-center items-center ${
-                    hasExtraBand 
-                      ? 'bg-transparent border-2 border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50/50' 
-                      : 'bg-wayo-dark text-white border-2 border-transparent hover:bg-gray-800 hover:-translate-y-0.5 shadow-sm hover:shadow'
-                  }`}
-                >
-                  {hasExtraBand ? '✓ Added' : '+ Add'}
-                </button>
               </div>
             </div>
 

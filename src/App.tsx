@@ -12,6 +12,8 @@ import { TermsPage } from './pages/TermsPage';
 import { ContactPage } from './pages/ContactPage';
 import { FeaturesPage } from './pages/FeaturesPage';
 import { ProductPage } from './pages/ProductPage';
+import { ShopPage } from './pages/ShopPage';
+import { ClipProductPage } from './pages/ClipProductPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,7 +35,6 @@ function Layout() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Product', path: '/product' },
     { name: 'How it Works', path: '/how-it-works' },
     { name: 'Features', path: '/features' },
     { name: 'FAQ', path: '/faq' },
@@ -70,8 +71,34 @@ function Layout() {
                 <img src="/logo2.webp" alt="WAYO" width="160" height="48" className="h-full w-auto object-contain" />
               </Link>
             </div>
-            <div className="hidden md:flex justify-center gap-6 lg:gap-8 text-wayo-dark font-medium text-sm lg:text-base">
-              {navLinks.map((link) => (
+            <div className="hidden md:flex justify-center gap-6 lg:gap-8 text-wayo-dark font-medium text-sm lg:text-base items-center">
+              <div className="relative group">
+                <button className={`font-medium flex items-center gap-1 transition-colors ${(isActive('/product') || isActive('/product/clip') || isActive('/shop')) ? 'font-bold text-wayo-dark' : 'text-[#4B5563] hover:text-wayo-dark'}`}>
+                  Shop
+                  <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all">
+                  <div className="bg-white rounded-2xl shadow-xl border border-gray-100 py-3 flex flex-col w-56 relative z-50">
+                    <Link to="/product" className="px-5 py-2.5 hover:bg-gray-50 flex flex-col">
+                      <span className="font-bold text-wayo-dark text-[15px]">WAYO Band</span>
+                      <span className="text-xs text-gray-500 font-medium">Child Safety Wearable</span>
+                    </Link>
+                    <Link to="/product/clip" className="px-5 py-2.5 hover:bg-gray-50 flex flex-col">
+                      <span className="font-bold text-wayo-dark text-[15px]">WAYO Clip</span>
+                      <span className="text-xs text-gray-500 font-medium">Smart Luggage Protection</span>
+                    </Link>
+                    <div className="mx-4 my-2 border-t border-gray-100"></div>
+                    <Link to="/shop" className="px-5 py-2 flex items-center justify-between group/link hover:bg-gray-50">
+                      <span className="font-bold text-wayo-coral text-[14px]">All Products</span>
+                      <span className="text-wayo-coral opacity-0 group-hover/link:opacity-100 transition-opacity transform translate-x-0 group-hover/link:translate-x-1">→</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+              {navLinks.slice(1).map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
@@ -109,8 +136,17 @@ function Layout() {
             </div>
             <div className="w-11" />
           </div>
-          <div className="flex flex-col items-center justify-center flex-grow gap-8 text-2xl font-bold text-wayo-dark pb-20">
-            {navLinks.map((link) => (
+          <div className="flex flex-col items-center justify-center flex-grow gap-8 text-2xl font-bold text-wayo-dark pb-20 overflow-y-auto">
+            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className={isActive('/') ? 'text-wayo-coral' : ''}>Home</Link>
+            
+            <div className="flex flex-col items-center gap-4 bg-wayo-dark/5 w-full py-6">
+              <span className="text-[#4B5563] text-sm opacity-60 mb-2 uppercase tracking-widest font-semibold">Shop</span>
+              <Link to="/product" onClick={() => setIsMobileMenuOpen(false)} className={`text-xl ${isActive('/product') ? 'text-wayo-coral' : ''}`}>WAYO Band</Link>
+              <Link to="/product/clip" onClick={() => setIsMobileMenuOpen(false)} className={`text-xl ${isActive('/product/clip') ? 'text-wayo-coral' : ''}`}>WAYO Clip</Link>
+              <Link to="/shop" onClick={() => setIsMobileMenuOpen(false)} className={`text-lg text-wayo-coral mt-2 font-medium`}>View All Products →</Link>
+            </div>
+
+            {navLinks.slice(1).map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -126,7 +162,9 @@ function Layout() {
 
       <Routes>
         <Route path="/" element={<Home onOpenWaitlist={openModal} />} />
+        <Route path="/shop" element={<ShopPage />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/product/clip" element={<ClipProductPage onOpenWaitlist={openModal} />} />
         <Route path="/how-it-works" element={<HowItWorksPage onOpenWaitlist={openModal} />} />
         <Route path="/features" element={<FeaturesPage onOpenWaitlist={openModal} />} />
         <Route path="/about" element={<AboutPage onOpenWaitlist={openModal} />} />
