@@ -16,6 +16,8 @@ const loadRazorpayScript = () => {
   });
 };
 
+const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+
 export function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
   const navigate = useNavigate();
@@ -59,18 +61,21 @@ export function CheckoutPage() {
     if (!promoInput.trim()) return;
     try {
       const code = promoInput.toUpperCase().trim();
-      const { data, error } = await supabase
-        .from('promo_codes')
-        .select('*')
-        .eq('code', code)
-        .eq('is_active', true)
-        .single();
+      const response = await fetch(`${API_URL}/api/validate-promo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code }),
+      });
 
-      if (error || !data) {
+      if (!response.ok) {
         setPromoStatus({ type: 'error', message: 'Invalid or expired code' });
         setAppliedPromo(null);
         return;
       }
+
+      const data = await response.json();
 
       setAppliedPromo({
         code: data.code,
@@ -135,7 +140,7 @@ export function CheckoutPage() {
         return;
       }
 
-      const backendResponse = await fetch('http://localhost:5000/api/create-razorpay-order', {
+      const backendResponse = await fetch(`${API_URL}/api/create-razorpay-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: cartItems, promoCode: appliedPromo?.code })
@@ -158,48 +163,48 @@ export function CheckoutPage() {
           console.log("PAYMENT SUCCESS:", response);
           try {
             // Step A: Verify signature securely on Node backend
-            const verifyRes = await fetch('http://localhost:5000/api/verify-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_signature: response.razorpay_signature
-                })
+            const verifyRes = await fetch(`${API_URL}/api/verify-payment`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              })
             });
 
             if (!verifyRes.ok) throw new Error('Payment verification failed');
             const verifyData = await verifyRes.json();
-            
+
             if (verifyData.success) {
-                // Step B: Save to Supabase actively
-                const { error } = await supabase.from('orders').insert([{
-                  user_id: auth.currentUser?.uid || 'guest',
-                  customer_email: form.email,
-                  items_ordered: cartItems,
-                  shipping_address: { street: form.street, city: form.city, state: form.state, pincode: form.pincode, phone: form.phone },
-                  subtotal: cartTotal,
-                  promo_code_used: appliedPromo?.code || null,
-                  discount_applied: calculatedDiscountAmount || 0,
-                  total_amount: finalTotal, 
-                  payment_status: 'paid',
-                  shipping_status: 'processing',
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_payment_id: response.razorpay_payment_id
-                }]);
+              // Step B: Save to Supabase actively
+              const { error } = await supabase.from('orders').insert([{
+                user_id: auth.currentUser?.uid || 'guest',
+                customer_email: form.email,
+                items_ordered: cartItems,
+                shipping_address: { street: form.street, city: form.city, state: form.state, pincode: form.pincode, phone: form.phone },
+                subtotal: cartTotal,
+                promo_code_used: appliedPromo?.code || null,
+                discount_applied: calculatedDiscountAmount || 0,
+                total_amount: finalTotal,
+                payment_status: 'paid',
+                shipping_status: 'processing',
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id
+              }]);
 
-                if (error) {
-                    console.error('Supabase save error:', error);
-                    alert('Order saved with warnings. Please contact support.');
-                }
+              if (error) {
+                console.error('Supabase save error:', error);
+                alert('Order saved with warnings. Please contact support.');
+              }
 
-                // Step C: Clean Up & Ship to Portal
-                clearCart();
-                navigate('/account');
+              // Step C: Clean Up & Ship to Portal
+              clearCart();
+              navigate('/account');
             }
-          } catch(err) {
-              console.error(err);
-              alert("Payment verification error! Check orders.");
+          } catch (err) {
+            console.error(err);
+            alert("Payment verification error! Check orders.");
           }
         },
         prefill: {
@@ -242,7 +247,7 @@ export function CheckoutPage() {
                     <input
                       type="text" name="name" required value={form.name} onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-1 focus:ring-wayo-coral outline-none transition-colors"
-                      placeholder="Jane Doe"
+                      placeholder=""
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
@@ -257,7 +262,7 @@ export function CheckoutPage() {
                 <div className="flex flex-col gap-1.5">
                   <label className="text-sm font-bold text-gray-700">Phone Number</label>
                   <div className="flex gap-3">
-                    <select 
+                    <select
                       value={phoneCode}
                       onChange={(e) => setPhoneCode(e.target.value)}
                       className="w-24 px-3 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral outline-none bg-white font-medium text-gray-700 disabled:bg-gray-50"
@@ -410,10 +415,10 @@ export function CheckoutPage() {
                   </>
                 ) : (
                   <div className="bg-green-50 text-green-700 px-4 py-3 rounded-xl flex justify-between items-center mb-4 border border-green-100 shadow-sm transition-all duration-300">
-                     <span className="font-bold text-[14px]">✓ Promo "{appliedPromo.code}" Applied</span>
-                     <button onClick={removePromoCode} className="text-green-800 hover:bg-green-200 w-7 h-7 rounded-full flex items-center justify-center transition-colors">
-                       <X className="w-4 h-4" />
-                     </button>
+                    <span className="font-bold text-[14px]">✓ Promo "{appliedPromo.code}" Applied</span>
+                    <button onClick={removePromoCode} className="text-green-800 hover:bg-green-200 w-7 h-7 rounded-full flex items-center justify-center transition-colors">
+                      <X className="w-4 h-4" />
+                    </button>
                   </div>
                 )}
 

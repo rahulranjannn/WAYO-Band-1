@@ -25,7 +25,7 @@ export function ProductPage() {
       <WhatsInTheBox />
       <WhoItsFor />
       <Specs />
-      <Testimonials />
+      <Testimonials variant="band" />
       <FinalCTA selectedModel={selectedModel} />
     </main>
   );

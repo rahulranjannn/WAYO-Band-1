@@ -21,7 +21,7 @@ export function WhatsInTheBox() {
           className="bg-wayo-cream rounded-[2rem] p-8 sm:p-12 shadow-sm mb-12"
         >
           <img
-            src="/abc-1080.webp"
+            src="/mid.webp"
             alt="Wayo Box Contents"
             className="w-full h-auto rounded-xl shadow-md mb-12 object-cover"
             loading="lazy"

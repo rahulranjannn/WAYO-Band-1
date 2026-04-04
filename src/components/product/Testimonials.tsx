@@ -3,36 +3,60 @@ import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 import { WriteReviewModal } from './WriteReviewModal';
 
-export function Testimonials() {
+interface TestimonialsProps {
+  variant?: 'band' | 'clip';
+}
+
+export function Testimonials({ variant = 'band' }: TestimonialsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const testimonials = [
+  const bandTestimonials = [
     {
-      quote: "My son is 4 and loves running ahead. The first time the band buzzed in a mall I nearly cried — I found him in 10 seconds flat.",
+      quote: "Great innovation! This is such a needed concept, and having it makes me significantly less worried when we go out.",
+      name: "Verified Parent",
+      location: " "
+    },
+    {
+      quote: "Exactly what we were looking for. The setup was simple and the peace of mind is totally worth it.",
+      name: "Sarah T.",
+      location: " "
+    },
+    {
+      quote: "My son is 4 and loves running ahead. The first time the band buzzed in a mall I nearly cried I found him in 10 seconds flat.",
       name: "Priya M.",
-      location: "Pune"
-    },
-    {
-      quote: "I was skeptical it would be this simple. There's literally nothing to do except wear it. Even my mother figured it out.",
-      name: "Rahul S.",
-      location: "Delhi"
-    },
-    {
-      quote: "The talk button is our favourite feature. She calls me on her 'Wayo phone' all day.",
-      name: "Anita K.",
-      location: "Bengaluru"
+      location: " "
     }
   ];
 
+  const clipTestimonials = [
+    {
+      quote: "A fantastic new addition to my travel tech. Truly a helpful gadget for my solo trips.",
+      name: "Solo Traveler",
+      location: " "
+    },
+    {
+      quote: "Brilliant and simple. It clips right on and does exactly what it promises without any hassle.",
+      name: "Tech Enthusiast",
+      location: " "
+    },
+    {
+      quote: "Slept completely fearlessly on the overnight train. The instant alarm feature is a gamechanger.",
+      name: "Rahul Verma",
+      location: " "
+    }
+  ];
+
+  const testimonials = variant === 'clip' ? clipTestimonials : bandTestimonials;
+
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section id="reviews" className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-wayo-dark font-display">Parents who've tried it</h2>
         </div>
 
         {/* Mobile: Horizontal Scroll, Desktop: Grid */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory xl:overflow-x-visible" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory xl:overflow-x-visible" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {testimonials.map((t, index) => (
             <motion.div
               key={index}
@@ -59,7 +83,7 @@ export function Testimonials() {
         </div>
 
         <div className="mt-12 text-center">
-          <button 
+          <button
             onClick={() => setIsModalOpen(true)}
             className="bg-wayo-dark text-white hover:bg-gray-800 px-8 py-3.5 rounded-full font-bold transition-all text-base shadow-md transform hover:-translate-y-0.5"
           >

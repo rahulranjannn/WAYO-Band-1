@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Star, Minus, Plus } from 'lucide-react';
 import { PriceDisplay } from '../PriceDisplay';
 import { useCart } from '../../context/CartContext';
@@ -8,22 +9,21 @@ interface ClipProductOverviewProps {
 }
 
 export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps) {
-  const [mainImage, setMainImage] = useState('/hero1-1080.webp');
-  const [selectedColor, setSelectedColor] = useState('Slate Black');
+  const [mainImage, setMainImage] = useState('/clip_1.webp');
+  const [selectedColor, setSelectedColor] = useState('Black');
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const colors = [
-    { name: 'Slate Black', hex: '#1A1A2E', label: 'most popular for travel' },
-    { name: 'Sunshine Yellow', hex: '#F5C842', label: 'easy to spot' },
-    { name: 'Coral Red', hex: '#FF7F6B', label: 'vibrant and bold' },
+    { name: 'Black', hex: '#1A1A2E', label: 'match with anything' },
   ];
 
   const thumbnails = [
-    '/hero1-1080.webp',
-    '/childband-1080.webp',
-    '/one-1080.webp',
-    '/three-1080.webp',
+    '/clip_1.webp',
+    '/clip_2.webp',
+    '/clip_3.webp',
+    '/clip_4.webp',
   ];
 
   const selectedColorData = colors.find(c => c.name === selectedColor);
@@ -65,8 +65,11 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
               <div className="flex text-wayo-yellow">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
               </div>
-              <span className="text-gray-500 font-medium text-sm hover:text-wayo-dark cursor-pointer transition-colors">
-                Be the first to review →
+              <span
+                onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-gray-500 font-medium text-sm hover:text-wayo-dark cursor-pointer transition-colors"
+              >
+                (100+ prebookings received) →
               </span>
             </div>
 
@@ -105,6 +108,11 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
               </div>
             </div>
 
+            <div className="mb-2 mt-4">
+              <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+                Limited batch of 500 pcs available
+              </span>
+            </div>
             <div className="flex flex-col gap-4 mb-6">
               <div className="flex items-center justify-between border-2 border-gray-200 rounded-full px-4 py-2 w-36 h-[60px]">
                 <button
@@ -138,10 +146,22 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
               </button>
 
               <button
-                onClick={onOpenWaitlist}
+                onClick={() => {
+                  addToCart({
+                    id: `wayo-clip-${selectedColor}`,
+                    name: 'Wayo Clip',
+                    model: 'Clip',
+                    color: selectedColor,
+                    price: 799,
+                    quantity: quantity,
+                    image: mainImage,
+                    hasExtraBand: false
+                  });
+                  navigate('/checkout');
+                }}
                 className="w-full bg-white border-2 border-gray-200 text-wayo-dark rounded-xl font-bold text-lg hover:border-gray-300 hover:bg-gray-50 transition-all h-[64px] px-8"
               >
-                Join the Waitlist — Get Launch Notification
+                Book Now
               </button>
             </div>
 
@@ -150,7 +170,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
               <span>·</span>
               <span className="flex items-center gap-1">🇮🇳 Ships across India</span>
               <span>·</span>
-              <span className="flex items-center gap-1">📦 Launching Soon</span>
+              <span className="flex items-center gap-1">📦 Free Shipping</span>
             </div>
 
             <div className="divide-y divide-gray-100 border-t border-gray-100">

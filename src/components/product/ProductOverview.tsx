@@ -11,7 +11,7 @@ interface ProductOverviewProps {
 }
 
 export function ProductOverview({ selectedModel, setSelectedModel }: ProductOverviewProps) {
-  const [selectedColor, setSelectedColor] = useState('Coral');
+  const [selectedColor, setSelectedColor] = useState('Pink');
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>('description');
@@ -19,16 +19,15 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   const { addToCart } = useCart();
 
   const colors = [
-    { name: 'Coral', class: 'bg-wayo-coral' },
-    { name: 'Yellow', class: 'bg-wayo-yellow' },
-    { name: 'Mint', class: 'bg-wayo-mint' },
+    { name: 'Pink', class: 'bg-[#FFB6C1]' },
+    { name: 'Blue', class: 'bg-[#AEC6CF]' },
   ];
 
   const images = [
-    '/hero1-1080.webp',
-    '/childband-1080.webp',
-    '/one-1080.webp',
-    '/three-1080.webp',
+    '/1.webp',
+    '/2.webp',
+    '/3.webp',
+    '/4.webp',
   ];
 
   const scrollToHowItWorks = () => {
@@ -77,20 +76,35 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-3">
                 <div className="flex text-wayo-yellow">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
                 </div>
-                <span className="text-sm text-gray-500 font-medium">(128 Reviews)</span>
+                <span
+                  onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-gray-500 font-medium text-sm hover:text-wayo-dark cursor-pointer transition-colors"
+                >
+                  (100+ prebookings received) →
+                </span>
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-wayo-dark mb-4 font-display leading-tight">
                 Wayo Band Pair
               </h1>
-              <p className="text-lg text-gray-600 font-medium mb-6">
-                The invisible safety thread. Instant alerts the moment your child wanders too far — no phone, no app, no internet.
-              </p>
+
               <div className="mb-4">
                 <PriceDisplay discountedPrice={finalPrice} originalPrice={finalMrp} />
               </div>
-              <p className="text-sm text-gray-500 font-medium">Taxes included. Free delivery across India.</p>
+              <p className="text-sm text-gray-500 font-medium mb-4">Taxes included. Complete Set — Parent + Child Band.</p>
+
+              <div className="flex flex-wrap gap-2 mb-8">
+                <div className="bg-wayo-yellow/20 text-yellow-800 px-3 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5">
+                  <span>🔔</span> Instant Vibration Alert
+                </div>
+                <div className="bg-wayo-yellow/20 text-yellow-800 px-3 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5">
+                  <span>📵</span> No App. No Phone.
+                </div>
+                <div className="bg-wayo-yellow/20 text-yellow-800 px-3 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5">
+                  <span>✅</span> No Monthly Fees
+                </div>
+              </div>
             </div>
 
             <hr className="border-gray-100 my-6" />
@@ -168,6 +182,11 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
             </div>
 
             {/* Quantity & Add to Cart */}
+            <div className="mb-2">
+              <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+                Limited batch of 500 pcs available
+              </span>
+            </div>
             <div className="flex flex-col gap-5 mb-8">
               <div className="flex items-center justify-between border-2 border-gray-200 rounded-full px-4 py-2 w-36 h-[60px] bg-white text-lg">
                 <button
@@ -272,9 +291,9 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                       className="overflow-hidden"
                     >
                       <ul className="pt-4 text-gray-600 text-sm leading-relaxed font-medium list-disc pl-5 space-y-2">
-                        <li>Free standard shipping across India (3-5 business days).</li>
+                        <li>Free standard shipping across India (5-7 business days).</li>
                         <li>Express shipping available at checkout.</li>
-                        <li>7-day no-questions-asked return policy.</li>
+                        <li>7-day replacement policy.</li>
                       </ul>
                     </motion.div>
                   )}

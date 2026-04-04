@@ -4,7 +4,7 @@ import { Star } from 'lucide-react';
 export function Testimonials() {
   const testimonials = [
     {
-      quote: "My son is 4 and loves running ahead. The first time the band buzzed in a mall I nearly cried — I found him in 10 seconds flat.",
+      quote: "My son is 4 and loves running ahead. The first time the band buzzed in a mall I nearly cried I found him in 10 seconds flat.",
       name: "Priya M.",
       location: "Pune"
     },

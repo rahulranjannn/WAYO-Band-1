@@ -21,16 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Strict CORS Configuration
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:5173', 'https://your-production-url.wayo.co'];
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+app.use(cors({ origin: [process.env.FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173'] }));
 
 // Basic middlewares
 // We must parse raw body for Razorpay Webhooks. We create a middleware hook for it.
@@ -175,6 +166,32 @@ app.get('/api/admin/data', async (req, res) => {
     } catch (error) {
         console.error('Admin Fetch Error:', error);
         res.status(500).json({ error: 'Failed to fetch admin data' });
+    }
+});
+
+// Validate Promo Code
+app.post('/api/validate-promo', async (req, res) => {
+    try {
+        const { code } = req.body;
+        if (!code) {
+            return res.status(400).json({ error: "Promo code required." });
+        }
+
+        const { data, error } = await supabaseAdmin
+            .from('promo_codes')
+            .select('*')
+            .eq('code', code.toUpperCase())
+            .eq('is_active', true)
+            .single();
+
+        if (error || !data) {
+            return res.status(400).json({ error: "Invalid or expired code" });
+        }
+
+        res.json(data);
+    } catch (err) {
+        console.error('Promo Validation Error:', err);
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 

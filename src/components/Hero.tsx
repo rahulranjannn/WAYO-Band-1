@@ -31,7 +31,7 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
                   onClick={onOpenWaitlist}
                   className="bg-wayo-dark text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-800 transition-all transform hover:scale-105 active:scale-95 shadow-xl flex items-center justify-center gap-2"
                 >
-                  Join the Waitlist <ArrowRight className="w-5 h-5" />
+                  Book Now <ArrowRight className="w-5 h-5" />
                 </button>
               </div>
               <div className="mt-8 flex items-center gap-4 text-sm font-medium text-gray-500">
@@ -86,7 +86,7 @@ export function Hero({ onOpenWaitlist }: HeroProps) {
                 onClick={onOpenWaitlist}
                 className="bg-wayo-dark text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-800 transition-all active:scale-95 shadow-xl flex items-center justify-center gap-2"
               >
-                Join the Waitlist <ArrowRight className="w-5 h-5" />
+                Book Now <ArrowRight className="w-5 h-5" />
               </button>
             </div>
             <div className="mt-6 flex flex-col justify-center items-center gap-3 text-sm font-medium text-gray-500">

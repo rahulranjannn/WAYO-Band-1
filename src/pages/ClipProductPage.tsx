@@ -30,7 +30,7 @@ export function ClipProductPage({ onOpenWaitlist }: ClipProductPageProps) {
       <ClipUseCases />
       <ClipComparison />
       <ClipSpecs />
-      <Testimonials />
+      <Testimonials variant="clip" />
       <ClipFinalCTA onOpenWaitlist={onOpenWaitlist} />
     </main>
   );

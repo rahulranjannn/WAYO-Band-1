@@ -5,6 +5,8 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { SEO } from '../components/SEO';
 import { Loader2, LogOut, RefreshCw } from 'lucide-react';
 
+const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+
 export function AdminDashboard() {
   const navigate = useNavigate();
   const [isAuthLoading, setIsAuthLoading] = useState(true);
@@ -34,7 +36,7 @@ export function AdminDashboard() {
   const fetchAllData = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/admin/data');
+      const res = await fetch(`${API_URL}/api/admin/data`);
       if (res.ok) {
         const data = await res.json();
         setOrders(data.orders || []);
@@ -56,7 +58,7 @@ export function AdminDashboard() {
 
   const updateOrderStatus = async (orderId: string, newStatus: string) => {
     try {
-      const res = await fetch('http://localhost:5000/api/admin/update-order', {
+      const res = await fetch(`${API_URL}/api/admin/update-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderId, newStatus })

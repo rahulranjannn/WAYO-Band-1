@@ -124,7 +124,7 @@ export function ClipProductOverview() {
                 onClick={() => setIsModalOpen(true)}
                 className="w-full bg-white border-2 border-gray-200 text-wayo-dark rounded-xl font-bold text-lg hover:border-gray-300 hover:bg-gray-50 transition-all h-[64px] px-8"
               >
-                Join the Waitlist — Get Launch Notification
+                Book Now — Get Launch Notification
               </button>
             </div>
 
@@ -133,7 +133,7 @@ export function ClipProductOverview() {
               <span>·</span>
               <span className="flex items-center gap-1">🇮🇳 Ships across India</span>
               <span>·</span>
-              <span className="flex items-center gap-1">📦 Launching Soon</span>
+              <span className="flex items-center gap-1">📦 Free Shipping</span>
             </div>
 
             <div className="divide-y divide-gray-100 border-t border-gray-100">

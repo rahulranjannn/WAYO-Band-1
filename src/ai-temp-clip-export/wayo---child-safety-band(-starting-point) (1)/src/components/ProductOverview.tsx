@@ -225,9 +225,9 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                       className="overflow-hidden"
                     >
                       <ul className="pt-4 text-gray-600 text-sm leading-relaxed font-medium list-disc pl-5 space-y-2">
-                        <li>Free standard shipping across India (3-5 business days).</li>
+                        <li>Free standard shipping across India (5-7 business days).</li>
                         <li>Express shipping available at checkout.</li>
-                        <li>7-day no-questions-asked return policy.</li>
+                        <li>7-day replacement policy.</li>
                       </ul>
                     </motion.div>
                   )}
