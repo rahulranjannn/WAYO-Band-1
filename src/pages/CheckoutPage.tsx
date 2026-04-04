@@ -37,9 +37,11 @@ export function CheckoutPage() {
   const [appliedPromo, setAppliedPromo] = useState<{ code: string; discount_type: string; discount_value: number } | null>(null);
   const [promoStatus, setPromoStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isApplyingPromo, setIsApplyingPromo] = useState(false);
+  const [paymentComplete, setPaymentComplete] = useState(false);
 
   useEffect(() => {
-    if (cartItems.length === 0) {
+    if (cartItems.length === 0 && !paymentComplete) {
       navigate('/shop');
     }
 
@@ -59,6 +61,7 @@ export function CheckoutPage() {
 
   const handleApplyPromo = async () => {
     if (!promoInput.trim()) return;
+    setIsApplyingPromo(true);
     try {
       const code = promoInput.toUpperCase().trim();
       const response = await fetch(`${API_URL}/api/validate-promo`, {
@@ -87,6 +90,8 @@ export function CheckoutPage() {
 
     } catch (err: any) {
       setPromoStatus({ type: 'error', message: 'Error applying promo code' });
+    } finally {
+      setIsApplyingPromo(false);
     }
   };
 
@@ -188,6 +193,7 @@ export function CheckoutPage() {
               // Step B: Backend order insertion to bypass RLS securely
 
               // Step C: Clean Up & Ship to Success Portal
+              setPaymentComplete(true);
               clearCart();
               navigate('/order-success');
             }
@@ -385,15 +391,21 @@ export function CheckoutPage() {
                           placeholder="Promo code"
                           value={promoInput}
                           onChange={(e) => setPromoInput(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-1 focus:ring-wayo-coral outline-none transition-colors uppercase font-bold"
+                          disabled={isApplyingPromo}
+                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-wayo-coral focus:ring-1 focus:ring-wayo-coral outline-none transition-colors uppercase font-bold disabled:bg-gray-50 disabled:text-gray-400"
                         />
                       </div>
                       <button
                         type="button"
                         onClick={handleApplyPromo}
-                        className="bg-gray-100 text-wayo-dark hover:bg-gray-200 px-6 py-3 rounded-xl font-bold transition-colors shadow-sm"
+                        disabled={isApplyingPromo || !promoInput.trim()}
+                        className="bg-gray-100 text-wayo-dark hover:bg-gray-200 px-6 py-3 rounded-xl font-bold transition-colors shadow-sm disabled:opacity-75 disabled:cursor-not-allowed min-w-[100px] flex justify-center items-center"
                       >
-                        Apply
+                        {isApplyingPromo ? (
+                          <div className="w-5 h-5 border-2 border-wayo-dark border-t-transparent rounded-full animate-spin"></div>
+                        ) : (
+                          'Apply'
+                        )}
                       </button>
                     </div>
                     {promoStatus && promoStatus.type === 'error' && (
