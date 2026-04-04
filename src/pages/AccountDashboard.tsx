@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { auth } from '../lib/firebase';
 import { signOut, onAuthStateChanged, User, sendEmailVerification } from 'firebase/auth';
 import { Package, User as UserIcon, Settings, Plus, AlertCircle } from 'lucide-react';
@@ -8,6 +8,15 @@ import { SEO } from '../components/SEO';
 export function AccountDashboard() {
   const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'settings'>('profile');
   const [user, setUser] = useState<User | null | undefined>(undefined);
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab === 'profile' || tab === 'orders' || tab === 'settings') {
+      setActiveTab(tab);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

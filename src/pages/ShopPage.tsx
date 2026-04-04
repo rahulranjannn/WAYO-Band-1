@@ -68,9 +68,9 @@ export function ShopPage() {
               <div className="p-8 pb-10 flex flex-col flex-grow">
                 <h2 className="text-3xl font-extrabold text-wayo-dark font-display mb-2">{product.name}</h2>
                 <p className="text-gray-500 font-medium mb-8 text-lg flex-grow">{product.tagline}</p>
-                <div className="flex items-center justify-between border-t border-gray-100 pt-6">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-gray-100 pt-6">
                   <PriceDisplay discountedPrice={product.price} originalPrice={product.originalPrice} />
-                  <div className="bg-wayo-dark text-white px-8 py-3 rounded-xl font-bold text-base group-hover:bg-gray-800 transition-colors shadow-md ml-4">
+                  <div className="bg-wayo-dark text-white px-8 py-3 rounded-xl font-bold text-base group-hover:bg-gray-800 transition-colors shadow-md lg:ml-4">
                     View Details
                   </div>
                 </div>

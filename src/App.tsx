@@ -161,8 +161,8 @@ function Layout() {
                       </div>
                     </div>
                     <div className="py-2">
-                      <Link to="/account" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><UserIcon className="w-4 h-4 text-gray-400" /> Profile</Link>
-                      <Link to="/account" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><Package className="w-4 h-4 text-gray-400" /> Orders</Link>
+                      <Link to="/account?tab=profile" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><UserIcon className="w-4 h-4 text-gray-400" /> Profile</Link>
+                      <Link to="/account?tab=orders" className="px-5 py-2.5 hover:bg-gray-50 text-[15px] font-bold text-gray-700 hover:text-wayo-dark transition-colors flex items-center gap-3"><Package className="w-4 h-4 text-gray-400" /> Orders</Link>
                     </div>
                     <div className="border-t border-gray-50 py-2">
                       <button onClick={handleLogout} className="w-full px-5 py-2 hover:bg-red-50 text-left text-[14px] font-bold text-red-600 transition-colors flex items-center gap-3"><LogOut className="w-4 h-4" /> Sign out</button>
@@ -300,12 +300,13 @@ function Layout() {
 
       {/* Floating Mobile CTA */}
       <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
-        <button
-          onClick={openModal}
+        <Link
+          to="/product"
+          onClick={() => setIsMobileMenuOpen(false)}
           className="w-[95%] max-w-sm bg-wayo-coral text-white py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform active:scale-95 transition-transform"
         >
-          Get Early Access
-        </button>
+          Book Now
+        </Link>
       </div>
 
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />

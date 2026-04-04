@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Star, Minus, Plus } from 'lucide-react';
 import { PriceDisplay } from '../PriceDisplay';
@@ -9,9 +9,10 @@ interface ClipProductOverviewProps {
 }
 
 export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps) {
-  const [mainImage, setMainImage] = useState('/clip_1.webp');
+  const [activeImage, setActiveImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState('Black');
   const [quantity, setQuantity] = useState(1);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
@@ -26,6 +27,8 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
     '/clip_4.webp',
   ];
 
+  const mainImage = thumbnails[activeImage];
+
   const selectedColorData = colors.find(c => c.name === selectedColor);
 
   return (
@@ -35,15 +38,41 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
 
           {/* Left Column - Gallery */}
           <div className="lg:col-span-7 flex flex-col gap-4">
-            <div className="bg-wayo-cream rounded-[2rem] overflow-hidden aspect-square relative">
-              <img src={mainImage} alt="Wayo Clip" className="w-full h-full object-cover" />
+            <div 
+              ref={scrollRef}
+              className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar bg-wayo-cream rounded-[2rem] aspect-square relative"
+              onScroll={(e) => {
+                const scrollLeft = e.currentTarget.scrollLeft;
+                const width = e.currentTarget.offsetWidth;
+                const newIndex = Math.round(scrollLeft / width);
+                if (newIndex !== activeImage && newIndex >= 0 && newIndex < thumbnails.length) {
+                  setActiveImage(newIndex);
+                }
+              }}
+            >
+              {thumbnails.map((thumb, idx) => (
+                <img
+                  key={idx}
+                  src={thumb}
+                  alt={`Wayo Clip ${idx + 1}`}
+                  className="w-full h-full object-cover flex-shrink-0 snap-center"
+                />
+              ))}
             </div>
             <div className="grid grid-cols-4 gap-4">
               {thumbnails.map((thumb, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setMainImage(thumb)}
-                  className={`rounded-xl overflow-hidden aspect-square border-2 transition-all ${mainImage === thumb ? 'border-wayo-dark' : 'border-transparent hover:border-gray-200'}`}
+                  onClick={() => {
+                    setActiveImage(idx);
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollTo({
+                        left: scrollRef.current.offsetWidth * idx,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                  className={`rounded-xl overflow-hidden aspect-square border-2 transition-all ${activeImage === idx ? 'border-wayo-dark' : 'border-transparent hover:border-gray-200'}`}
                 >
                   <img src={thumb} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>

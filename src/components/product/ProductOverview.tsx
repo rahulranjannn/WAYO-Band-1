@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Star, ShieldCheck, Truck, RotateCcw, ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PriceDisplay } from '../PriceDisplay';
@@ -16,6 +16,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   const [activeImage, setActiveImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>('description');
   const [hasExtraBand, setHasExtraBand] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
 
   const colors = [
@@ -51,18 +52,40 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
 
           {/* Left: Image Gallery */}
           <div className="w-full lg:w-1/2 flex flex-col gap-4">
-            <div className="aspect-square rounded-3xl overflow-hidden bg-gray-50 border border-gray-100">
-              <img
-                src={images[activeImage]}
-                alt="Wayo Band"
-                className="w-full h-full object-cover"
-              />
+            <div 
+              ref={scrollRef}
+              className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar aspect-square rounded-3xl bg-gray-50 border border-gray-100"
+              onScroll={(e) => {
+                const scrollLeft = e.currentTarget.scrollLeft;
+                const width = e.currentTarget.offsetWidth;
+                const newIndex = Math.round(scrollLeft / width);
+                if (newIndex !== activeImage && newIndex >= 0 && newIndex < images.length) {
+                  setActiveImage(newIndex);
+                }
+              }}
+            >
+              {images.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`Wayo Band ${idx + 1}`}
+                  className="w-full h-full object-cover flex-shrink-0 snap-center"
+                />
+              ))}
             </div>
             <div className="grid grid-cols-4 gap-4">
               {images.map((img, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setActiveImage(idx)}
+                  onClick={() => {
+                    setActiveImage(idx);
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollTo({
+                        left: scrollRef.current.offsetWidth * idx,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
                   className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-wayo-coral' : 'border-transparent hover:border-gray-200'}`}
                 >
                   <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
