@@ -298,6 +298,16 @@ app.post('/api/verify-payment', async (req, res) => {
                 return res.status(500).json({ success: false, error: 'Database save failed.' });
             }
 
+            // Async send emails
+            sendAdminNotification({ 
+                customer_email, 
+                total_amount, 
+                user_id: user_id || 'guest',
+                items_ordered 
+            }, 'order');
+            
+            sendUserConfirmation(customer_email, '', 'order', { total_amount });
+
             res.json({ success: true, message: 'Payment verified and saved successfully' });
         } else {
             res.status(400).json({ success: false, error: 'Invalid payment signature' });

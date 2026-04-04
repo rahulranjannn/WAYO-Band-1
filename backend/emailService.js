@@ -33,6 +33,14 @@ const sendAdminNotification = async (data, type) => {
       <p><strong>Topic:</strong> ${data.topic}</p>
       <p><strong>Message:</strong><br/>${data.message}</p>
     `;
+    } else if (type === 'order') {
+        subject = `🛒 New Order Received!`;
+        htmlContent = `
+      <h2>New Order Placed!</h2>
+      <p><strong>Customer:</strong> ${data.customer_email}</p>
+      <p><strong>Total Amount:</strong> ₹${data.total_amount}</p>
+      <p><strong>User ID:</strong> ${data.user_id}</p>
+    `;
     }
 
     try {
@@ -53,9 +61,10 @@ const sendAdminNotification = async (data, type) => {
  * Sends a confirmation email to the user.
  * @param {String} userEmail The user's email address.
  * @param {String} userName The user's name.
- * @param {String} type The type of submission ('waitlist' or 'contact').
+ * @param {String} type The type of submission ('waitlist' or 'contact' or 'order').
+ * @param {Object} data Optional extra data (e.g. order details).
  */
-const sendUserConfirmation = async (userEmail, userName, type) => {
+const sendUserConfirmation = async (userEmail, userName, type, data = {}) => {
     let subject = '';
     let htmlContent = '';
 
@@ -79,6 +88,18 @@ const sendUserConfirmation = async (userEmail, userName, type) => {
         <p>We have successfully received your message and our team will get back to you within <strong>24 hours on working days</strong>.</p>
         <p>We appreciate your patience and look forward to speaking with you soon.</p>
         <p>Best regards,<br/><strong>The WAYO Band Team</strong></p>
+      </div>
+    `;
+    } else if (type === 'order') {
+        subject = 'Your WAYO Order is Confirmed! 🎉';
+        htmlContent = `
+      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #4A90E2;">Hi ${userName || 'there'},</h2>
+        <p>Thank you for ordering from WAYO!</p>
+        <p>Your order has been confirmed successfully and we are preparing it for shipment.</p>
+        <p><strong>Total Paid:</strong> ₹${data.total_amount || '...'} </p>
+        <p>We'll notify you once it ships. You can view your order tracking code inside your account dashboard.</p>
+        <p>Best regards,<br/><strong>The WAYO Team</strong></p>
       </div>
     `;
     }

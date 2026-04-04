@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 import { auth } from '../lib/firebase';
 import { signOut, onAuthStateChanged, User, sendEmailVerification } from 'firebase/auth';
 import { Package, User as UserIcon, Settings, Plus, AlertCircle } from 'lucide-react';
@@ -8,6 +9,8 @@ import { SEO } from '../components/SEO';
 export function AccountDashboard() {
   const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'settings'>('profile');
   const [user, setUser] = useState<User | null | undefined>(undefined);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [loadingOrders, setLoadingOrders] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,6 +27,32 @@ export function AccountDashboard() {
     });
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (user && activeTab === 'orders') {
+      fetchOrders();
+    }
+  }, [user, activeTab]);
+
+  const fetchOrders = async () => {
+    if (!user) return;
+    setLoadingOrders(true);
+    try {
+      const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('user_id', user.uid)
+        .order('created_at', { ascending: false });
+        
+      if (!error && data) {
+        setOrders(data);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingOrders(false);
+    }
+  };
 
   if (user === undefined) return null; // loading
   if (user === null) return <Navigate to="/" />;
@@ -110,15 +139,50 @@ export function AccountDashboard() {
         )}
 
         {activeTab === 'orders' && (
-          <div className="bg-white rounded-2xl p-8 sm:p-12 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col items-center justify-center min-h-[50vh] text-center animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6 text-gray-300">
-              <Package className="w-10 h-10 opacity-50" />
-            </div>
-            <h2 className="text-2xl font-bold text-wayo-dark mb-3">No orders yet.</h2>
-            <p className="text-gray-500 font-medium mb-10 max-w-sm">Go to store to place an order. Your recent purchases and tracking details will appear here.</p>
-            <a href="/shop" className="bg-wayo-dark text-white px-10 py-3.5 rounded-xl font-bold text-sm hover:bg-gray-800 transition-colors shadow-md">
-              Continue Shopping
-            </a>
+          <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+            {loadingOrders ? (
+               <div className="bg-white rounded-2xl p-8 sm:p-12 border border-gray-100 flex justify-center py-24 shadow-[0_2px_10px_rgba(0,0,0,0.02)]"><div className="w-8 h-8 border-4 border-wayo-coral border-t-transparent rounded-full animate-spin"></div></div>
+            ) : orders.length > 0 ? (
+               <div className="space-y-4">
+                 {orders.map(order => (
+                   <div key={order.id} className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+                     <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
+                        <div>
+                          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 mt-1">Order #{order.id?.substring(0, 8) || 'PREORDER'}</p>
+                          <p className="font-extrabold text-wayo-dark text-xl">Total: ₹{order.total_amount}</p>
+                        </div>
+                        <div className="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-bold border border-green-100 uppercase">
+                          {order.payment_status || 'Paid'}
+                        </div>
+                     </div>
+                     <div className="flex flex-col gap-4">
+                       {(order.items_ordered || []).map((item: any, i: number) => (
+                         <div key={i} className="flex gap-4 items-center bg-gray-50/50 p-3 rounded-xl border border-gray-100">
+                           <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center overflow-hidden border border-gray-100">
+                             <img src={item.image || '/logo2.webp'} alt={item.name} className="w-full h-full object-cover" />
+                           </div>
+                           <div className="flex flex-col">
+                              <p className="font-bold text-wayo-dark text-[15px]">{item.name}</p>
+                              <p className="text-sm text-gray-500 font-medium">{item.color} • Qty {item.quantity}</p>
+                           </div>
+                         </div>
+                       ))}
+                     </div>
+                   </div>
+                 ))}
+               </div>
+            ) : (
+              <div className="bg-white rounded-2xl p-8 sm:p-12 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col items-center justify-center min-h-[50vh] text-center">
+                <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6 text-gray-300">
+                  <Package className="w-10 h-10 opacity-50" />
+                </div>
+                <h2 className="text-2xl font-bold text-wayo-dark mb-3">No orders yet.</h2>
+                <p className="text-gray-500 font-medium mb-10 max-w-sm">Go to store to place an order. Your recent purchases and tracking details will appear here.</p>
+                <a href="/shop" className="bg-wayo-dark text-white px-10 py-3.5 rounded-xl font-bold text-sm hover:bg-gray-800 transition-colors shadow-md">
+                  Continue Shopping
+                </a>
+              </div>
+            )}
           </div>
         )}
 
