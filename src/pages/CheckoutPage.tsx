@@ -169,16 +169,7 @@ export function CheckoutPage() {
               body: JSON.stringify({
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature
-              })
-            });
-
-            if (!verifyRes.ok) throw new Error('Payment verification failed');
-            const verifyData = await verifyRes.json();
-
-            if (verifyData.success) {
-              // Step B: Save to Supabase actively
-              const { error } = await supabase.from('orders').insert([{
+                razorpay_signature: response.razorpay_signature,
                 user_id: auth.currentUser?.uid || 'guest',
                 customer_email: form.email,
                 items_ordered: cartItems,
@@ -186,21 +177,19 @@ export function CheckoutPage() {
                 subtotal: cartTotal,
                 promo_code_used: appliedPromo?.code || null,
                 discount_applied: calculatedDiscountAmount || 0,
-                total_amount: finalTotal,
-                payment_status: 'paid',
-                shipping_status: 'processing',
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id
-              }]);
+                total_amount: finalTotal
+              })
+            });
 
-              if (error) {
-                console.error('Supabase save error:', error);
-                alert('Order saved with warnings. Please contact support.');
-              }
+            if (!verifyRes.ok) throw new Error('Payment verification failed');
+            const verifyData = await verifyRes.json();
 
-              // Step C: Clean Up & Ship to Portal
+            if (verifyData.success) {
+              // Step B: Backend order insertion to bypass RLS securely
+
+              // Step C: Clean Up & Ship to Success Portal
               clearCart();
-              navigate('/account');
+              navigate('/order-success');
             }
           } catch (err) {
             console.error(err);

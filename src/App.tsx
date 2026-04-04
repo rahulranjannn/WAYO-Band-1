@@ -22,6 +22,7 @@ import { ShopPage } from './pages/ShopPage';
 import { ClipProductPage } from './pages/ClipProductPage';
 import { AccountDashboard } from './pages/AccountDashboard';
 import { CheckoutPage } from './pages/CheckoutPage';
+import { OrderSuccessPage } from './pages/OrderSuccess';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { div } from 'motion/react-client';
 
@@ -282,6 +283,7 @@ function Layout() {
         <Route path="/account" element={<AccountDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order-success" element={<OrderSuccessPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product/clip" element={<ClipProductPage onOpenWaitlist={openModal} />} />

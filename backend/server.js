@@ -258,9 +258,13 @@ app.post('/api/create-razorpay-order', async (req, res) => {
     }
 });
 
-app.post('/api/verify-payment', (req, res) => {
+app.post('/api/verify-payment', async (req, res) => {
     try {
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+        const { 
+            razorpay_order_id, razorpay_payment_id, razorpay_signature,
+            user_id, customer_email, items_ordered, shipping_address,
+            subtotal, promo_code_used, discount_applied, total_amount
+        } = req.body;
 
         if (!process.env.RAZORPAY_KEY_SECRET) {
             return res.status(500).json({ error: 'Razorpay secret key missing on server.' });
@@ -272,7 +276,29 @@ app.post('/api/verify-payment', (req, res) => {
             .digest('hex');
 
         if (generated_signature === razorpay_signature) {
-            res.json({ success: true, message: 'Payment verified successfully' });
+            
+            // Insert securely via Admin Hook bypassing RLS
+            const { error: dbError } = await supabaseAdmin.from('orders').insert([{
+                user_id: user_id || 'guest',
+                customer_email,
+                items_ordered,
+                shipping_address,
+                subtotal,
+                promo_code_used: promo_code_used || null,
+                discount_applied: discount_applied || 0,
+                total_amount,
+                payment_status: 'paid',
+                shipping_status: 'processing',
+                razorpay_order_id,
+                razorpay_payment_id
+            }]);
+
+            if (dbError) {
+                console.error("Database order insertion error:", dbError);
+                return res.status(500).json({ success: false, error: 'Database save failed.' });
+            }
+
+            res.json({ success: true, message: 'Payment verified and saved successfully' });
         } else {
             res.status(400).json({ success: false, error: 'Invalid payment signature' });
         }
