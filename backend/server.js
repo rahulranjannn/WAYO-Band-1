@@ -56,9 +56,9 @@ app.get('/', (req, res) => {
 
 // Rate Limiting Config
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 requests per block
-  message: { error: 'Too many requests, please try again later.' }
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit each IP to 5 requests per block
+    message: { error: 'Too many requests, please try again later.' }
 });
 
 // Example: Waitlist Registration
@@ -209,59 +209,59 @@ app.post('/api/admin/update-order', async (req, res) => {
 
 // Razorpay Order Creation Route
 app.post('/api/create-razorpay-order', async (req, res) => {
-  try {
-    const { items, promoCode } = req.body;
-    if (!items || items.length === 0) return res.status(400).json({ error: "Cart is empty" });
+    try {
+        const { items, promoCode } = req.body;
+        if (!items || items.length === 0) return res.status(400).json({ error: "Cart is empty" });
 
-    let calculatedTotal = 0;
-    items.forEach(item => {
-        let itemPrice = (item.model === 'Wayo Plus' || item.title?.includes('Plus') || item.model === 'plus') ? 1499 : 999;
-        if (item.hasExtraBand) itemPrice += 500;
-        calculatedTotal += (itemPrice * item.quantity);
-    });
+        let calculatedTotal = 0;
+        items.forEach(item => {
+            let itemPrice = (item.model === 'Wayo Plus' || item.title?.includes('Plus') || item.model === 'plus') ? 1499 : 999;
+            if (item.hasExtraBand) itemPrice += 500;
+            calculatedTotal += (itemPrice * item.quantity);
+        });
 
-    let calculatedDiscount = 0;
-    if (promoCode) {
-        // Query database natively using Admin hook bypassing RLS securely
-        const { data: promo, error: promoError } = await supabaseAdmin
-            .from('promo_codes')
-            .select('*')
-            .eq('code', promoCode)
-            .single();
+        let calculatedDiscount = 0;
+        if (promoCode) {
+            // Query database natively using Admin hook bypassing RLS securely
+            const { data: promo, error: promoError } = await supabaseAdmin
+                .from('promo_codes')
+                .select('*')
+                .eq('code', promoCode)
+                .single();
 
-        if (promo && promo.is_active) {
-            if (promo.discount_type === 'percent') {
-                calculatedDiscount = (calculatedTotal * promo.discount_value) / 100;
-            } else if (promo.discount_type === 'flat') {
-                calculatedDiscount = promo.discount_value;
+            if (promo && promo.is_active) {
+                if (promo.discount_type === 'percent') {
+                    calculatedDiscount = (calculatedTotal * promo.discount_value) / 100;
+                } else if (promo.discount_type === 'flat') {
+                    calculatedDiscount = promo.discount_value;
+                }
+            } else if (promoError && promoError.code !== 'PGRST116') {
+                console.error('Promo lookup error:', promoError);
             }
-        } else if (promoError && promoError.code !== 'PGRST116') {
-             console.error('Promo lookup error:', promoError);
         }
+
+        calculatedTotal = Math.max(0, calculatedTotal - calculatedDiscount);
+        const amountInPaise = Math.round(calculatedTotal * 100);
+
+        // Razorpay REQUIRES amount, currency, and receipt
+        const options = {
+            amount: amountInPaise,
+            currency: "INR",
+            receipt: `rcpt_${Date.now()}`
+        };
+
+        const order = await razorpay.orders.create(options);
+        res.json(order);
+    } catch (error) {
+        console.error("Razorpay API Error:", error);
+        res.status(400).json({ error: error.message || "Failed to create order" });
     }
-
-    calculatedTotal = Math.max(0, calculatedTotal - calculatedDiscount);
-    const amountInPaise = Math.round(calculatedTotal * 100);
-
-    // Razorpay REQUIRES amount, currency, and receipt
-    const options = {
-        amount: amountInPaise,
-        currency: "INR",
-        receipt: `rcpt_${Date.now()}` 
-    };
-
-    const order = await razorpay.orders.create(options);
-    res.json(order);
-  } catch (error) {
-    console.error("Razorpay API Error:", error);
-    res.status(400).json({ error: error.message || "Failed to create order" });
-  }
 });
 
 app.post('/api/verify-payment', (req, res) => {
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-        
+
         if (!process.env.RAZORPAY_KEY_SECRET) {
             return res.status(500).json({ error: 'Razorpay secret key missing on server.' });
         }
@@ -288,7 +288,7 @@ app.post('/api/webhook/razorpay', (req, res) => {
     if (!secret) return res.status(500).send("Webhook secret missing on server.");
 
     const signature = req.headers['x-razorpay-signature'];
-    
+
     // Secure Crypto verification hashing against the raw buffer!
     const shasum = crypto.createHmac('sha256', secret);
     shasum.update(req.body);
@@ -298,7 +298,7 @@ app.post('/api/webhook/razorpay', (req, res) => {
         // Since we bypassed JSON parsing above, parse safely to use body logic
         const parsedBody = JSON.parse(req.body.toString());
         console.log("Valid Webhook Received:", parsedBody);
-        
+
         // TODO: Database fulfillment routing 
 
         res.status(200).send('OK');
@@ -308,7 +308,7 @@ app.post('/api/webhook/razorpay', (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
     console.log('Ensure you have configured your .env file with Supabase credentials.');
 });
