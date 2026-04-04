@@ -19,7 +19,7 @@ export function OrderSuccessPage() {
         </h1>
         
         <p className="text-gray-600 font-medium text-lg leading-relaxed mb-10">
-          Welcome to the WAYO Family. Your order is confirmed and an email receipt is on its way.
+          Welcome to the WAYO Family. Your order is confirmed and your email receipt is on its way.
         </p>
         
         <Link 
@@ -27,7 +27,7 @@ export function OrderSuccessPage() {
           className="w-full bg-wayo-dark text-white py-4 px-6 rounded-2xl font-bold text-lg hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 group"
         >
           <Home className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          Back to Homepage
+          Return to Home
         </Link>
       </div>
     </main>
