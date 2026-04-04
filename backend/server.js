@@ -169,6 +169,26 @@ app.get('/api/admin/data', async (req, res) => {
     }
 });
 
+// Fetch User Specific Orders Bypassing RLS
+app.get('/api/orders/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        if (!userId) return res.status(400).json({ error: "User ID required" });
+
+        const { data, error } = await supabaseAdmin
+            .from('orders')
+            .select('*')
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        res.json(data || []);
+    } catch (err) {
+        console.error('User Orders Fetch Error:', err);
+        res.status(500).json({ error: 'Failed to fetch user orders' });
+    }
+});
+
 // Validate Promo Code
 app.post('/api/validate-promo', async (req, res) => {
     try {

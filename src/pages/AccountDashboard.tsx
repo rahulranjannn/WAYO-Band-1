@@ -38,15 +38,13 @@ export function AccountDashboard() {
     if (!user) return;
     setLoadingOrders(true);
     try {
-      const { data, error } = await supabase
-        .from('orders')
-        .select('*')
-        .eq('user_id', user.uid)
-        .order('created_at', { ascending: false });
-        
-      if (!error && data) {
-        setOrders(data);
-      }
+      const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/orders/${user.uid}`);
+      
+      if (!response.ok) throw new Error('Failed to fetch orders');
+      
+      const data = await response.json();
+      setOrders(data || []);
     } catch (e) {
       console.error(e);
     } finally {
