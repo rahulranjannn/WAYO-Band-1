@@ -12,14 +12,14 @@ export function Footer({ onOpenWaitlist }: FooterProps) {
           Ready to let them roam?
         </h2>
         <p className="text-xl text-[#4B5563] mb-12 max-w-2xl mx-auto">
-          WAYO launches in April. Don't miss out on the first batch.
+          Don't miss out on the first batch.
         </p>
 
         <button
           onClick={onOpenWaitlist}
           className="bg-wayo-mint text-wayo-dark px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white transition-all transform hover:scale-105 active:scale-95 shadow-xl shadow-wayo-mint/20 inline-flex items-center gap-3"
         >
-          Notify Me <ArrowRight className="w-6 h-6" />
+          Book Now <ArrowRight className="w-6 h-6" />
         </button>
 
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[#4B5563] text-sm">

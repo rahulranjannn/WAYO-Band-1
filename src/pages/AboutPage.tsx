@@ -121,7 +121,7 @@ export function AboutPage({ onOpenWaitlist }: AboutPageProps) {
                         onClick={onOpenWaitlist}
                         className="bg-wayo-coral text-white px-8 py-4 rounded-full font-bold transition-all shadow-md hover:bg-red-700 shadow-wayo-coral/30 inline-flex items-center text-lg"
                     >
-                        Join the Waitlist <ArrowRight className="w-5 h-5 ml-2" />
+                        Book Now <ArrowRight className="w-5 h-5 ml-2" />
                     </button>
                 </div>
             </section>
