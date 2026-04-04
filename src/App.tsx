@@ -299,6 +299,7 @@ function Layout() {
       <Footer onOpenWaitlist={openModal} />
 
       {/* Floating Mobile CTA */}
+      {(isActive('/') || isActive('/features') || isActive('/faq') || isActive('/how-it-works')) && (
       <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
         <Link
           to="/product"
@@ -308,6 +309,7 @@ function Layout() {
           Book Now
         </Link>
       </div>
+      )}
 
       <WaitlistModal isOpen={isModalOpen} onClose={closeModal} />
       <SpeedInsights />

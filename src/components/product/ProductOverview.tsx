@@ -16,6 +16,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   const [activeImage, setActiveImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>('description');
   const [hasExtraBand, setHasExtraBand] = useState(false);
+  const [isAddedFeedback, setIsAddedFeedback] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
 
@@ -237,10 +238,14 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                   setQuantity(1);
                   setHasExtraBand(false);
                   setSelectedModel('standard');
+                  setIsAddedFeedback(true);
+                  setTimeout(() => setIsAddedFeedback(false), 2000);
                 }}
-                className="w-full bg-wayo-coral text-white rounded-full font-bold text-xl hover:bg-red-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-wayo-coral/20 h-[60px] px-8"
+                className={`w-full text-white rounded-full font-bold text-xl transition-all transform shadow-md h-[60px] px-8 flex items-center justify-center gap-2 ${
+                  isAddedFeedback ? 'bg-wayo-mint hover:bg-green-500 scale-[1.02]' : 'bg-wayo-coral hover:bg-red-500 hover:scale-[1.02] active:scale-[0.98]'
+                }`}
               >
-                Add to Cart
+                {isAddedFeedback ? 'Added to Cart ✓' : 'Add to Cart'}
               </button>
             </div>
 
@@ -326,6 +331,31 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
 
           </div>
         </div>
+      </div>
+      
+      {/* Floating Add to Cart for Mobile */}
+      <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <button
+          onClick={() => {
+            addToCart({
+              id: `wayo-band-${selectedModel}-${selectedColor}`,
+              name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
+              model: selectedModel,
+              color: selectedColor,
+              price: finalPrice,
+              quantity: quantity,
+              image: images[activeImage],
+              hasExtraBand: hasExtraBand
+            });
+            setIsAddedFeedback(true);
+            setTimeout(() => setIsAddedFeedback(false), 2000);
+          }}
+          className={`w-[95%] max-w-sm text-white py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform transition-transform ${
+             isAddedFeedback ? 'bg-wayo-mint scale-[1.02]' : 'bg-wayo-dark active:scale-95'
+          }`}
+        >
+          {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹${finalPrice}`}
+        </button>
       </div>
     </section>
   );

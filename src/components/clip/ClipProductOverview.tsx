@@ -12,6 +12,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
   const [activeImage, setActiveImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState('Black');
   const [quantity, setQuantity] = useState(1);
+  const [isAddedFeedback, setIsAddedFeedback] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
   const navigate = useNavigate();
@@ -168,10 +169,14 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
                     hasExtraBand: false
                   });
                   setQuantity(1);
+                  setIsAddedFeedback(true);
+                  setTimeout(() => setIsAddedFeedback(false), 2000);
                 }}
-                className="w-full bg-wayo-yellow text-wayo-dark rounded-xl font-bold text-xl hover:bg-yellow-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg h-[64px] px-8"
+                className={`w-full rounded-xl font-bold text-xl transition-all transform shadow-md h-[64px] px-8 flex justify-center items-center ${
+                  isAddedFeedback ? 'bg-wayo-mint text-white scale-[1.02]' : 'bg-wayo-yellow text-wayo-dark hover:bg-yellow-400 hover:scale-[1.02] active:scale-[0.98]'
+                }`}
               >
-                Add to Cart
+                {isAddedFeedback ? 'Added to Cart ✓' : 'Add to Cart'}
               </button>
 
               <button
@@ -247,6 +252,31 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Floating Add to Cart for Mobile */}
+      <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <button
+          onClick={() => {
+            addToCart({
+              id: `wayo-clip-${selectedColor}`,
+              name: 'Wayo Clip',
+              model: 'Clip',
+              color: selectedColor,
+              price: 799,
+              quantity: quantity,
+              image: mainImage,
+              hasExtraBand: false
+            });
+            setIsAddedFeedback(true);
+            setTimeout(() => setIsAddedFeedback(false), 2000);
+          }}
+          className={`w-[95%] max-w-sm py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform transition-transform ${
+             isAddedFeedback ? 'bg-wayo-mint text-white scale-[1.02]' : 'bg-wayo-dark text-white active:scale-95'
+          }`}
+        >
+          {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹799`}
+        </button>
       </div>
     </section>
   );
