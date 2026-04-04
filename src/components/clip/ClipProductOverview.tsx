@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Star, Minus, Plus } from 'lucide-react';
 import { PriceDisplay } from '../PriceDisplay';
+import { useCart } from '../../context/CartContext';
 
 interface ClipProductOverviewProps {
   onOpenWaitlist: () => void;
@@ -10,6 +11,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
   const [mainImage, setMainImage] = useState('/hero1-1080.webp');
   const [selectedColor, setSelectedColor] = useState('Slate Black');
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   const colors = [
     { name: 'Slate Black', hex: '#1A1A2E', label: 'most popular for travel' },
@@ -117,10 +119,19 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
               </div>
               
               <button 
-                onClick={onOpenWaitlist}
+                onClick={() => addToCart({
+                  id: `wayo-clip-${selectedColor}`,
+                  name: 'Wayo Clip',
+                  model: 'Clip',
+                  color: selectedColor,
+                  price: 799,
+                  quantity: quantity,
+                  image: mainImage,
+                  hasExtraBand: false
+                })}
                 className="w-full bg-wayo-yellow text-wayo-dark rounded-xl font-bold text-xl hover:bg-yellow-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg h-[64px] px-8"
               >
-                Pre-Order Now — ₹799
+                Add to Cart
               </button>
               
               <button 

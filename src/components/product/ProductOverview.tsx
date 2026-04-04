@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Star, ShieldCheck, Truck, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
+import { Star, ShieldCheck, Truck, RotateCcw, ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PriceDisplay } from '../PriceDisplay';
+import { useCart } from '../../context/CartContext';
 import type { WayoModel } from '../../pages/ProductPage';
 
 interface ProductOverviewProps {
@@ -15,6 +16,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   const [activeImage, setActiveImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<string | null>('description');
   const [hasExtraBand, setHasExtraBand] = useState(false);
+  const { addToCart } = useCart();
 
   const colors = [
     { name: 'Coral', class: 'bg-wayo-coral' },
@@ -168,19 +170,31 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
 
             {/* Quantity & Add to Cart */}
             <div className="flex flex-col gap-5 mb-8">
-              <div className="flex items-center justify-between border-2 border-gray-200 rounded-full px-4 py-2 w-36 h-[60px]">
+              <div className="flex items-center justify-between border-2 border-gray-200 rounded-full px-4 py-2 w-36 h-[60px] bg-white text-lg">
                 <button 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="text-gray-500 hover:text-wayo-dark text-2xl font-medium px-2"
-                >-</button>
-                <span className="font-bold text-wayo-dark text-xl">{quantity}</span>
+                  className="text-gray-500 hover:text-wayo-dark font-medium px-2 py-2"
+                ><Minus className="w-5 h-5"/></button>
+                <span className="font-bold text-wayo-dark">{quantity}</span>
                 <button 
                   onClick={() => setQuantity(quantity + 1)}
-                  className="text-gray-500 hover:text-wayo-dark text-2xl font-medium px-2"
-  >+</button>
+                  className="text-gray-500 hover:text-wayo-dark font-medium px-2 py-2"
+                ><Plus className="w-5 h-5" /></button>
               </div>
-              <button className="w-full bg-wayo-coral text-white rounded-full font-bold text-xl hover:bg-red-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-wayo-coral/40 h-[72px] px-8">
-                Pre-Order Your Wayo Pair
+              <button 
+                onClick={() => addToCart({
+                  id: `wayo-band-${selectedModel}-${selectedColor}`,
+                  name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
+                  model: selectedModel,
+                  color: selectedColor,
+                  price: finalPrice,
+                  quantity: quantity,
+                  image: images[activeImage],
+                  hasExtraBand: hasExtraBand
+                })}
+                className="w-full bg-wayo-coral text-white rounded-full font-bold text-xl hover:bg-red-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-wayo-coral/20 h-[60px] px-8"
+              >
+                Add to Cart
               </button>
             </div>
 
