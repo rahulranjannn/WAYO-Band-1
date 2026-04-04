@@ -45,6 +45,10 @@ export function CheckoutPage() {
       navigate('/shop');
     }
 
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'InitiateCheckout');
+    }
+
     // Auth Pre-fill
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user?.email) {

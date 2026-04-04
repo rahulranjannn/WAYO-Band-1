@@ -17,6 +17,12 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
+  const trackAddToCart = (price: number) => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'AddToCart', { value: price, currency: 'INR' });
+    }
+  };
+
   const colors = [
     { name: 'Black', hex: '#1A1A2E', label: 'match with anything' },
   ];
@@ -158,6 +164,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
 
               <button
                 onClick={() => {
+                  trackAddToCart(799);
                   addToCart({
                     id: `wayo-clip-${selectedColor}`,
                     name: 'Wayo Clip',
@@ -258,6 +265,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
       <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
         <button
           onClick={() => {
+            trackAddToCart(799);
             addToCart({
               id: `wayo-clip-${selectedColor}`,
               name: 'Wayo Clip',

@@ -328,6 +328,40 @@ app.post('/api/verify-payment', async (req, res) => {
             
             sendUserConfirmation(customer_email, '', 'order', { total_amount });
 
+            // Meta CAPI
+            try {
+                if (process.env.META_PIXEL_ID && process.env.META_ACCESS_TOKEN) {
+                    const hashData = (data) => data ? crypto.createHash('sha256').update(data.toLowerCase().trim()).digest('hex') : '';
+                    
+                    const eventData = {
+                        data: [
+                            {
+                                event_name: "Purchase",
+                                event_time: Math.floor(Date.now() / 1000),
+                                action_source: "website",
+                                user_data: {
+                                    client_ip_address: req.headers['x-forwarded-for'] || req.socket?.remoteAddress || req.ip,
+                                    client_user_agent: req.headers['user-agent'],
+                                    em: [hashData(customer_email)]
+                                },
+                                custom_data: {
+                                    currency: "INR",
+                                    value: total_amount
+                                }
+                            }
+                        ]
+                    };
+
+                    await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(eventData)
+                    });
+                }
+            } catch (capiErr) {
+                console.error("Meta CAPI Error:", capiErr);
+            }
+
             res.json({ success: true, message: 'Payment verified and saved successfully' });
         } else {
             res.status(400).json({ success: false, error: 'Invalid payment signature' });

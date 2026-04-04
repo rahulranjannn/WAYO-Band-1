@@ -20,6 +20,12 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   const scrollRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
 
+  const trackAddToCart = (price: number) => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'AddToCart', { value: price, currency: 'INR' });
+    }
+  };
+
   const colors = [
     { name: 'Pink', class: 'bg-[#FFB6C1]' },
     { name: 'Blue', class: 'bg-[#AEC6CF]' },
@@ -225,12 +231,14 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
               </div>
               <button
                 onClick={() => {
+                  const priceToTrack = (selectedModel === 'plus' ? 1499 : 999) + (hasExtraBand ? 500 : 0);
+                  trackAddToCart(priceToTrack);
                   addToCart({
                     id: `wayo-band-${selectedModel}-${selectedColor}`,
                     name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
                     model: selectedModel,
                     color: selectedColor,
-                    price: (selectedModel === 'plus' ? 1499 : 999) + (hasExtraBand ? 500 : 0),
+                    price: priceToTrack,
                     quantity: quantity,
                     image: images[activeImage],
                     hasExtraBand: hasExtraBand
@@ -337,6 +345,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
       <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
         <button
           onClick={() => {
+            trackAddToCart(finalPrice);
             addToCart({
               id: `wayo-band-${selectedModel}-${selectedColor}`,
               name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,

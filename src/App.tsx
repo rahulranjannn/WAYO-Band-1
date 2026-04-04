@@ -31,6 +31,9 @@ function ScrollToTop() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'PageView');
+    }
   }, [pathname]);
 
   return null;
