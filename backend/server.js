@@ -363,7 +363,7 @@ app.post('/api/verify-payment', async (req, res) => {
 });
 
 // Razorpay Webhook Fulfillment 
-app.post('/api/webhook/razorpay', (req, res) => {
+app.post('/api/webhook/razorpay', async (req, res) => {
     const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
     if (!secret) return res.status(500).send("Webhook secret missing on server.");
 
@@ -375,13 +375,48 @@ app.post('/api/webhook/razorpay', (req, res) => {
     const digest = shasum.digest('hex');
 
     if (digest === signature) {
-        // Since we bypassed JSON parsing above, parse safely to use body logic
-        const parsedBody = JSON.parse(req.body.toString());
-        console.log("Valid Webhook Received:", parsedBody);
+        try {
+            // Since we bypassed JSON parsing above, parse safely to use body logic
+            const parsedBody = JSON.parse(req.body.toString());
+            const eventName = parsedBody.event;
+            
+            if (eventName === 'order.paid' || eventName === 'payment.captured') {
+                const paymentEntity = parsedBody.payload.payment?.entity || {};
+                const razorpay_order_id = paymentEntity.order_id || parsedBody.payload.order?.entity?.id;
 
-        // TODO: Database fulfillment routing 
+                if (razorpay_order_id) {
+                    // IDEMPOTENCY CHECK
+                    const { data: existingOrder, error: checkError } = await supabaseAdmin
+                        .from('orders')
+                        .select('id, payment_status')
+                        .eq('razorpay_order_id', razorpay_order_id)
+                        .single();
 
-        res.status(200).send('OK');
+                    if (checkError && checkError.code !== 'PGRST116') {
+                        console.error("Webhook Supabase error:", checkError);
+                        return res.status(500).send('Database Error');
+                    }
+
+                    // Strict Idempotency return
+                    if (existingOrder && existingOrder.payment_status === 'paid') {
+                        return res.status(200).send('OK (Already Processed)');
+                    }
+
+                    // Fallback fulfill
+                    if (existingOrder) {
+                        await supabaseAdmin
+                            .from('orders')
+                            .update({ payment_status: 'paid' })
+                            .eq('razorpay_order_id', razorpay_order_id);
+                    }
+                }
+            }
+
+            res.status(200).send('OK');
+        } catch (err) {
+            console.error("Webhook processing error:", err);
+            res.status(500).send('Error Processing Webhook');
+        }
     } else {
         console.error("Invalid Razorpay Webhook Signature.");
         res.status(400).send('Invalid signature');

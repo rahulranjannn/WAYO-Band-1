@@ -174,7 +174,6 @@ export function CheckoutPage() {
         description: 'WAYO Band Pre-order',
         order_id: order.id,
         handler: async function (response: any) {
-          console.log("PAYMENT SUCCESS:", response);
           try {
             // Step A: Verify signature securely on Node backend
             const verifyRes = await fetch(`${API_URL}/api/verify-payment`, {
