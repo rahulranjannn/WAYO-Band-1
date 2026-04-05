@@ -305,7 +305,11 @@ app.post('/api/verify-payment', async (req, res) => {
 
             // Meta CAPI
             try {
-                if (process.env.META_PIXEL_ID && process.env.META_ACCESS_TOKEN) {
+                console.log("🚀 Starting Meta CAPI Process...");
+
+                if (!process.env.META_PIXEL_ID || !process.env.META_CAPI_TOKEN) {
+                    console.error("❌ MISSING META ENV VARIABLES. CAPI ABORTED.");
+                } else {
                     const hashData = (data) => data ? crypto.createHash('sha256').update(data.toLowerCase().trim()).digest('hex') : '';
                     
                     const eventData = {
@@ -331,14 +335,18 @@ app.post('/api/verify-payment', async (req, res) => {
                         eventData.test_event_code = process.env.META_TEST_EVENT_CODE;
                     }
 
-                    await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`, {
+                    console.log("📦 CAPI Payload:", JSON.stringify(eventData, null, 2));
+
+                    const response = await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_CAPI_TOKEN}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(eventData)
                     });
+
+                    console.log("✅ Meta Response:", await response.text());
                 }
             } catch (capiErr) {
-                console.error("Meta CAPI Error:", capiErr);
+                console.error("🔥 CAPI CRASH:", capiErr);
             }
 
             res.json({ success: true, message: 'Payment verified and saved successfully' });
