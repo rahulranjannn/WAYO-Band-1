@@ -42,7 +42,10 @@ export function CheckoutPage() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'InitiateCheckout');
+      if (!(window as any).hasTrackedInitiateCheckout) {
+        (window as any).hasTrackedInitiateCheckout = true;
+        (window as any).fbq('track', 'InitiateCheckout');
+      }
     }
   }, []);
 
