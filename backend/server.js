@@ -273,7 +273,7 @@ app.post('/api/verify-payment', async (req, res) => {
         if (generated_signature === razorpay_signature) {
             
             // Insert securely via Admin Hook bypassing RLS
-            const { error: dbError } = await supabaseAdmin.from('orders').insert([{
+            const { data: dbData, error: dbError } = await supabaseAdmin.from('orders').insert([{
                 user_id: user_id || 'guest',
                 customer_email,
                 items_ordered,
@@ -286,12 +286,14 @@ app.post('/api/verify-payment', async (req, res) => {
                 shipping_status: 'processing',
                 razorpay_order_id,
                 razorpay_payment_id
-            }]);
+            }]).select();
 
             if (dbError) {
                 console.error("Database order insertion error:", dbError);
                 return res.status(500).json({ success: false, error: 'Database save failed.' });
             }
+
+            const order_db_id = dbData && dbData[0] ? dbData[0].id : razorpay_order_id;
 
             // Async send emails
             sendAdminNotification({ 
@@ -317,6 +319,7 @@ app.post('/api/verify-payment', async (req, res) => {
                             {
                                 event_name: "Purchase",
                                 event_time: Math.floor(Date.now() / 1000),
+                                event_id: order_db_id,
                                 action_source: "website",
                                 user_data: {
                                     client_ip_address: req.headers['x-forwarded-for'] || req.socket?.remoteAddress || req.ip,
@@ -349,7 +352,7 @@ app.post('/api/verify-payment', async (req, res) => {
                 console.error("🔥 CAPI CRASH:", capiErr);
             }
 
-            res.json({ success: true, message: 'Payment verified and saved successfully' });
+            res.json({ success: true, message: 'Payment verified and saved successfully', order_id: order_db_id });
         } else {
             res.status(400).json({ success: false, error: 'Invalid payment signature' });
         }

@@ -202,7 +202,7 @@ export function CheckoutPage() {
               const finalAmount = finalTotal;
               setPaymentComplete(true);
               clearCart();
-              navigate('/order-success', { state: { orderTotal: finalAmount } });
+              navigate('/order-success', { state: { orderTotal: finalAmount, orderId: verifyData.order_id } });
             }
           } catch (err) {
             console.error(err);

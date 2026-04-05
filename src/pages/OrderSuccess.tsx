@@ -5,12 +5,17 @@ import { SEO } from '../components/SEO';
 
 export function OrderSuccessPage() {
   const location = useLocation();
+  const hasTracked = React.useRef(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).fbq) {
-      const orderTotal = location.state?.orderTotal || 0;
-      if (orderTotal > 0) {
-         (window as any).fbq('track', 'Purchase', { currency: 'INR', value: orderTotal });
+      if (!hasTracked.current) {
+        const orderTotal = location.state?.orderTotal || 0;
+        const orderId = location.state?.orderId;
+        if (orderTotal > 0) {
+           (window as any).fbq('track', 'Purchase', { currency: 'INR', value: orderTotal }, { eventID: orderId });
+        }
+        hasTracked.current = true;
       }
     }
   }, [location.state]);
