@@ -58,7 +58,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
 
           {/* Left: Image Gallery */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-4">
+          <div className="w-full lg:w-1/2 flex flex-col gap-4 mt-6 lg:mt-0">
             <div 
               ref={scrollRef}
               className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar aspect-square rounded-3xl bg-gray-50 border border-gray-100"

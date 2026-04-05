@@ -79,7 +79,7 @@ function Layout() {
     <div className="min-h-screen bg-wayo-cream font-sans selection:bg-wayo-coral selection:text-white pb-24 md:pb-0">
       <ScrollToTop />
       <header className="absolute top-0 left-0 right-0 z-50">
-        <div className="bg-wayo-yellow text-yellow-900 text-center py-2 text-xs sm:text-sm font-bold tracking-widest uppercase shadow-sm">
+        <div className="bg-wayo-yellow text-yellow-900 text-center py-2 px-2 text-[10px] sm:text-sm font-bold tracking-widest uppercase shadow-sm whitespace-nowrap overflow-hidden text-ellipsis">
           🛡️ 1-Year Warranty | Proudly Made for Indian Parents
         </div>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4 grid grid-cols-3 md:grid-cols-[1fr_auto_1fr] items-center gap-4">
