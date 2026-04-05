@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Star, ShieldCheck, Truck, RotateCcw, ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PriceDisplay } from '../PriceDisplay';
@@ -18,7 +18,26 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   const [hasExtraBand, setHasExtraBand] = useState(false);
   const [isAddedFeedback, setIsAddedFeedback] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const primaryButtonRef = useRef<HTMLButtonElement>(null);
+  const [showSticky, setShowSticky] = useState(false);
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowSticky(!entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    if (primaryButtonRef.current) {
+      observer.observe(primaryButtonRef.current);
+    }
+
+    return () => {
+      if (primaryButtonRef.current) observer.unobserve(primaryButtonRef.current);
+    };
+  }, []);
 
   const trackAddToCart = (price: number) => {
     if (typeof window !== 'undefined' && (window as any).fbq) {
@@ -230,6 +249,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                 ><Plus className="w-5 h-5" /></button>
               </div>
               <button
+                ref={primaryButtonRef}
                 onClick={() => {
                   const priceToTrack = (selectedModel === 'plus' ? 1499 : 999) + (hasExtraBand ? 500 : 0);
                   trackAddToCart(priceToTrack);
@@ -342,30 +362,32 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
       </div>
       
       {/* Floating Add to Cart for Mobile */}
-      <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
-        <button
-          onClick={() => {
-            trackAddToCart(finalPrice);
-            addToCart({
-              id: `wayo-band-${selectedModel}-${selectedColor}`,
-              name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
-              model: selectedModel,
-              color: selectedColor,
-              price: finalPrice,
-              quantity: quantity,
-              image: images[activeImage],
-              hasExtraBand: hasExtraBand
-            });
-            setIsAddedFeedback(true);
-            setTimeout(() => setIsAddedFeedback(false), 2000);
-          }}
-          className={`w-[95%] max-w-sm text-white py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform transition-transform ${
-             isAddedFeedback ? 'bg-wayo-mint scale-[1.02]' : 'bg-wayo-dark active:scale-95'
-          }`}
-        >
-          {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹${finalPrice}`}
-        </button>
-      </div>
+      {showSticky && (
+        <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <button
+            onClick={() => {
+              trackAddToCart(finalPrice);
+              addToCart({
+                id: `wayo-band-${selectedModel}-${selectedColor}`,
+                name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
+                model: selectedModel,
+                color: selectedColor,
+                price: finalPrice,
+                quantity: quantity,
+                image: images[activeImage],
+                hasExtraBand: hasExtraBand
+              });
+              setIsAddedFeedback(true);
+              setTimeout(() => setIsAddedFeedback(false), 2000);
+            }}
+            className={`w-[95%] max-w-sm text-white py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform transition-transform ${
+               isAddedFeedback ? 'bg-wayo-mint scale-[1.02]' : 'bg-wayo-dark active:scale-95'
+            }`}
+          >
+            {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹${finalPrice}`}
+          </button>
+        </div>
+      )}
     </section>
   );
 }
