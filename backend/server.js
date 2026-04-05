@@ -232,38 +232,11 @@ app.post('/api/admin/update-order', async (req, res) => {
 // Razorpay Order Creation Route
 app.post('/api/create-razorpay-order', async (req, res) => {
     try {
-        const { items, promoCode } = req.body;
+        const { items, promoCode, amount } = req.body;
         if (!items || items.length === 0) return res.status(400).json({ error: "Cart is empty" });
+        if (!amount || amount <= 0) return res.status(400).json({ error: "Invalid amount" });
 
-        let calculatedTotal = 0;
-        items.forEach(item => {
-            let itemPrice = (item.model === 'Wayo Plus' || item.title?.includes('Plus') || item.model === 'plus') ? 1499 : 999;
-            if (item.hasExtraBand) itemPrice += 500;
-            calculatedTotal += (itemPrice * item.quantity);
-        });
-
-        let calculatedDiscount = 0;
-        if (promoCode) {
-            // Query database natively using Admin hook bypassing RLS securely
-            const { data: promo, error: promoError } = await supabaseAdmin
-                .from('promo_codes')
-                .select('*')
-                .eq('code', promoCode)
-                .single();
-
-            if (promo && promo.is_active) {
-                if (promo.discount_type === 'percent') {
-                    calculatedDiscount = (calculatedTotal * promo.discount_value) / 100;
-                } else if (promo.discount_type === 'flat') {
-                    calculatedDiscount = promo.discount_value;
-                }
-            } else if (promoError && promoError.code !== 'PGRST116') {
-                console.error('Promo lookup error:', promoError);
-            }
-        }
-
-        calculatedTotal = Math.max(0, calculatedTotal - calculatedDiscount);
-        const amountInPaise = Math.round(calculatedTotal * 100);
+        const amountInPaise = Math.round(amount * 100);
 
         // Razorpay REQUIRES amount, currency, and receipt
         const options = {

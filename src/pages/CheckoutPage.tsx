@@ -154,7 +154,7 @@ export function CheckoutPage() {
       const backendResponse = await fetch(`${API_URL}/api/create-razorpay-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cartItems, promoCode: appliedPromo?.code })
+        body: JSON.stringify({ items: cartItems, promoCode: appliedPromo?.code, amount: finalTotal })
       });
 
       if (!backendResponse.ok) {
