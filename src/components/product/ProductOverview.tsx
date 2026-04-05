@@ -25,7 +25,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowSticky(!entry.isIntersecting);
+        setShowSticky(!entry.isIntersecting && entry.boundingClientRect.top < 0);
       },
       { threshold: 0 }
     );
@@ -362,32 +362,30 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
       </div>
       
       {/* Floating Add to Cart for Mobile */}
-      {showSticky && (
-        <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <button
-            onClick={() => {
-              trackAddToCart(finalPrice);
-              addToCart({
-                id: `wayo-band-${selectedModel}-${selectedColor}`,
-                name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
-                model: selectedModel,
-                color: selectedColor,
-                price: finalPrice,
-                quantity: quantity,
-                image: images[activeImage],
-                hasExtraBand: hasExtraBand
-              });
-              setIsAddedFeedback(true);
-              setTimeout(() => setIsAddedFeedback(false), 2000);
-            }}
-            className={`w-[95%] max-w-sm text-white py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform transition-transform ${
-               isAddedFeedback ? 'bg-wayo-mint scale-[1.02]' : 'bg-wayo-dark active:scale-95'
-            }`}
-          >
-            {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹${finalPrice}`}
-          </button>
-        </div>
-      )}
+      <div className={`md:hidden fixed bottom-0 left-0 w-full z-40 p-4 pb-6 pointer-events-none flex justify-center transition-all duration-300 ease-in-out transform ${showSticky ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+        <button
+          onClick={() => {
+            trackAddToCart(finalPrice);
+            addToCart({
+              id: `wayo-band-${selectedModel}-${selectedColor}`,
+              name: `Wayo ${selectedModel === 'plus' ? 'Plus' : 'Band'}`,
+              model: selectedModel,
+              color: selectedColor,
+              price: finalPrice,
+              quantity: quantity,
+              image: images[activeImage],
+              hasExtraBand: hasExtraBand
+            });
+            setIsAddedFeedback(true);
+            setTimeout(() => setIsAddedFeedback(false), 2000);
+          }}
+          className={`w-[95%] max-w-sm text-white py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform ${
+             isAddedFeedback ? 'bg-wayo-mint scale-[1.02]' : 'bg-wayo-dark active:scale-95'
+          }`}
+        >
+          {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹${finalPrice}`}
+        </button>
+      </div>
     </section>
   );
 }

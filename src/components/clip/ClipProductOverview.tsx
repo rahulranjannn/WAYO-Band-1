@@ -22,7 +22,7 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowSticky(!entry.isIntersecting);
+        setShowSticky(!entry.isIntersecting && entry.boundingClientRect.top < 0);
       },
       { threshold: 0 }
     );
@@ -282,32 +282,30 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
       </div>
       
       {/* Floating Add to Cart for Mobile */}
-      {showSticky && (
-        <div className="md:hidden fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <button
-            onClick={() => {
-              trackAddToCart(799);
-              addToCart({
-                id: `wayo-clip-${selectedColor}`,
-                name: 'Wayo Clip',
-                model: 'Clip',
-                color: selectedColor,
-                price: 799,
-                quantity: quantity,
-                image: mainImage,
-                hasExtraBand: false
-              });
-              setIsAddedFeedback(true);
-              setTimeout(() => setIsAddedFeedback(false), 2000);
-            }}
-            className={`w-[95%] max-w-sm py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform transition-transform ${
-               isAddedFeedback ? 'bg-wayo-mint text-white scale-[1.02]' : 'bg-wayo-dark text-white active:scale-95'
-            }`}
-          >
-            {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹799`}
-          </button>
-        </div>
-      )}
+      <div className={`md:hidden fixed bottom-0 left-0 w-full z-40 p-4 pb-6 pointer-events-none flex justify-center transition-all duration-300 ease-in-out transform ${showSticky ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+        <button
+          onClick={() => {
+            trackAddToCart(799);
+            addToCart({
+              id: `wayo-clip-${selectedColor}`,
+              name: 'Wayo Clip',
+              model: 'Clip',
+              color: selectedColor,
+              price: 799,
+              quantity: quantity,
+              image: mainImage,
+              hasExtraBand: false
+            });
+            setIsAddedFeedback(true);
+            setTimeout(() => setIsAddedFeedback(false), 2000);
+          }}
+          className={`w-[95%] max-w-sm py-4 rounded-[2rem] font-bold text-lg pointer-events-auto shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center justify-center gap-2 transform ${
+             isAddedFeedback ? 'bg-wayo-mint text-white scale-[1.02]' : 'bg-wayo-dark text-white active:scale-95'
+          }`}
+        >
+          {isAddedFeedback ? 'Added to Cart ✓' : `Add to Cart - ₹799`}
+        </button>
+      </div>
     </section>
   );
 }
