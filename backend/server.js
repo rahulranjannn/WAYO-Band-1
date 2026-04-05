@@ -327,6 +327,10 @@ app.post('/api/verify-payment', async (req, res) => {
                         ]
                     };
 
+                    if (process.env.META_TEST_EVENT_CODE) {
+                        eventData.test_event_code = process.env.META_TEST_EVENT_CODE;
+                    }
+
                     await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
