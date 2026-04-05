@@ -167,7 +167,7 @@ export function CheckoutPage() {
       const order = await backendResponse.json();
 
       const options = {
-        key: 'rzp_test_SZKGXlopXPdrnk',
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: 'INR',
         name: 'WAYO',
