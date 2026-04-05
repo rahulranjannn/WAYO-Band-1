@@ -189,7 +189,7 @@ function Layout() {
 
             <button
               onClick={toggleCart}
-              className="relative hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-wayo-cream border-2 border-transparent hover:border-gray-200 text-wayo-dark transition-colors"
+              className="relative flex items-center justify-center w-10 h-10 rounded-full bg-wayo-cream border-2 border-transparent hover:border-gray-200 text-wayo-dark transition-colors"
               title="Cart"
             >
               <ShoppingBag className="w-5 h-5" strokeWidth={2} />

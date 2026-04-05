@@ -20,9 +20,9 @@ export function RefundPolicy() {
 
             <hr />
 
-            <h2>1. 14-Day Return Window</h2>
+            <h2>1. 14-day replacement window</h2>
             <p>
-                We offer a strict <strong>14-day return window</strong> from the date of delivery. If 14 days have passed since your product was delivered, we unfortunately cannot offer you a standard refund or exchange, barring circumstances covered entirely by our 1-year product warranty.
+                We offer a strict <strong>14-day replacement window</strong> from the date of delivery. If 14 days have passed since your product was delivered, we unfortunately cannot offer you a standard refund or exchange, barring circumstances covered entirely by our 1-year product warranty.
             </p>
 
             <hr />
@@ -61,7 +61,7 @@ export function RefundPolicy() {
                 To return your product, please initiate a ticket via email at <strong>hello@wayoband.com</strong>.
             </p>
             <p>
-                If the device is defective upon arrival, WAYO will cover the return shipping costs. If the return is initiated for other approved reasons outside of manufacturing defects, you will be responsible for paying for your own shipping costs for returning your item. 
+                If the device is defective upon arrival, WAYO will cover the return shipping costs. If the return is initiated for other approved reasons outside of manufacturing defects, you will be responsible for paying for your own shipping costs for returning your item.
             </p>
 
             <hr />
