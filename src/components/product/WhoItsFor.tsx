@@ -5,7 +5,7 @@ export function WhoItsFor() {
     {
       title: "The mall trip",
       description: "For when you need them to stay close but you can't hold their hand every second.",
-      image: "/img1-1080.webp",
+      image: "/mall-trip.webp",
       color: "bg-blue-50"
     },
     {
