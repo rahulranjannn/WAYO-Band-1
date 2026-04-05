@@ -41,12 +41,14 @@ export function CheckoutPage() {
   const [paymentComplete, setPaymentComplete] = useState(false);
 
   useEffect(() => {
-    if (cartItems.length === 0 && !paymentComplete) {
-      navigate('/shop');
-    }
-
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'InitiateCheckout');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cartItems.length === 0 && !paymentComplete) {
+      navigate('/shop');
     }
 
     // Auth Pre-fill
@@ -197,9 +199,10 @@ export function CheckoutPage() {
               // Step B: Backend order insertion to bypass RLS securely
 
               // Step C: Clean Up & Ship to Success Portal
+              const finalAmount = finalTotal;
               setPaymentComplete(true);
               clearCart();
-              navigate('/order-success');
+              navigate('/order-success', { state: { orderTotal: finalAmount } });
             }
           } catch (err) {
             console.error(err);

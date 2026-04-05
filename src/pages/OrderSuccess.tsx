@@ -1,9 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { CheckCircle2, Home } from 'lucide-react';
 import { SEO } from '../components/SEO';
 
 export function OrderSuccessPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      const orderTotal = location.state?.orderTotal || 0;
+      if (orderTotal > 0) {
+         (window as any).fbq('track', 'Purchase', { currency: 'INR', value: orderTotal });
+      }
+    }
+  }, [location.state]);
+
   return (
     <main className="min-h-screen bg-wayo-cream flex items-center justify-center selection:bg-wayo-coral selection:text-white px-4 pt-20">
       <SEO title="Order Confirmed" description="Your WAYO order is confirmed." path="/order-success" />

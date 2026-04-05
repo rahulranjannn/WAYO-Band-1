@@ -38,6 +38,10 @@ export function ContactPage() {
                 throw new Error('Failed to send message');
             }
 
+            if (typeof window !== 'undefined' && (window as any).fbq) {
+                (window as any).fbq('track', 'Contact');
+            }
+
             setSubmitted(true);
             form.reset(); // Clear the form fields successfully
         } catch (err) {
