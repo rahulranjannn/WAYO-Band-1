@@ -41,21 +41,20 @@ export function SEO({ title, description, path, heroImage, isHome = false }: SEO
                 <link rel="preload" as="image" href={heroImage} fetchpriority="high" />
             )}
 
+            <meta property="og:title" content={title} />
+            <meta property="og:description" content={description} />
+            <meta property="og:image" content={heroImage ? (heroImage.startsWith('http') ? heroImage : `${baseUrl}${heroImage}`) : ogImageUrl} />
+            <meta property="og:url" content={path === '/' ? baseUrl : `${baseUrl}${path}`} />
+            <meta property="og:type" content="website" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={title} />
+            <meta name="twitter:description" content={description} />
+            <meta name="twitter:image" content={heroImage ? (heroImage.startsWith('http') ? heroImage : `${baseUrl}${heroImage}`) : ogImageUrl} />
+
             {isHome && (
-                <>
-                    <meta property="og:title" content="WAYO Band — No matter where they go, WAYO brings them back." />
-                    <meta property="og:description" content="The screen-free wristband that keeps your child safely within reach. Distance alert + water submersion alert. Launching April 2026." />
-                    <meta property="og:image" content={ogImageUrl} />
-                    <meta property="og:url" content={baseUrl} />
-                    <meta property="og:type" content="website" />
-                    <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content="WAYO Band — Launching April 2026" />
-                    <meta name="twitter:description" content="The screen-free wristband that keeps your child safely within reach." />
-                    <meta name="twitter:image" content={ogImageUrl} />
-                    <script type="application/ld+json">
-                        {JSON.stringify(schema)}
-                    </script>
-                </>
+                <script type="application/ld+json">
+                    {JSON.stringify(schema)}
+                </script>
             )}
         </Helmet>
     );
