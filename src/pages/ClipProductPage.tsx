@@ -16,7 +16,7 @@ interface ClipProductPageProps {
 
 export function ClipProductPage({ onOpenWaitlist }: ClipProductPageProps) {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pb-28 lg:pb-0">
       <SEO 
         title="WAYO Clip - Smart Luggage Protection"
         description="The ultimate smart clip that alerts your wrist the moment your bag is moved. Pre-order now."

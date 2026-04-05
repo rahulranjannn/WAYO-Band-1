@@ -16,7 +16,7 @@ export function ProductPage() {
   const [selectedModel, setSelectedModel] = useState<WayoModel>('plus');
 
   return (
-    <main>
+    <main className="pb-28 lg:pb-0">
       <ProductOverview selectedModel={selectedModel} setSelectedModel={setSelectedModel} />
       <AhaSection />
       <HowItWorks />
