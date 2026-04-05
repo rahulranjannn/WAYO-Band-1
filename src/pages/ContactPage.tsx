@@ -283,7 +283,7 @@ export function ContactPage() {
                         <div className="mt-6 w-full">
                             <div className="text-[11px] text-[#4B5563] uppercase tracking-[0.1em] mb-3 font-semibold font-['DM_Sans']">FOLLOW OUR JOURNEY</div>
                             <div className="flex gap-3">
-                                <a href="#" className="bg-[#FAFAF8] border border-[#EAE4DC] rounded-[100px] px-5 py-2.5 font-['DM_Sans'] text-[14px] font-medium text-[#1A2E44] flex items-center gap-2 hover:bg-[#EBF1F7] hover:border-[#5B7A99] transition-colors">
+                                <a href="https://instagram.com/wayoband" target="_blank" rel="noopener noreferrer" className="bg-[#FAFAF8] border border-[#EAE4DC] rounded-[100px] px-5 py-2.5 font-['DM_Sans'] text-[14px] font-medium text-[#1A2E44] flex items-center gap-2 hover:bg-[#EBF1F7] hover:border-[#5B7A99] transition-colors">
                                     <span>📸</span> @wayoband
                                 </a>
                                 <a href="https://chat.whatsapp.com" target="_blank" rel="noopener noreferrer" className="bg-[#FAFAF8] border border-[#EAE4DC] rounded-[100px] px-5 py-2.5 font-['DM_Sans'] text-[14px] font-medium text-[#1A2E44] flex items-center gap-2 hover:bg-[#EBF1F7] hover:border-[#5B7A99] transition-colors">

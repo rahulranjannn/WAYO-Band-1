@@ -15,6 +15,7 @@ import { AboutPage } from './pages/AboutPage';
 import { FAQPage } from './pages/FAQPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
+import { RefundPolicy } from './pages/RefundPolicy';
 import { ContactPage } from './pages/ContactPage';
 import { FeaturesPage } from './pages/FeaturesPage';
 import { ProductPage } from './pages/ProductPage';
@@ -297,8 +298,9 @@ function Layout() {
         <Route path="/features" element={<FeaturesPage onOpenWaitlist={openModal} />} />
         <Route path="/about" element={<AboutPage onOpenWaitlist={openModal} />} />
         <Route path="/faq" element={<FAQPage onOpenWaitlist={openModal} />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
 
