@@ -46,6 +46,8 @@ export function WhoItsFor() {
                   className="w-full h-full object-cover mix-blend-multiply opacity-90"
                   loading="lazy"
                   referrerPolicy="no-referrer"
+                  width={800}
+                  height={600}
                 />
               </div>
               <div className="p-8">

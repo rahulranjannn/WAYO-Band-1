@@ -9,7 +9,20 @@ import { SEO } from '../components/SEO';
 export function AccountDashboard() {
   const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'settings'>('profile');
   const [user, setUser] = useState<User | null | undefined>(undefined);
-  const [orders, setOrders] = useState<any[]>([]);
+  interface Order {
+    id: string;
+    customer_email: string;
+    total_amount: number;
+    payment_status: string;
+    shipping_status: string;
+    created_at: string;
+    items_ordered: any[];
+    shipping_address?: any;
+    discount_applied?: number;
+    promo_code_used?: string;
+  }
+
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(false);
   const location = useLocation();
 
@@ -38,7 +51,7 @@ export function AccountDashboard() {
     if (!user) return;
     setLoadingOrders(true);
     try {
-      const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const response = await fetch(`${API_URL}/api/orders/${user.uid}`);
       
       if (!response.ok) throw new Error('Failed to fetch orders');

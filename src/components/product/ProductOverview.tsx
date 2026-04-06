@@ -40,8 +40,8 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
   }, []);
 
   const trackAddToCart = (price: number) => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'AddToCart', { value: price, currency: 'INR' });
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'AddToCart', { value: price, currency: 'INR' });
     }
   };
 
@@ -96,6 +96,8 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                   src={img}
                   alt={`Wayo Band ${idx + 1}`}
                   className="w-full h-full object-cover flex-shrink-0 snap-center"
+                  width={1080}
+                  height={1080}
                 />
               ))}
             </div>
@@ -103,6 +105,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
               {images.map((img, idx) => (
                 <button
                   key={idx}
+                  aria-label={`View image ${idx + 1}`}
                   onClick={() => {
                     setActiveImage(idx);
                     if (scrollRef.current) {
@@ -114,7 +117,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                   }}
                   className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-wayo-coral' : 'border-transparent hover:border-gray-200'}`}
                 >
-                  <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                  <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" width={300} height={300} />
                 </button>
               ))}
             </div>
@@ -206,11 +209,11 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
 
             {/* Extra Band Add-on */}
             <div className="mb-8">
-              <h3 className="text-[15px] font-semibold text-[#4B5563] mb-3 font-display tracking-tight">Need an extra band for a sibling?</h3>
+              <h2 className="text-[15px] font-semibold text-[#4B5563] mb-3 font-display tracking-tight">Need an extra band for a sibling?</h2>
               <div className="flex items-center justify-between py-3 px-4 bg-wayo-cream/40 rounded-[1.25rem] border border-gray-100/80 shadow-sm transition-all hover:bg-wayo-cream/60">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 bg-white rounded-xl overflow-hidden border border-gray-100 flex-shrink-0 shadow-sm">
-                    <img src="/childband-1080.webp" alt="Extra Band" className="w-full h-full object-cover object-center" />
+                    <img src="/childband-1080.webp" alt="Extra Band" className="w-full h-full object-cover object-center" width={100} height={100} />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-bold text-wayo-dark text-[15px]">Extra Wayo Child Band</span>
@@ -241,11 +244,13 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="text-gray-500 hover:text-wayo-dark font-medium px-2 py-2"
+                  aria-label="Decrease quantity"
                 ><Minus className="w-5 h-5" /></button>
                 <span className="font-bold text-wayo-dark">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
                   className="text-gray-500 hover:text-wayo-dark font-medium px-2 py-2"
+                  aria-label="Increase quantity"
                 ><Plus className="w-5 h-5" /></button>
               </div>
               <button

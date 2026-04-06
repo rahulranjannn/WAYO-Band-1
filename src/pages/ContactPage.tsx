@@ -24,7 +24,7 @@ export function ContactPage() {
         };
 
         try {
-            const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
             const response = await fetch(`${API_URL}/api/contact`, {
                 method: "POST",
                 headers: {
@@ -38,8 +38,8 @@ export function ContactPage() {
                 throw new Error('Failed to send message');
             }
 
-            if (typeof window !== 'undefined' && (window as any).fbq) {
-                (window as any).fbq('track', 'Contact');
+            if (typeof window !== 'undefined' && window.fbq) {
+                window.fbq('track', 'Contact');
             }
 
             setSubmitted(true);

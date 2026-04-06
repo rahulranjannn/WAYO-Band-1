@@ -37,8 +37,8 @@ export function ClipProductOverview({ onOpenWaitlist }: ClipProductOverviewProps
   }, []);
 
   const trackAddToCart = (price: number) => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'AddToCart', { value: price, currency: 'INR' });
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'AddToCart', { value: price, currency: 'INR' });
     }
   };
 

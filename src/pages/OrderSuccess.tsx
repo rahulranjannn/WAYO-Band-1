@@ -6,14 +6,14 @@ import { SEO } from '../components/SEO';
 export function OrderSuccessPage() {
   const location = useLocation();
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
+    if (typeof window !== 'undefined' && window.fbq) {
       const orderTotal = location.state?.orderTotal || 0;
       const orderId = location.state?.orderId;
       
       if (orderId && orderTotal > 0) {
-        if (!(window as any)[`hasTrackedPurchase_${orderId}`]) {
-          (window as any)[`hasTrackedPurchase_${orderId}`] = true;
-          (window as any).fbq('track', 'Purchase', { currency: 'INR', value: orderTotal }, { eventID: orderId });
+        if (!window[`hasTrackedPurchase_${orderId}`]) {
+          window[`hasTrackedPurchase_${orderId}`] = true;
+          window.fbq('track', 'Purchase', { currency: 'INR', value: orderTotal }, { eventID: orderId });
         }
       }
     }

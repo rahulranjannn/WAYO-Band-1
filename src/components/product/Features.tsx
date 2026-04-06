@@ -68,6 +68,8 @@ export function Features() {
                     className="w-full h-full object-cover"
                     loading="lazy"
                     referrerPolicy="no-referrer"
+                    width={800}
+                    height={600}
                   />
                 </div>
               </motion.div>

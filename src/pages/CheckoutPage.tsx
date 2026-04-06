@@ -16,7 +16,7 @@ const loadRazorpayScript = () => {
   });
 };
 
-const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export function CheckoutPage() {
   const { cartItems, cartTotal, clearCart } = useCart();
@@ -41,10 +41,10 @@ export function CheckoutPage() {
   const [paymentComplete, setPaymentComplete] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      if (!(window as any).hasTrackedInitiateCheckout) {
-        (window as any).hasTrackedInitiateCheckout = true;
-        (window as any).fbq('track', 'InitiateCheckout');
+    if (typeof window !== 'undefined' && window.fbq) {
+      if (!window.hasTrackedInitiateCheckout) {
+        window.hasTrackedInitiateCheckout = true;
+        window.fbq('track', 'InitiateCheckout');
       }
     }
   }, []);
@@ -221,7 +221,7 @@ export function CheckoutPage() {
         }
       };
 
-      const paymentObject = new (window as any).Razorpay(options);
+      const paymentObject = new window.Razorpay(options);
       paymentObject.open();
 
     } catch (err: any) {

@@ -9,6 +9,7 @@ import { WhoItsFor } from '../components/product/WhoItsFor';
 import { Specs } from '../components/product/Specs';
 import { Testimonials } from '../components/product/Testimonials';
 import { FinalCTA } from '../components/product/FinalCTA';
+import { SEO } from '../components/SEO';
 
 export type WayoModel = 'standard' | 'plus';
 
@@ -17,6 +18,7 @@ export function ProductPage() {
 
   return (
     <main className="pb-28 lg:pb-0">
+      <SEO title="Buy Wayo - Smart Child Safety Band" description="A screen-free wristband pair that alerts parents when their child wanders too far or falls in water." path="/product" />
       <ProductOverview selectedModel={selectedModel} setSelectedModel={setSelectedModel} />
       <AhaSection />
       <HowItWorks />

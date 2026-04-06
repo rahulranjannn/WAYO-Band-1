@@ -26,6 +26,8 @@ export function WhatsInTheBox() {
             className="w-full h-auto rounded-xl shadow-md mb-12 object-cover"
             loading="lazy"
             referrerPolicy="no-referrer"
+            width={1200}
+            height={800}
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">

@@ -5,17 +5,61 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { SEO } from '../components/SEO';
 import { Loader2, LogOut, RefreshCw } from 'lucide-react';
 
-const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export function AdminDashboard() {
   const navigate = useNavigate();
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   
-  const [orders, setOrders] = useState<any[]>([]);
-  const [promos, setPromos] = useState<any[]>([]);
-  const [waitlist, setWaitlist] = useState<any[]>([]);
-  const [contacts, setContacts] = useState<any[]>([]);
-  const [reviews, setReviews] = useState<any[]>([]);
+  interface Order {
+    id: string;
+    customer_email: string;
+    total_amount: number;
+    payment_status: string;
+    shipping_status: string;
+    created_at: string;
+    items_ordered: any[];
+  }
+
+  interface Promo {
+    id: string;
+    code: string;
+    discount_type: string;
+    discount_value: number;
+    is_active: boolean;
+  }
+
+  interface Waitlist {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+    created_at: string;
+  }
+
+  interface Contact {
+    id: string;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    created_at: string;
+  }
+
+  interface Review {
+    id: string;
+    reviewer_name: string;
+    rating: number;
+    review_text: string;
+    created_at: string;
+  }
+
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [promos, setPromos] = useState<Promo[]>([]);
+  const [waitlist, setWaitlist] = useState<Waitlist[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
   
   const [activeTab, setActiveTab] = useState<'orders' | 'promos' | 'waitlist' | 'contacts' | 'reviews'>('orders');
   const [isLoading, setIsLoading] = useState(true);

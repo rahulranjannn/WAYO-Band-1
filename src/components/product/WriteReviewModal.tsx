@@ -61,7 +61,7 @@ export function WriteReviewModal({ isOpen, onClose }: WriteReviewModalProps) {
             <div className="w-16 h-16 bg-wayo-mint/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <Star className="w-8 h-8 text-teal-600 fill-teal-600" />
             </div>
-            <h3 className="text-2xl font-bold text-wayo-dark mb-2 font-display">Thank you!</h3>
+            <h2 className="text-2xl font-bold text-wayo-dark mb-2 font-display">Thank you!</h2>
             <p className="text-gray-600 font-medium">Your review has been submitted and is pending moderation.</p>
           </div>
         ) : (

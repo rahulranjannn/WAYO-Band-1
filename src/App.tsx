@@ -32,10 +32,10 @@ function ScrollToTop() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      if (!(window as any)[`hasTrackedPageView_${pathname}`]) {
-        (window as any)[`hasTrackedPageView_${pathname}`] = true;
-        (window as any).fbq('track', 'PageView');
+    if (typeof window !== 'undefined' && window.fbq) {
+      if (!window[`hasTrackedPageView_${pathname}`]) {
+        window[`hasTrackedPageView_${pathname}`] = true;
+        window.fbq('track', 'PageView');
       }
     }
   }, [pathname]);
