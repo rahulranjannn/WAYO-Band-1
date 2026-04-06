@@ -98,6 +98,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                   className="w-full h-full object-cover flex-shrink-0 snap-center"
                   width={1080}
                   height={1080}
+                  loading={idx === 0 ? "eager" : "lazy"}
                 />
               ))}
             </div>
@@ -117,7 +118,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
                   }}
                   className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-wayo-coral' : 'border-transparent hover:border-gray-200'}`}
                 >
-                  <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" width={300} height={300} />
+                  <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" width={300} height={300} loading="lazy" />
                 </button>
               ))}
             </div>
@@ -213,7 +214,7 @@ export function ProductOverview({ selectedModel, setSelectedModel }: ProductOver
               <div className="flex items-center justify-between py-3 px-4 bg-wayo-cream/40 rounded-[1.25rem] border border-gray-100/80 shadow-sm transition-all hover:bg-wayo-cream/60">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 bg-white rounded-xl overflow-hidden border border-gray-100 flex-shrink-0 shadow-sm">
-                    <img src="/childband-1080.webp" alt="Extra Band" className="w-full h-full object-cover object-center" width={100} height={100} />
+                    <img src="/childband-1080.webp" alt="Extra Band" className="w-full h-full object-cover object-center" width={100} height={100} loading="lazy" />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-bold text-wayo-dark text-[15px]">Extra Wayo Child Band</span>

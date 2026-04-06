@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { Menu, X, LogOut, User as UserIcon, Package, ShoppingBag } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -10,21 +10,22 @@ import { useCart } from './context/CartContext';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { auth } from './lib/firebase';
 import { Home } from './pages/Home';
-import { HowItWorksPage } from './pages/HowItWorksPage';
-import { AboutPage } from './pages/AboutPage';
-import { FAQPage } from './pages/FAQPage';
-import { PrivacyPage } from './pages/PrivacyPage';
-import { TermsPage } from './pages/TermsPage';
-import { RefundPolicy } from './pages/RefundPolicy';
-import { ContactPage } from './pages/ContactPage';
-import { FeaturesPage } from './pages/FeaturesPage';
 import { ProductPage } from './pages/ProductPage';
 import { ShopPage } from './pages/ShopPage';
-import { ClipProductPage } from './pages/ClipProductPage';
-import { AccountDashboard } from './pages/AccountDashboard';
-import { CheckoutPage } from './pages/CheckoutPage';
-import { OrderSuccessPage } from './pages/OrderSuccess';
-import { AdminDashboard } from './pages/AdminDashboard';
+
+const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage').then(module => ({ default: module.HowItWorksPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
+const FAQPage = lazy(() => import('./pages/FAQPage').then(module => ({ default: module.FAQPage })));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then(module => ({ default: module.PrivacyPage })));
+const TermsPage = lazy(() => import('./pages/TermsPage').then(module => ({ default: module.TermsPage })));
+const RefundPolicy = lazy(() => import('./pages/RefundPolicy').then(module => ({ default: module.RefundPolicy })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
+const FeaturesPage = lazy(() => import('./pages/FeaturesPage').then(module => ({ default: module.FeaturesPage })));
+const ClipProductPage = lazy(() => import('./pages/ClipProductPage').then(module => ({ default: module.ClipProductPage })));
+const AccountDashboard = lazy(() => import('./pages/AccountDashboard').then(module => ({ default: module.AccountDashboard })));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage').then(module => ({ default: module.CheckoutPage })));
+const OrderSuccessPage = lazy(() => import('./pages/OrderSuccess').then(module => ({ default: module.OrderSuccessPage })));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(module => ({ default: module.AdminDashboard })));
 import { div } from 'motion/react-client';
 
 function ScrollToTop() {
@@ -285,24 +286,26 @@ function Layout() {
         </div>
       )}
 
-      <Routes>
-        <Route path="/" element={<Home onOpenWaitlist={openModal} />} />
-        <Route path="/account" element={<AccountDashboard />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/order-success" element={<OrderSuccessPage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/product/clip" element={<ClipProductPage onOpenWaitlist={openModal} />} />
-        <Route path="/how-it-works" element={<HowItWorksPage onOpenWaitlist={openModal} />} />
-        <Route path="/features" element={<FeaturesPage onOpenWaitlist={openModal} />} />
-        <Route path="/about" element={<AboutPage onOpenWaitlist={openModal} />} />
-        <Route path="/faq" element={<FAQPage onOpenWaitlist={openModal} />} />
-        <Route path="/privacy-policy" element={<PrivacyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/refund-policy" element={<RefundPolicy />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+      <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="w-8 h-8 border-4 border-wayo-coral border-t-transparent rounded-full animate-spin"></div></div>}>
+        <Routes>
+          <Route path="/" element={<Home onOpenWaitlist={openModal} />} />
+          <Route path="/account" element={<AccountDashboard />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-success" element={<OrderSuccessPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/product/clip" element={<ClipProductPage onOpenWaitlist={openModal} />} />
+          <Route path="/how-it-works" element={<HowItWorksPage onOpenWaitlist={openModal} />} />
+          <Route path="/features" element={<FeaturesPage onOpenWaitlist={openModal} />} />
+          <Route path="/about" element={<AboutPage onOpenWaitlist={openModal} />} />
+          <Route path="/faq" element={<FAQPage onOpenWaitlist={openModal} />} />
+          <Route path="/privacy-policy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </Suspense>
 
       <Footer onOpenWaitlist={openModal} />
 
