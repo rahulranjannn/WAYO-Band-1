@@ -54,6 +54,8 @@ app.get('/', (req, res) => {
     res.status(200).json({ status: 'OK', message: 'WAYO Band backend API is running' });
 });
 
+app.get('/api/ping', (req, res) => res.status(200).send('OK'));
+
 /*
  * Note: Add your exact route logic below. 
  * E.g., handling form submissions and sending to Supabase or mailing with Nodemailer.
