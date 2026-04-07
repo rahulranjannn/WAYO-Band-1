@@ -23,7 +23,10 @@ app.set('trust proxy', 1);
 const PORT = process.env.PORT || 5000;
 
 // Strict CORS Configuration
-app.use(cors({ origin: [process.env.FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173'] }));
+app.use(cors({ 
+    origin: [process.env.FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173'],
+    maxAge: 86400 
+}));
 
 // Basic middlewares
 // We must parse raw body for Razorpay Webhooks. We create a middleware hook for it.
