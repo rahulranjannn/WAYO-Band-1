@@ -39,6 +39,13 @@ export function CheckoutPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isApplyingPromo, setIsApplyingPromo] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
+  const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
+
+  useEffect(() => {
+    loadRazorpayScript().then((res) => {
+      if (res) setIsRazorpayLoaded(true);
+    }).catch(console.error);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.fbq) {
@@ -128,32 +135,14 @@ export function CheckoutPage() {
       return;
     }
 
-    const orderPayload = {
-      user_id: auth.currentUser?.uid || 'guest',
-      customer_email: form.email,
-      items_ordered: cartItems,
-      shipping_address: {
-        street: form.street,
-        city: form.city,
-        state: form.state,
-        pincode: form.pincode,
-        phone: `${phoneCode}${form.phone}`
-      },
-      subtotal: cartTotal,
-      promo_code_used: appliedPromo?.code || null,
-      discount_applied: calculatedDiscountAmount,
-      total_amount: finalTotal,
-    };
+    if (!isRazorpayLoaded || !(window as any).Razorpay) {
+      alert("Payment gateway is still initializing. Please check your connection and try again.");
+      return;
+    }
 
     setIsProcessing(true);
 
     try {
-      const res = await loadRazorpayScript();
-      if (!res) {
-        alert('Razorpay SDK failed to load. Are you online?');
-        return;
-      }
-
       const backendResponse = await fetch(`${API_URL}/api/create-razorpay-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
